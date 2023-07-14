@@ -464,6 +464,7 @@ class PlayState extends MusicBeatState
 		var stageData:StageFile = StageData.getStageFile(curStage);
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
 			stageData = {
+				name: "",
 				directory: "",
 				defaultZoom: 0.9,
 				isPixelStage: false,
@@ -476,7 +477,8 @@ class PlayState extends MusicBeatState
 				camera_boyfriend: [0, 0],
 				camera_opponent: [0, 0],
 				camera_girlfriend: [0, 0],
-				camera_speed: 1
+				camera_speed: 1,
+				layerArray: []
 			};
 		}
 
@@ -839,7 +841,13 @@ class PlayState extends MusicBeatState
 			case 'stress':
 				GameOverSubstate.characterName = 'bf-holding-gf-dead';
 		}
-
+        default: //custom stages
+            curStage = stageData.name;
+            for (layer in stageData.layerArray){
+            var loadedLayer:BGSprite = new BGSprite(layer.directory, layer.xAxis, layer.yAxis, layer.scrollX, layer.scrollY);
+            loadedLayer.setGraphicSize(Std.int(loadedLayer.width * layer.scale));
+            add(loadedLayer);
+        }
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
