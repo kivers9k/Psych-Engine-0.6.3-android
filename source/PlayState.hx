@@ -478,7 +478,6 @@ class PlayState extends MusicBeatState
 				camera_opponent: [0, 0],
 				camera_girlfriend: [0, 0],
 				camera_speed: 1,
-				layerArray: []
 			};
 		}
 
@@ -834,13 +833,6 @@ class PlayState extends MusicBeatState
 				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('tank4', 1300, 900, 1.5, 1.5, ['fg']));
 				foregroundSprites.add(new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg']));
 				if(!ClientPrefs.lowQuality) foregroundSprites.add(new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg']));
-            default: //custom stages
-                curStage = stageData.name;
-                for (layer in stageData.layerArray){
-                var loadedLayer:BGSprite = new BGSprite(layer.directory, layer.xAxis, layer.yAxis, layer.scrollX, layer.scrollY);
-                loadedLayer.setGraphicSize(Std.int(loadedLayer.width * layer.scale));
-                add(loadedLayer);
-            }
 		}
 
 		switch(Paths.formatToSongPath(SONG.song))

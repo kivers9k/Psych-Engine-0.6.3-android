@@ -81,10 +81,6 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-            ["stage editor by"],
-			['Pakie', 'pakie', 'Main Coder', 'https://twitter.com/modder_modder', '32FF32'],
-			['magnumsrtisswag', 'face', 'Stage Editor\n(not affiliated directly with psych engine dx)', 'https://github.com/ShadowMario/FNF-PsychEngine/pull/3502',		                'A1A1A1'],
-			[''],
 			['Psych Engine Android Team'],
 			['MaysLastPlay',		'MaysLastPlay',		'Android Porter',							'https://www.youtube.com/channel/UCx0LxtFR8ROd9sFAq-UxDfw',	'5DE7FF'],
 			['Nuno Filipe Studios',	'nuno',				'Android Porter',							'https://www.youtube.com/channel/UCq7G3p4msVN5SX2CpJ86tTw',	'989c99'],
