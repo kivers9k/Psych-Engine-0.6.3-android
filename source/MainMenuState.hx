@@ -27,7 +27,13 @@ using StringTools;
 
 typedef MenuData =
 {
-    menuItemX:Float
+    menuItemScroll:Float;
+    bgScroll:Float;
+    menuItemX:Float;
+    AddItem:Array<AddShit>;
+}
+typedef AddShit = {
+    AddMenuItem:String;
 }
 
 class MainMenuState extends MusicBeatState
@@ -40,23 +46,11 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	
-	var optionShit:Array<String> = [
-		'story_mode',
-		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		'credits',
-		#if !switch 'donate', #end
-		'options'
-	];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-
-	var menuJSON:MenuData;
 
 	override function create()
 	{
@@ -84,7 +78,14 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
+		//LIKE SERIOUSLY IGNORE IT
+    	var menuJSON:MenuData;
+    	var shit:AddShit;
+		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
+		shit = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
+    	var optionShit:Array<String> = [shit.AddMenuItem];
+
+		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), menuJSON.bgScroll);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
@@ -130,15 +131,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
 			menuItems.add(menuItem);
-			var scr:Float = (optionShit.length - 4) * 0.135;
+			var scr:Float = (optionShit.length - 4) *menuJSON.menuItemScroll;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 		}
-
-		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menuOffset.json'));
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 		
