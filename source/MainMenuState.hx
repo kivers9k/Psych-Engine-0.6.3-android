@@ -81,7 +81,7 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
         menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
 
-		var yScroll:Float = Math.max(menuJSON.bgScroll * (menuJSON.addOption.length - 4));
+		var yScroll:Float = (menuJSON.addOption.length - 4) * menuJSON.optionScroll;
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
@@ -118,7 +118,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...menuJSON.addOption.length)
 		{
             var offset:Float = 108 - (Math.max(menuJSON.addOption.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(menuJSON.optionX, menuJSON.optionY + (i * menuJSON.optionheight)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(menuJSON.optionX, menuJSON.optionY + (i * menuJSON.optionHeight)  + offset);
 			menuItem.scale.x = menuJSON.scale;
 			menuItem.scale.y = menuJSON.scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + menuJSON.addOption[i]);
