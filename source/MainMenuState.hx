@@ -21,8 +21,14 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import haxe.Json;
 
 using StringTools;
+
+typedef menuData =
+{
+    menuItemX:Float
+}
 
 class MainMenuState extends MusicBeatState
 {
@@ -49,6 +55,8 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+
+	var menuJSON:menuData;
 
 	override function create()
 	{
@@ -113,7 +121,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(menuJSON.menuItemX, (i * 140)  + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -121,7 +129,6 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -131,6 +138,8 @@ class MainMenuState extends MusicBeatState
 			menuItem.updateHitbox();
 		}
 
+		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/menuOffset.json'));
+
 		FlxG.camera.follow(camFollowPos, null, 1);
 		
 		if (FlxG.save.data.firstTimeUsing == null) {
@@ -138,7 +147,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		var texts:Array<String> = [
-			"Main Menu Lua Test"
+			"Main Menu version idk"
 		];
 
 		for (i in 0...texts.length) {
