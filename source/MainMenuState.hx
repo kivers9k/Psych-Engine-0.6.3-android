@@ -21,12 +21,6 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
-import FunkinLua;
-
-#if sys
-import sys.FileSystem;
-import sys.io.File;
-#end
 
 using StringTools;
 
@@ -36,11 +30,6 @@ class MainMenuState extends MusicBeatState
 	public static var extraKeysVersion:String = '0.3';
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
-
-	// Lua shit
-	public static var instance:MainMenuState;
-	public var luaArray:Array<FunkinLua> = [];
-	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -149,8 +138,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		var texts:Array<String> = [
-			"Main Menu Lua Test",
-			"hahaha penis"
+			"Main Menu Lua Test"
 		];
 
 		for (i in 0...texts.length) {
@@ -176,37 +164,6 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 		#end
-
-        //LUA ALLOWED ON MAIN MENU
-		#if LUA_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [SUtil.getPath() + Paths.getPreloadPath('scripts/')];
-
-		#if MODS_ALLOWED
-		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
-
-		for(mod in Paths.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if(file.endsWith('.lua') && !filesPushed.contains(file))
-					{
-						luaArray.push(new FunkinLua(folder + file));
-						filesPushed.push(file);
-					}
-				}
-			}
-		}
-		#end
-		callOnLuas('onCreatePost', []);
 
         #if mobile
         addVirtualPad(UP_DOWN, A_B_C);
@@ -262,8 +219,6 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-	callOnLuas('onUpdate', [elapsed]);
-
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -361,78 +316,6 @@ class MainMenuState extends MusicBeatState
 		{
 			spr.screenCenter(X);
 		});
-		callOnLuas('onUpdatePost', [elapsed]);
-	}
-
-	public function callOnLuas(event:String, args:Array<Dynamic>, ignoreStops = true, exclusions:Array<String> = null):Dynamic {
-		var returnVal:Dynamic = FunkinLua.Function_Continue;
-		#if LUA_ALLOWED
-		if(exclusions == null) exclusions = [];
-		for (script in luaArray) {
-			if(exclusions.contains(script.scriptName))
-				continue;
-
-			var ret:Dynamic = script.call(event, args);
-			if(ret == FunkinLua.Function_StopLua && !ignoreStops)
-				break;
-			
-			// had to do this because there is a bug in haxe where Stop != Continue doesnt work
-			var bool:Bool = ret == FunkinLua.Function_Continue;
-			if(!bool && ret != 0) {
-				returnVal = cast ret;
-			}
-		}
-		#end
-		//trace(event, returnVal);
-		return returnVal;
-	}
-
-	function startCharacterLua(name:String)
-	{
-		#if LUA_ALLOWED
-		var doPush:Bool = false;
-		var luaFile:String = 'characters/' + name + '.lua';
-		#if MODS_ALLOWED
-		if(FileSystem.exists(Paths.modFolders(luaFile))) {
-			luaFile = Paths.modFolders(luaFile);
-			doPush = true;
-		} else {
-			luaFile = SUtil.getPath() + Paths.getPreloadPath(luaFile);
-			if(FileSystem.exists(luaFile)) {
-				doPush = true;
-			}
-		}
-		#else
-		luaFile = Paths.getPreloadPath(luaFile);
-		if(Assets.exists(luaFile)) {
-			doPush = true;
-		}
-		#end
-
-		if(doPush)
-		{
-			for (script in luaArray)
-			{
-				if(script.scriptName == luaFile) return;
-			}
-			luaArray.push(new FunkinLua(luaFile));
-		}
-		#end
-	}
-
-	public function addTextToDebug(text:String, color:FlxColor) {
-		#if LUA_ALLOWED
-		luaDebugGroup.forEachAlive(function(spr:DebugLuaText) {
-			spr.y += 20;
-		});
-
-		if(luaDebugGroup.members.length > 34) {
-			var blah = luaDebugGroup.members[34];
-			blah.destroy();
-			luaDebugGroup.remove(blah);
-		}
-		luaDebugGroup.insert(0, new DebugLuaText(text, luaDebugGroup, color));
-		#end
 	}
 
 	function changeItem(huh:Int = 0)
