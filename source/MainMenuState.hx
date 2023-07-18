@@ -30,7 +30,7 @@ typedef MenuData =
     menuItemScroll:Float,
     bgScroll:Float,
     menuItemX:Float,
-    addMenuItem:Array<String>
+    addOption:Array<String>
 }
 class MainMenuState extends MusicBeatState
 {
@@ -45,7 +45,6 @@ class MainMenuState extends MusicBeatState
 
     //LIKE SERIOUSLY IGNORE IT
     var menuJSON:MenuData;
-	var optionShit:Array<String> = [menuJSON.addMenuItem];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -79,7 +78,7 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
         menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
 
-		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), menuJSON.bgScroll);
+		var yScroll:Float = Math.max(0.25 - (0.05 * (menuJSON.addOption.length - 4)), menuJSON.bgScroll);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
@@ -109,24 +108,24 @@ class MainMenuState extends MusicBeatState
 		add(menuItems);
 
 		var scale:Float = 1;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
+		/*if(menuJSON.addOption.length > 6) {
+			scale = 6 / menuJSON.addOption.length;
 		}*/
 
-		for (i in 0...optionShit.length)
+		for (i in 0...menuJSON.addOption.length)
 		{
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
+			var offset:Float = 108 - (Math.max(menuJSON.addOption.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(menuJSON.menuItemX, (i * 140)  + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
-			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
-			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
+			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + menuJSON.addOption[i]);
+			menuItem.animation.addByPrefix('idle', menuJSON.addOption[i] + " basic", 24);
+			menuItem.animation.addByPrefix('selected', menuJSON.addOption[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
 			menuItems.add(menuItem);
-			var scr:Float = (optionShit.length - 4) *menuJSON.menuItemScroll;
-			if(optionShit.length < 6) scr = 0;
+			var scr:Float = (menuJSON.addOption.length - 4) *menuJSON.menuItemScroll;
+			if(menuJSON.addOption.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
@@ -253,7 +252,7 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
+				if (menuJSON.addOption[curSelected] == 'donate')
 				{
 					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
 				}
@@ -281,7 +280,7 @@ class MainMenuState extends MusicBeatState
 						{
 							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
 							{
-								var daChoice:String = optionShit[curSelected];
+								var daChoice:String = menuJSON.addOption[curSelected];
 
 								switch (daChoice)
 								{
