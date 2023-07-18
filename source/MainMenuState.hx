@@ -29,10 +29,12 @@ typedef MenuData =
 {
     optionScroll:Float,
     bgScroll:Float,
-    optionX:Float,
-    optionY:Float,
-    optionHeight:Float,
     scale:Float,
+
+    optionPosition:Array<Float>,
+    optionHeight:Float,
+    optionCenter:Bool,
+
     addOption:Array<String>
 }
 class MainMenuState extends MusicBeatState
@@ -81,7 +83,7 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
         menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
 
-		var yScroll:Float = (menuJSON.addOption.length - 4) * menuJSON.optionScroll;
+		var yScroll:Float = (menuJSON.addOption.length - 4) * menuJSON.bgScroll;
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
@@ -110,15 +112,10 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var scale:Float = 1;
-		/*if(menuJSON.addOption.length > 6) {
-			scale = 6 / menuJSON.addOption.length;
-		}*/
-
 		for (i in 0...menuJSON.addOption.length)
 		{
             var offset:Float = 108 - (Math.max(menuJSON.addOption.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(menuJSON.optionX, menuJSON.optionY + (i * menuJSON.optionHeight)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(menuJSON.optionPosition[1], menuJSON.optionPosition[2] + (i * menuJSON.optionHeight) + offset);
 			menuItem.scale.x = menuJSON.scale;
 			menuItem.scale.y = menuJSON.scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + menuJSON.addOption[i]);
@@ -133,6 +130,14 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
+		}
+
+		if (menuJSON.optionCenter)
+		{
+    		menuItems.forEach(function(spr:FlxSprite)
+    		{
+    			spr.screenCenter(X);
+    		});
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
@@ -175,6 +180,7 @@ class MainMenuState extends MusicBeatState
 
 		super.create();
 	}
+}
 
 	function qatarShit():String {
 		var leGoal = new Date(2022, 11, 21, 12, 0, 0).getTime();
