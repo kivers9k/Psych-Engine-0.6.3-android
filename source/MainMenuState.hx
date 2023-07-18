@@ -23,6 +23,11 @@ import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 import FunkinLua;
 
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
+
 using StringTools;
 
 class MainMenuState extends MusicBeatState
