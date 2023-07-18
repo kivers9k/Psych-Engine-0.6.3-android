@@ -47,6 +47,11 @@ class MainMenuState extends MusicBeatState
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 
+    //LIKE SERIOUSLY IGNORE IT
+    var menuJSON:MenuData;
+    var shit:AddShit;
+    var optionShit:Array<String> = [shit];
+
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
@@ -77,13 +82,7 @@ class MainMenuState extends MusicBeatState
 		transOut = FlxTransitionableState.defaultTransOut;
 
 		persistentUpdate = persistentDraw = true;
-
-		//LIKE SERIOUSLY IGNORE IT
-    	var menuJSON:MenuData;
-    	var shit:AddShit;
-		menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
-		shit = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
-    	var optionShit:Array<String> = [shit.AddMenuItem];
+        menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), menuJSON.bgScroll);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
