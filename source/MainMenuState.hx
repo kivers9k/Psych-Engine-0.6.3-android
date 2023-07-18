@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxTimer;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -26,7 +27,9 @@ using StringTools;
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
+	public static var extraKeysVersion:String = '0.3';
 	public static var curSelected:Int = 0;
+	public static var launchChance:Dynamic = null;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -49,9 +52,6 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();
-
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -132,15 +132,22 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
+		
+		if (FlxG.save.data.firstTimeUsing == null) {
+			FlxG.save.data.firstTimeUsing = true;
+		}
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
+		var texts:Array<String> = [
+			"Main Menu Lua Test",
+			"hahaha penis"
+		];
+
+		for (i in 0...texts.length) {
+			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, texts[i], 12);
+			versionShit.scrollFactor.set();
+			versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(versionShit);
+		}
 
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -159,11 +166,82 @@ class MainMenuState extends MusicBeatState
 		}
 		#end
 
-		#if android
-		addVirtualPad(UP_DOWN, A_B_E);
+		#if LUA_ALLOWED
+		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
+		luaDebugGroup.cameras = [camOther];
+		add(luaDebugGroup);
 		#end
 
+		// LUA ALLOWED ON MAIN MENU
+		#if LUA_ALLOWED
+		var filesPushed:Array<String> = [];
+		var foldersToCheck:Array<String> = [SUtil.getPath() + Paths.getPreloadPath('scripts/')];
+
+		#if MODS_ALLOWED
+		foldersToCheck.insert(0, Paths.mods('scripts/'));
+		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
+
+		for(mod in Paths.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/scripts/'));
+		#end
+
+		for (folder in foldersToCheck)
+		{
+			if(FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if(file.endsWith('.lua') && !filesPushed.contains(file))
+					{
+						luaArray.push(new FunkinLua(folder + file));
+						filesPushed.push(file);
+					}
+				}
+			}
+		}
+		#end
+		callOnLuas('onCreatePost', []);
+
+        #if mobile
+        addVirtualPad(UP_DOWN, A_B_C);
+        #end
+
 		super.create();
+	}
+
+	function qatarShit():String {
+		var leGoal = new Date(2022, 11, 21, 12, 0, 0).getTime();
+
+		var second = 1000;
+		var minute = second * 60;
+		var hour = minute * 60;
+		var day = hour * 24;
+
+		var leDate = Date.now().getTime();
+		var timeLeft = leGoal - leDate;
+
+		var shitArray:Array<Dynamic> = [
+			Math.floor(timeLeft / (day)),
+         	Math.floor((timeLeft % (day)) / (hour)),
+			Math.floor((timeLeft % (hour)) / (minute)),
+        	Math.floor((timeLeft % (minute)) / second)
+		];
+
+		var zeroShitArray:Array<String> = ["day","hour","minute","second"];
+		
+		var leftTime:String = "";
+
+		for (i in 0...shitArray.length) {
+			if (shitArray[i] < 10) {
+				zeroShitArray[i] = '0' + shitArray[i];
+			} else zeroShitArray[i] = '' + shitArray[i];
+			var dosPuntos:String = (i > 0 && i < shitArray.length) ? ":" : "";
+
+			leftTime += dosPuntos + zeroShitArray[i];
+		}
+
+		return leftTime;
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
@@ -179,6 +257,8 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+	callOnLuas('onUpdate', [elapsed]);
+
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -219,6 +299,7 @@ class MainMenuState extends MusicBeatState
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxG.mouse.visible = false;
 
 					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
@@ -262,13 +343,11 @@ class MainMenuState extends MusicBeatState
 					});
 				}
 			}
-			#if (desktop || android)
-			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
+			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonC.justPressed #end)
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
-			#end
 		}
 
 		super.update(elapsed);
@@ -277,6 +356,30 @@ class MainMenuState extends MusicBeatState
 		{
 			spr.screenCenter(X);
 		});
+		callOnLuas('onUpdatePost', [elapsed]);
+	}
+
+	public function callOnLuas(event:String, args:Array<Dynamic>, ignoreStops = true, exclusions:Array<String> = null):Dynamic {
+		var returnVal:Dynamic = FunkinLua.Function_Continue;
+		#if LUA_ALLOWED
+		if(exclusions == null) exclusions = [];
+		for (script in luaArray) {
+			if(exclusions.contains(script.scriptName))
+				continue;
+
+			var ret:Dynamic = script.call(event, args);
+			if(ret == FunkinLua.Function_StopLua && !ignoreStops)
+				break;
+			
+			// had to do this because there is a bug in haxe where Stop != Continue doesnt work
+			var bool:Bool = ret == FunkinLua.Function_Continue;
+			if(!bool && ret != 0) {
+				returnVal = cast ret;
+			}
+		}
+		#end
+		//trace(event, returnVal);
+		return returnVal;
 	}
 
 	function changeItem(huh:Int = 0)
