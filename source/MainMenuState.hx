@@ -27,13 +27,13 @@ using StringTools;
 
 typedef MenuData =
 {
-    menuItemScroll:Float;
-    bgScroll:Float;
-    menuItemX:Float;
-    AddItem:Array<AddShit>;
+    menuItemScroll:Float,
+    bgScroll:Float,
+    menuItemX:Float,
+    AddItem:Array<AddShit>
 }
 typedef AddShit = {
-    AddMenuItem:String;
+    AddMenuItem:String
 }
 
 class MainMenuState extends MusicBeatState
