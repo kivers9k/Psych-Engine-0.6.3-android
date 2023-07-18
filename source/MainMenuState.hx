@@ -35,12 +35,11 @@ typedef MenuData =
     optionHeight:Float,
     optionCenter:Bool,
 
-    addOption:Array<String>
+    addOption:Array<String>,
+    menuText:Array<String>
 }
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
-	public static var extraKeysVersion:String = '0.3';
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
 
@@ -146,12 +145,8 @@ class MainMenuState extends MusicBeatState
 			FlxG.save.data.firstTimeUsing = true;
 		}
 
-		var texts:Array<String> = [
-			"Main Menu version idk"
-		];
-
-		for (i in 0...texts.length) {
-			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, texts[i], 12);
+		for (i in 0...menuJSON.menuText.length) {
+			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, menuJSON.menuText[i], 12);
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(versionShit);
