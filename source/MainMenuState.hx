@@ -27,9 +27,12 @@ using StringTools;
 
 typedef MenuData =
 {
-    menuItemScroll:Float,
+    optionScroll:Float,
     bgScroll:Float,
-    menuItemX:Float,
+    optionX:Float,
+    optionY:Float,
+    optionHeight:Float,
+    scale:Float,
     addOption:Array<String>
 }
 class MainMenuState extends MusicBeatState
@@ -78,7 +81,7 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
         menuJSON = Json.parse(Paths.getTextFromFile('images/mainmenu/mainmenu.json'));
 
-		var yScroll:Float = Math.max(0.25 - (0.05 * (menuJSON.addOption.length - 4)), menuJSON.bgScroll);
+		var yScroll:Float = Math.max(menuJSON.bgScroll * (menuJSON.addOption.length - 4));
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
@@ -114,17 +117,17 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...menuJSON.addOption.length)
 		{
-			var offset:Float = 108 - (Math.max(menuJSON.addOption.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(menuJSON.menuItemX, (i * 140)  + offset);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
+            var offset:Float = 108 - (Math.max(menuJSON.addOption.length, 4) - 4) * 80;
+			var menuItem:FlxSprite = new FlxSprite(menuJSON.optionX, menuJSON.optionY + (i * menuJSON.optionheight)  + offset);
+			menuItem.scale.x = menuJSON.scale;
+			menuItem.scale.y = menuJSON.scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + menuJSON.addOption[i]);
 			menuItem.animation.addByPrefix('idle', menuJSON.addOption[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', menuJSON.addOption[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
 			menuItems.add(menuItem);
-			var scr:Float = (menuJSON.addOption.length - 4) *menuJSON.menuItemScroll;
+			var scr:Float = (menuJSON.addOption.length - 4) * menuJSON.optionScroll;
 			if(menuJSON.addOption.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
@@ -310,13 +313,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 		}
-
 		super.update(elapsed);
-
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.screenCenter(X);
-		});
 	}
 
 	function changeItem(huh:Int = 0)
