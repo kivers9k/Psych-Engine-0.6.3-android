@@ -30,12 +30,8 @@ typedef MenuData =
     menuItemScroll:Float,
     bgScroll:Float,
     menuItemX:Float,
-    AddItem:Array<AddShit>
+    addMenuItem:Array<String>
 }
-typedef AddShit = {
-    AddMenuItem:String
-}
-
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
@@ -49,8 +45,7 @@ class MainMenuState extends MusicBeatState
 
     //LIKE SERIOUSLY IGNORE IT
     var menuJSON:MenuData;
-    var shit:AddShit;
-    var optionShit:Array<String> = [shit];
+	var optionShit:Array<String> = [menuJSON.addMenuItem];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
