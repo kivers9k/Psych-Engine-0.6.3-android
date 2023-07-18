@@ -180,7 +180,6 @@ class MainMenuState extends MusicBeatState
 
 		super.create();
 	}
-}
 
 	function qatarShit():String {
 		var leGoal = new Date(2022, 11, 21, 12, 0, 0).getTime();
