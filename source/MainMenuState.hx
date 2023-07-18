@@ -25,7 +25,7 @@ import haxe.Json;
 
 using StringTools;
 
-typedef menuData =
+typedef MenuData =
 {
     menuItemX:Float
 }
@@ -56,7 +56,7 @@ class MainMenuState extends MusicBeatState
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
 
-	var menuJSON:menuData;
+	var menuJSON:MenuData;
 
 	override function create()
 	{
