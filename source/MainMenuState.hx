@@ -1,7 +1,9 @@
 package;
 
 import flixel.util.FlxTimer;
+#if desktop
 import Discord.DiscordClient;
+#end
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -64,7 +66,9 @@ class MainMenuState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 
 		// Updating Discord Rich Presence
+		#if desktop
 		DiscordClient.changePresence("In the Menus", null);
+		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
 		camGame = new FlxCamera();
