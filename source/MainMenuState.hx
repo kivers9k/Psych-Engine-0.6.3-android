@@ -1,7 +1,7 @@
 package;
 
 import flixel.util.FlxTimer;
-import Discord;
+import Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
