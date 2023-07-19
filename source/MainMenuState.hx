@@ -1,9 +1,7 @@
 package;
 
 import flixel.util.FlxTimer;
-#if desktop
 import Discord.DiscordClient;
-#end
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -36,12 +34,15 @@ typedef MenuData =
     optionCenter:Bool,
 
     addOption:Array<String>,
-    menuText:Array<String>
+    addText:Array<String>
 }
 class MainMenuState extends MusicBeatState
 {
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
+
+	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
+	public static var extraKeysVersion:String = '0.3';
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -62,10 +63,8 @@ class MainMenuState extends MusicBeatState
 		#end
 		WeekData.loadTheFirstEnabledMod();
 
-		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
-		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
 		camGame = new FlxCamera();
@@ -145,8 +144,8 @@ class MainMenuState extends MusicBeatState
 			FlxG.save.data.firstTimeUsing = true;
 		}
 
-		for (i in 0...menuJSON.menuText.length) {
-			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, menuJSON.menuText[i], 12);
+		for (i in 0...menuJSON.addText.length) {
+			var versionShit:FlxText = new FlxText(12, (FlxG.height - 24) - (18 * i), 0, menuJSON.addText[i], 12);
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(versionShit);
