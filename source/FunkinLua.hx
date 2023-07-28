@@ -33,6 +33,8 @@ import flixel.math.FlxMath;
 import flixel.util.FlxSave;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.system.FlxAssets.FlxShader;
+import MusicBeatState;
+import MusicBeatSubstate;
 
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
@@ -1712,6 +1714,16 @@ class FunkinLua {
 				default: PlayState.instance.boyfriend.dance();
 			}
 		});
+
+		//mobile virtualpad lua
+        Lua_helper.add_callback(lua, "addVirtualPad", function(DPad:String, Action:String, x:Float, y:Float) {
+        addVirtualPad(DPad, Action);
+        _virtualPad.x = x;
+        _virtualPad.y = y;
+        });
+        Lua_helper.add_callback(lua, "removeVirtualPad", function() {
+        removeVirtualPad();
+        });
 
 		Lua_helper.add_callback(lua, "makeLuaSprite", function(tag:String, image:String, x:Float, y:Float) {
 			tag = tag.replace('.', '');
