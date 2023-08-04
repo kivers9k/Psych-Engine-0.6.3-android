@@ -255,6 +255,16 @@ class FunkinLua {
 			return false;
 		});
 
+		//collide shit
+		Lua_helper.add_callback(lua, "setCollide", function(obj1:String, obj2:String) {
+		if(PlayState.instance.getLuaObject(obj1,false)!=null) {
+			var co1 = PlayState.instance.getLuaObject(obj1,false);
+			var co2 = PlayState.instance.getLuaObject(obj2,false);
+			FlxG.collide(co1, co2);
+			return false;
+			}
+		});
+
 		// shader shit
 		Lua_helper.add_callback(lua, "initLuaShader", function(name:String) {
 			if(!ClientPrefs.shaders) return false;
