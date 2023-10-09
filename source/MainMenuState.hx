@@ -34,6 +34,7 @@ typedef MenuData =
     optionPosition:Array<Float>,
     optionHeight:Float,
     optionCenter:Bool,
+    disable_editor:Bool,
 
     addOption:Array<String>,
     addText:Array<String>
@@ -173,7 +174,12 @@ class MainMenuState extends MusicBeatState
 		#end
 
         #if mobile
-        addVirtualPad(UP_DOWN, A_B_C);
+            if (menuJSON.disable_editor)
+            {
+                addVirtualPad(UP_DOWN, A_B);
+                else
+                addVirtualPad(UP_DOWN,A_B_C);
+            }
         #end
 
 		super.create();
@@ -310,12 +316,17 @@ class MainMenuState extends MusicBeatState
 					});
 				}
 			}
-			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonC.justPressed #end)
-			{
-				selectedSomethin = true;
-				MusicBeatState.switchState(new MasterEditorMenu());
-			}
 		}
+	if (menuJSON.disable_editor)
+	{
+		//nothing
+	else
+		if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonC.justPressed #end)
+		{
+			selectedSomethin = true;
+			MusicBeatState.switchState(new MasterEditorMenu());
+		}
+	}
 		super.update(elapsed);
 	}
 
