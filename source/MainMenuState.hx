@@ -176,12 +176,12 @@ class MainMenuState extends MusicBeatState
         #if mobile
             if (menuJSON.disable_editor == true)
             {
-                addVirtualPad(UP_DOWN,A_B);
+                addVirtualPad(UP_DOWN,A_B_C);
             
             }
             else
             {
-                addVirtualPad(UP_DOWN,A_B_C);
+                addVirtualPad(UP_DOWN,A_B);
             }
         #end
 
