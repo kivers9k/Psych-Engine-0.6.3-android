@@ -1,23 +1,11 @@
-
-# This is a basic workflow to help you get started with Actions
-
 name: Android
-
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-
   buildAndroid:
     name: buildAndroid
     runs-on: ubuntu-latest
@@ -34,13 +22,13 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@main
         with:
-          distribution: 'zulu'
-          java-version: 11
+          distribution: 'temurin'
+          java-version: '11'
 
       - name: Setup Haxe
-        uses: krdlab/setup-haxe@v1.2.0
+        uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.2.0
+          haxe-version: latest
 
       - name: Install Haxelib
         run: |
@@ -57,6 +45,8 @@ jobs:
           haxelib install hxjsonast
           haxelib install hscript
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
+          haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
+          haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools
           haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
