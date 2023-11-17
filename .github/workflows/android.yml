@@ -1,10 +1,5 @@
-name: androidBuild
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-workflow_dispatch:
+name: Android
+on: workflow_dispatch
 jobs:
   buildAndroid:
     name: buildAndroid
