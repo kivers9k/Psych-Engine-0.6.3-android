@@ -139,7 +139,7 @@ class MainMenuState extends MusicBeatState
 		{
     		menuItems.forEach(function(spr:FlxSprite)
     		{
-    			spr.screenCenter(X);
+    		spr.screenCenter(X);
     		});
 		}
 
@@ -317,10 +317,8 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-	if (menuJSON.disable_editor)
+	if (menuJSON.disable_editor == true)
 	{
-		//nothing
-	else
 		if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonC.justPressed #end)
 		{
 			selectedSomethin = true;
