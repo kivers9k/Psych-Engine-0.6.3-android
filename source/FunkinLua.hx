@@ -1239,7 +1239,7 @@ class FunkinLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "mouseOverlaps", function(tag:String) {
-			var joe = FlxG.mouse.overlaps(tag);
+			var joe = FlxG.mouse.overlaps(PlayState.instance.getLuaObject(tag));
 			return joe;
 		});
 		Lua_helper.add_callback(lua, "mouseClicked", function(button:String) {
