@@ -1238,6 +1238,10 @@ class FunkinLua {
 				}));
 			}
 		});
+		Lua_helper.add_callback(lua, "mouseOverlaps", function(obj:String) {
+			var joe = FlxG.mouse.overlaps(obj);
+			return joe;
+		});
 		Lua_helper.add_callback(lua, "mouseClicked", function(button:String) {
 			var boobs = FlxG.mouse.justPressed;
 			switch(button){
@@ -1246,8 +1250,6 @@ class FunkinLua {
 				case 'right':
 					boobs = FlxG.mouse.justPressedRight;
 			}
-
-
 			return boobs;
 		});
 		Lua_helper.add_callback(lua, "mousePressed", function(button:String) {
