@@ -30,7 +30,7 @@ class SUtil
 		if (aDir != null && aDir.length > 0)
 			return aDir;
 		else
-			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('File') + '/';
+			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
 		#else
 		return '';
 		#end
