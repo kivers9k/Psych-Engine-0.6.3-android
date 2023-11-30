@@ -16,11 +16,6 @@ import sys.FileSystem;
 import sys.io.File;
 import flash.system.System;
 
-/**
- * ...
- * @author: Saw (M.A. Jigsaw)
- */
-
 using StringTools;
 
 class SUtil
@@ -35,7 +30,7 @@ class SUtil
 		if (aDir != null && aDir.length > 0)
 			return aDir;
 		else
-			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
+			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('File') + '/';
 		#else
 		return '';
 		#end
@@ -55,27 +50,10 @@ class SUtil
 			if (!FileSystem.exists(Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file')))
 				FileSystem.createDirectory(Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file'));
 
-			if (!FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.exists(SUtil.getPath() + 'mods'))
+			if (!FileSystem.exists(SUtil.getPath() + 'assets') || !FileSystem.exists(SUtil.getPath() + 'mods'))
 			{
-				SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the files from the .APK!\nPlease watch the tutorial by pressing OK.");
-				CoolUtil.browserLoad('https://youtu.be/zjvkTmdWvfU');
+				SUtil.applicationAlert('Uncaught Error', "seen like you don't have assets folder and mods folder," + "\n" + " try copy assets and mods folder from apk and paste in " + getPath());
 				System.exit(0);
-			}
-			else
-			{
-				if (!FileSystem.exists(SUtil.getPath() + 'assets'))
-				{
-					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the assets/assets folder from the .APK!\nPlease watch the tutorial by pressing OK.");
-					CoolUtil.browserLoad('https://youtu.be/zjvkTmdWvfU');
-					System.exit(0);
-				}
-
-				if (!FileSystem.exists(SUtil.getPath() + 'mods'))
-				{
-					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the assets/mods folder from the .APK!\nPlease watch the tutorial by pressing OK.");
-					CoolUtil.browserLoad('https://youtu.be/zjvkTmdWvfU');
-					System.exit(0);
-				}
 			}
 		}
 		#end
@@ -118,7 +96,7 @@ class SUtil
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 		Sys.println("Making a simple alert ...");
 
-		SUtil.applicationAlert("Uncaught Error :(!", errMsg);
+		SUtil.applicationAlert("Uncaught Error", errMsg);
 		System.exit(0);
 	}
 
@@ -134,13 +112,13 @@ class SUtil
 			FileSystem.createDirectory(SUtil.getPath() + 'saves');
 
 		File.saveContent(SUtil.getPath() + 'saves/' + fileName + fileExtension, fileData);
-		SUtil.applicationAlert('Done :)!', 'File Saved Successfully!');
+		SUtil.applicationAlert('Done', 'File Saved Successfully!');
 	}
 
 	public static function saveClipboard(fileData:String = 'you forgot something to add in your code')
 	{
 		openfl.system.System.setClipboard(fileData);
-		SUtil.applicationAlert('Done :)!', 'Data Saved to Clipboard Successfully!');
+		SUtil.applicationAlert('Done', 'Data Saved to Clipboard Successfully!');
 	}
 
 	public static function copyContent(copyPath:String, savePath:String)
