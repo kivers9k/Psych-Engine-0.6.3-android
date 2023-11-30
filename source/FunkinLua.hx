@@ -254,17 +254,6 @@ class FunkinLua {
 			}
 			return false;
 		});
-
-        //collide shit
-        Lua_helper.add_callback(lua, "setCollide", function(obj1:String, obj2:String) {
-        var pe1 = PlayState.instance.getLuaObject(obj1);
-        var pe2 = PlayState.instance.getLuaObject(obj2);
-        if(pe1!=null || pe2!=null) {
-            FlxG.collide(pe1, pe2);
-            return;
-            }
-        });
-
 		// shader shit
 		Lua_helper.add_callback(lua, "initLuaShader", function(name:String) {
 			if(!ClientPrefs.shaders) return false;
@@ -1237,10 +1226,6 @@ class FunkinLua {
 					}
 				}));
 			}
-		});
-		Lua_helper.add_callback(lua, "mouseOverlaps", function(tag:String) {
-			var joe = FlxG.mouse.overlaps(PlayState.instance.getLuaObject(tag));
-			return joe;
 		});
 		Lua_helper.add_callback(lua, "mouseClicked", function(button:String) {
 			var boobs = FlxG.mouse.justPressed;
