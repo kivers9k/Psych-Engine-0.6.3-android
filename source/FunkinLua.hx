@@ -60,7 +60,7 @@ import Discord;
 #if android
 import android.Hardware;
 #end
-
+import haxe.Json;
 using StringTools;
 
 class FunkinLua {
@@ -3391,6 +3391,7 @@ class HScript
 		interp.variables.set('PlayState', PlayState);
 		interp.variables.set('game', PlayState.instance);
 		interp.variables.set('Paths', Paths);
+		interp.variables.set('Json', Json);
 		interp.variables.set('Conductor', Conductor);
 		interp.variables.set('ClientPrefs', ClientPrefs);
 		interp.variables.set('Character', Character);
