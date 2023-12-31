@@ -73,14 +73,14 @@
             "name":"hxCodec",
             "type":"git",
             "dir":null,
-            "ref":"master",
-            "url":"https://github.com/SPLCoding/hxCodec-but-it-works-xd"
+            "ref":"main",
+            "url":"https://github.com/SPLCoding/hxCodec-but-it-works-xd.git"
         },
         {
             "name":"extension-androidtools",
             "type":"git",
             "dir":null,
-            "ref":"master",
+            "ref":"main",
             "url":"https://github.com/MaysLastPlay77/extension-androidtools"
         }
     ]
