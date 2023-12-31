@@ -46,7 +46,7 @@
             "version":null
         },
         {
-            "name":"hxscript",
+            "name":"hscript",
             "type":"haxelib",
             "version":null
         },
@@ -56,7 +56,7 @@
             "version":null
         },
         {
-            "name":"hxscript-ex",
+            "name":"hscript-ex",
             "type":"git",
             "dir":null,
             "ref":"master",
