@@ -350,7 +350,7 @@ class ChartingState extends MusicBeatState
     		"\nHold C and click on an arrow to select it" +
     		"\nY/X - Zoom in/out" +
     		"\n" +
-    		"\nB - Test your chart inside Chart Editor" +
+    		"\nBack - Test your chart inside Chart Editor" +
     		"\nA - Play your chart" +
     		"\nX - Stop/Resume song" +
     		"\n";
@@ -1738,7 +1738,7 @@ class ChartingState extends MusicBeatState
 
 		if (!blockInput)
 		{
-			if (FlxG.keys.justPressed.ESCAPE #if android || _virtualpad.buttonB.justPressed #end)
+			if (FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 			{
 				autosaveSong();
 				LoadingState.loadAndSwitchState(new editors.EditorPlayState(sectionStartTime()));
@@ -1768,7 +1768,7 @@ class ChartingState extends MusicBeatState
 			}
 
 
-			if (FlxG.keys.justPressed.BACKSPACE #if android || FlxG.android.justReleased.BACK #end) {
+			if (FlxG.keys.justPressed.BACKSPACE #if android || _virtualpad.buttonB.justPressed #end) {
 				PlayState.chartingMode = false;
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -1917,7 +1917,7 @@ class ChartingState extends MusicBeatState
 			//AWW YOU MADE IT SEXY <3333 THX SHADMAR
 
 			if(!blockInput){
-				if(FlxG.keys.justPressed.RIGHT #if || android _virtualpad.buttonRight2.justPressed #end){
+				if(FlxG.keys.justPressed.RIGHT #if android || _virtualpad.buttonRight2.justPressed #end){
 					curQuant++;
 					if(curQuant>quantizations.length-1)
 						curQuant = 0;
@@ -1925,7 +1925,7 @@ class ChartingState extends MusicBeatState
 					quantization = quantizations[curQuant];
 				}
 
-				if(FlxG.keys.justPressed.LEFT #if || android _virtualpad.buttonLeft2.justPressed #end){
+				if(FlxG.keys.justPressed.LEFT #if android || _virtualpad.buttonLeft2.justPressed #end){
 					curQuant--;
 					if(curQuant<0)
 						curQuant = quantizations.length-1;
