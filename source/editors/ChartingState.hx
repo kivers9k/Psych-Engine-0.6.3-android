@@ -344,31 +344,33 @@ class ChartingState extends MusicBeatState
 
         #if android
     		text =
-    		\nLeft/Right (left side dpad) - Go to the previous/next section
-    		\nLeft/Right (right side dpad) - Change Snap
-    		\nUp/Down - Change Conductor's Strum Time with Snapping
-    		\nHold Y and click on an arrow to select it
-    		\nY/X - Zoom in/out
-    		\n
-    		\nBack - Test your chart inside Chart Editor
-    		\nA - Play your chart
-    		\nX - Stop/Resume song";
+    		"\nLeft/Right (left side dpad) - Go to the previous/next section" +
+    		"\nLeft/Right (right side dpad) - Change Snap" +
+    		"\nUp/Down - Change Conductor's Strum Time with Snapping" +
+    		"\nHold Y and click on an arrow to select it" +
+    		"\nY/X - Zoom in/out" +
+    		"\n" +
+    		"\nBack - Test your chart inside Chart Editor" +
+    		"\nA - Play your chart" +
+    		"\nX - Stop/Resume song" +
+    		"\n";
 		#else
     		text =
-    		"W/S or Mouse Wheel - Change Conductor's strum time
-    		\nA/D - Go to the previous/next section
-    		\nLeft/Right - Change Snap
-    		\nUp/Down - Change Conductor's Strum Time with Snapping
-    		\nLeft Bracket / Right Bracket - Change Song Playback Rate (SHIFT to go Faster)
-    		\nALT + Left Bracket / Right Bracket - Reset Song Playback Rate
-    		\nHold Shift to move 4x faster
-    		\nHold Control and click on an arrow to select it
-    		\nZ/X - Zoom in/out
-    		\n
-    		\nEsc - Test your chart inside Chart Editor
-    		\nEnter - Play your chart
-    		\nQ/E - Decrease/Increase Note Sustain Length
-    		\nSpace - Stop/Resume song";
+    		"W/S or Mouse Wheel - Change Conductor's strum time" +
+    		"\nA/D - Go to the previous/next section" +
+    		"\nLeft/Right - Change Snap" +
+    		"\nUp/Down - Change Conductor's Strum Time with Snapping" +
+    		"\nLeft Bracket / Right Bracket - Change Song Playback Rate (SHIFT to go Faster)" +
+    		"\nALT + Left Bracket / Right Bracket - Reset Song Playback Rate" +
+    		"\nHold Shift to move 4x faster" +
+    		"\nHold Control and click on an arrow to select it" +
+    		"\nZ/X - Zoom in/out" +
+    		"\n" +
+    		"\nEsc - Test your chart inside Chart Editor" +
+    		"\nEnter - Play your chart" +
+    		"\nQ/E - Decrease/Increase Note Sustain Length" +
+    		"\nSpace - Stop/Resume song" +
+    		"\n";
 		#end
 
 		var tipTextArray:Array<String> = text.split('\n');
