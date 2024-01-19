@@ -1,0 +1,25 @@
+{
+    "optionScroll": 0.135,
+    "bgScroll": 0.03,
+    "scale": 1,
+    "optionPosition": [0, 0],
+    "optionHeight": 140,
+    "optionCenter": true,
+    "disable_editor": true,
+    "addOption":
+    [
+        "story_mode",
+        "freeplay",
+        "mods",
+        "awards",
+        "credits",
+        "donate",
+        "options"
+    ],
+    "addText":
+    [
+        "Custom MainMenu by Kivers",
+        "Friday Night Funkin' v 0.2.8",
+        "Psych Engine v 0.6.3"
+    ]
+}
