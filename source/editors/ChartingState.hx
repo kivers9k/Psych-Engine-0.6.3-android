@@ -344,13 +344,13 @@ class ChartingState extends MusicBeatState
 
         #if android
     		text =
+    		"\nUp/Down - Change Conductor's strum time" +
     		"\nLeft/Right (left side dpad) - Go to the previous/next section" +
     		"\nLeft/Right (right side dpad) - Change Snap" +
-    		"\nUp/Down - Change Conductor's Strum Time with Snapping" +
-    		"\nHold Y and click on an arrow to select it" +
+    		"\nHold C and click on an arrow to select it" +
     		"\nY/X - Zoom in/out" +
     		"\n" +
-    		"\nBack - Test your chart inside Chart Editor" +
+    		"\nB - Test your chart inside Chart Editor" +
     		"\nA - Play your chart" +
     		"\nX - Stop/Resume song" +
     		"\n";
@@ -1917,7 +1917,7 @@ class ChartingState extends MusicBeatState
 			//AWW YOU MADE IT SEXY <3333 THX SHADMAR
 
 			if(!blockInput){
-				if(FlxG.keys.justPressed.RIGHT){
+				if(FlxG.keys.justPressed.RIGHT #if || android _virtualpad.buttonRight2.justPressed #end){
 					curQuant++;
 					if(curQuant>quantizations.length-1)
 						curQuant = 0;
@@ -1925,7 +1925,7 @@ class ChartingState extends MusicBeatState
 					quantization = quantizations[curQuant];
 				}
 
-				if(FlxG.keys.justPressed.LEFT){
+				if(FlxG.keys.justPressed.LEFT #if || android _virtualpad.buttonLeft2.justPressed #end){
 					curQuant--;
 					if(curQuant<0)
 						curQuant = quantizations.length-1;
