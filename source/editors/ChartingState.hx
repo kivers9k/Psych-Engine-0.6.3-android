@@ -342,21 +342,34 @@ class ChartingState extends MusicBeatState
 		UI_box.y = 25;
 		UI_box.scrollFactor.set();
 
-		text =
-		"W/S or Mouse Wheel - Change Conductor's strum time
-		\nA/D - Go to the previous/next section
-		\nLeft/Right - Change Snap
-		\nUp/Down - Change Conductor's Strum Time with Snapping
-		\nLeft Bracket / Right Bracket - Change Song Playback Rate (SHIFT to go Faster)
-		\nALT + Left Bracket / Right Bracket - Reset Song Playback Rate
-		\nHold Shift to move 4x faster
-		\nHold Control and click on an arrow to select it
-		\nZ/X - Zoom in/out
-		\n
-		\nEsc - Test your chart inside Chart Editor
-		\nEnter - Play your chart
-		\nQ/E - Decrease/Increase Note Sustain Length
-		\nSpace - Stop/Resume song";
+        #if android
+    		text =
+    		\nLeft/Right (left side dpad) - Go to the previous/next section
+    		\nLeft/Right (right side dpad) - Change Snap
+    		\nUp/Down - Change Conductor's Strum Time with Snapping
+    		\nHold Y and click on an arrow to select it
+    		\nY/X - Zoom in/out
+    		\n
+    		\nBack - Test your chart inside Chart Editor
+    		\nA - Play your chart
+    		\nX - Stop/Resume song";
+		#else
+    		text =
+    		"W/S or Mouse Wheel - Change Conductor's strum time
+    		\nA/D - Go to the previous/next section
+    		\nLeft/Right - Change Snap
+    		\nUp/Down - Change Conductor's Strum Time with Snapping
+    		\nLeft Bracket / Right Bracket - Change Song Playback Rate (SHIFT to go Faster)
+    		\nALT + Left Bracket / Right Bracket - Reset Song Playback Rate
+    		\nHold Shift to move 4x faster
+    		\nHold Control and click on an arrow to select it
+    		\nZ/X - Zoom in/out
+    		\n
+    		\nEsc - Test your chart inside Chart Editor
+    		\nEnter - Play your chart
+    		\nQ/E - Decrease/Increase Note Sustain Length
+    		\nSpace - Stop/Resume song";
+		#end
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
@@ -396,7 +409,7 @@ class ChartingState extends MusicBeatState
 		updateGrid();
 
 		#if android
-		addVirtualPad(FULL, A_B_C_X_Y_Z);
+		    addVirtualPad(CHART_EDITOR, CHART_EDITOR);
 		#end
 
 		super.create();
@@ -1586,7 +1599,7 @@ class ChartingState extends MusicBeatState
 			{
 				dummyArrow.visible = true;
 				dummyArrow.x = Math.floor(FlxG.mouse.x / GRID_SIZE) * GRID_SIZE;
-				if (_virtualpad.buttonY.pressed)
+				if (_virtualpad.buttonC.pressed)
 					dummyArrow.y = touch.y;
 				else
 				{
@@ -1761,17 +1774,14 @@ class ChartingState extends MusicBeatState
 				return;
 			}
  
-			if(FlxG.keys.justPressed.Z #if android || _virtualpad.buttonZ.justPressed #end && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
+			if(FlxG.keys.justPressed.Z #if android || _virtualpad.buttonY.justPressed #end && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
 				undo();
 			}
-
-
-
-			if((FlxG.keys.justPressed.Z #if android || _virtualpad.buttonZ.justPressed #end) && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
+			if((FlxG.keys.justPressed.Z #if android || _virtualpad.buttonY.justPressed #end) && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
 				--curZoom;
 				updateZoom();
 			}
-			if(FlxG.keys.justPressed.X #if android || _virtualpad.buttonC.justPressed #end && curZoom < zoomList.length-1) {
+			if(FlxG.keys.justPressed.X #if android || _virtualpad.buttonZ.justPressed #end && curZoom < zoomList.length-1) {
 				curZoom++;
 				updateZoom();
 			}
