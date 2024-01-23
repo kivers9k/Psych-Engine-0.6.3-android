@@ -17,7 +17,6 @@ class MobileConfigSubState extends MusicBeatState
 {
 	var vpad:FlxVirtualPad;
 	var hbox:FlxHitbox;
-	var newhbox:FlxNewHitbox;
 	var upPozition:FlxText;
 	var downPozition:FlxText;
 	var leftPozition:FlxText;
