@@ -96,9 +96,8 @@ class MobileConfigSubState extends BaseOptionsMenu
 		tipText.scrollFactor.set();
 		add(tipText);
 
+		changeSelect();
         super();
-
-		changeSelection();
 	}
 
 	override function update(elapsed:Float)
@@ -112,11 +111,11 @@ class MobileConfigSubState extends BaseOptionsMenu
 		for (touch in FlxG.touches.list){		
 			if(touch.overlaps(leftArrow) && touch.justPressed)
 			{
-				changeSelection(-1);
+				changeSelect(-1);
 			}
 			else if (touch.overlaps(rightArrow) && touch.justPressed)
 			{
-				changeSelection(1);
+				changeSelect(1);
 			}
 			trackbutton(touch);
 		}
@@ -132,7 +131,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		#end
 	}
 
-	function changeSelection(change:Int = 0)
+	function changeSelect(change:Int = 0)
 	{
 		curSelect += change;
 	
