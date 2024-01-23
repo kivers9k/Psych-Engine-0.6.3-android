@@ -62,13 +62,6 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
 
-		#if android
-		if(ClientPrefs.vibration)
-		{
-			Hardware.vibrate(vibrationTime);
-		}
-		#end
-
 		FlxG.sound.play(Paths.sound(deathSoundName));
 		Conductor.changeBPM(100);
 		// FlxG.camera.followLerp = 1;
