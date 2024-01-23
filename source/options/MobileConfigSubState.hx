@@ -1,4 +1,4 @@
-package android;
+package options;
 
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
