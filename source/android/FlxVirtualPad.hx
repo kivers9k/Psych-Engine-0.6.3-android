@@ -42,7 +42,6 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		super();
 
 		orgAntialiasing = antialiasingAlt;
-		orgAlpha = alphaAlt;
 
 		dPad = new FlxSpriteGroup();
 		dPad.scrollFactor.set();

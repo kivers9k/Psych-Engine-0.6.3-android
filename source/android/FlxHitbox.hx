@@ -21,7 +21,6 @@ class FlxHitbox extends FlxSpriteGroup {
 	public function new(?antialiasingAlt:Bool = true) {
 		super();
 
-		orgAlpha = alphaAlt;
 		orgAntialiasing = antialiasingAlt;
 
 		buttonLeft = new FlxButton(0, 0);
