@@ -16,10 +16,9 @@ class FlxHitbox extends FlxSpriteGroup {
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
 
-	public var orgAlpha:Float = 0.75;
 	public var orgAntialiasing:Bool = true;
 	
-	public function new(?alphaAlt:Float = 0.75, ?antialiasingAlt:Bool = true) {
+	public function new(?antialiasingAlt:Bool = true) {
 		super();
 
 		orgAlpha = alphaAlt;
@@ -38,7 +37,6 @@ class FlxHitbox extends FlxSpriteGroup {
 
 		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
 		hitbox_hint.antialiasing = orgAntialiasing;
-		hitbox_hint.alpha = orgAlpha;
 		add(hitbox_hint);
 	}
 
