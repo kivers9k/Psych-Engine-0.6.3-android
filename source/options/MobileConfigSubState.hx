@@ -96,9 +96,9 @@ class MobileConfigSubState extends BaseOptionsMenu
 		tipText.scrollFactor.set();
 		add(tipText);
 
-		changeSelection();
-
         super();
+
+		changeSelection();
 	}
 
 	override function update(elapsed:Float)
