@@ -171,7 +171,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 					vpad = new FlxVirtualPad(DUO, NONE, ClientPrefs.globalAntialiasing);
 					add(vpad);
 				case 'Hitbox':
-					vpad.alpha = ;
+					vpad.alpha = 0;
 				case 'Keyboard':
 					remove(vpad);
 					vpad.alpha = 0;
