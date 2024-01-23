@@ -1,5 +1,8 @@
 package options;
 
+#if desktop
+import Discord.DiscordClient;
+#end
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
@@ -14,7 +17,7 @@ import android.FlxVirtualPad;
 
 using StringTools;
 
-class MobileConfigSubState extends FlxSubState
+class MobileConfigSubState extends BaseOptionsMenu
 {
 	var vpad:FlxVirtualPad;
 	var hbox:FlxHitbox;
@@ -25,7 +28,7 @@ class MobileConfigSubState extends FlxSubState
 	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
-	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Duo','Hitbox','Keyboard'];
+	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Double','Hitbox','Keyboard'];
 	var curSelected:Int = 0;
 	var buttonistouched:Bool = false;
 	var bindbutton:FlxButton;
@@ -144,7 +147,7 @@ class MobileConfigSubState extends FlxSubState
 		if (curSelected >= controlitems.length)
 			curSelected = 0;
 	
-		inputvari.changeText(controlitems[curSelected]);
+		//inputvari.changeText(controlitems[curSelected]);
 
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
@@ -168,7 +171,7 @@ class MobileConfigSubState extends FlxSubState
 					vpad = new FlxVirtualPad(DUO, NONE, ClientPrefs.globalAntialiasing);
 					add(vpad);
 				case 'Hitbox':
-					vpad.alpha = 0;
+					vpad.alpha = ;
 				case 'Keyboard':
 					remove(vpad);
 					vpad.alpha = 0;

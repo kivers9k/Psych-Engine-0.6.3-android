@@ -26,8 +26,6 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
-import options.BaseOptionsMenu;
-import options.Option;
 import openfl.Lib;
 
 using StringTools;
@@ -41,7 +39,7 @@ class MobileSettingSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Mobile Controls Opacity', //mariomaster was here again
 			'Changes opacity',
-			'MobileCAlpha',
+			'mobileOpacity',
 			'float',
 			0.2);
 		option.scrollSpeed = 1.6;
@@ -53,7 +51,7 @@ class MobileSettingSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Hide Hitbox Hint', //mariomaster was here again
 			'Hide hint',
-			'HideHint',
+			'hideHint',
 			'bool',
 			false);
 
