@@ -30,13 +30,32 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
+	var options:Array<String> = [
+	    'Mobile Config',
+	    'Mobile Setting',
+	    'Note Colors',
+	    'Controls',
+	    'Adjust Delay and Combo',
+	    'Graphics',
+	    'Visuals and UI',
+	    'Gameplay'
+	   ];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
+		    case 'Mobile Config':
+				#if android
+				removeVirtualPad();
+				#end
+				openSubState(new android.MobileConfigSubState());
+		    case 'Mobile Setting':
+				#if android
+				removeVirtualPad();
+				#end
+				openSubState(new android.MobileSettingSubState());
 			case 'Note Colors':
 				#if android
 				removeVirtualPad();
