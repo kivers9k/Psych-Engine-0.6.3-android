@@ -29,7 +29,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Double','Hitbox','Keyboard'];
-	var curSelected:Int = 0;
+	var curSelect:Int = 0;
 	var buttonistouched:Bool = false;
 	var bindbutton:FlxButton;
 	var config:Config;
@@ -40,13 +40,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		rpcTitle = 'Mobile Config Menu';
 
 		config = new Config();
-		curSelected = config.getcontrolmode();
-
-		var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
-		bg.color = 0xFFea71fd;
-		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		add(bg);
+		curSelect= config.getcontrolmode();
 
 		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
 		vpad.alpha = 0;
@@ -56,7 +50,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		hbox.visible = false;
 		add(hbox);
 
-		inputvari = new Alphabet(0, 50, 'virtualpad', false);
+		inputvari = new Alphabet(0, 50, controlitems[curSelect], false);
 		inputvari.screenCenter(X);
 		add(inputvari);
 
@@ -140,16 +134,16 @@ class MobileConfigSubState extends BaseOptionsMenu
 
 	function changeSelection(change:Int = 0)
 	{
-		curSelected += change;
+		curSelect += change;
 	
-		if (curSelected < 0)
-			curSelected = controlitems.length - 1;
-		if (curSelected >= controlitems.length)
-			curSelected = 0;
+		if (curSelect < 0)
+			curSelect = controlitems.length - 1;
+		if (curSelect >= controlitems.length)
+			curSelect = 0;
 	
-		//inputvari.changeText(controlitems[curSelected]);
+		//inputvari.changeText(controlitems[curSelect]);
 
-		var daChoice:String = controlitems[Math.floor(curSelected)];
+		var daChoice:String = controlitems[Math.floor(curSelect)];
 
 		switch (daChoice)
 		{
@@ -199,7 +193,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 	}
 
 	function trackbutton(touch:flixel.input.touch.FlxTouch){
-		var daChoice:String = controlitems[Math.floor(curSelected)];
+		var daChoice:String = controlitems[Math.floor(curSelect)];
 
 		if (daChoice == 'Pad-Custom'){
 			if (buttonistouched){
@@ -249,8 +243,8 @@ class MobileConfigSubState extends BaseOptionsMenu
 	}
 
 	function save() {
-		config.setcontrolmode(curSelected);
-		var daChoice:String = controlitems[Math.floor(curSelected)];
+		config.setcontrolmode(curSelect);
+		var daChoice:String = controlitems[Math.floor(curSelect)];
 
 		if (daChoice == 'Pad-Custom'){
 			config.savecustom(vpad);
