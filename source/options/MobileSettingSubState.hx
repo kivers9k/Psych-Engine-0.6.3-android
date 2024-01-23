@@ -37,7 +37,7 @@ class MobileSettingSubState extends BaseOptionsMenu
 	public function new()
 	{
 		title = 'Mobile Controls Settings';
-		rpcTitle = 'Android Controls Settings'; //hi, you can ask what is that, i will answer it's all what you needed lol.
+		rpcTitle = 'Mobile Controls Settings Menu'; //hi, you can ask what is that, i will answer it's all what you needed lol.
 
 		var option:Option = new Option('Mobile Controls Opacity', //mariomaster was here again
 			'Changes opacity',

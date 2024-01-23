@@ -8,7 +8,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
 import android.FlxHitbox;
-import android.AndroidControls.Config;
+import android.MobileControls.Config;
 import android.FlxVirtualPad;
 
 using StringTools;
@@ -22,7 +22,7 @@ class MobileConfigSubState extends MusicBeatState
 	var downPozition:FlxText;
 	var leftPozition:FlxText;
 	var rightPozition:FlxText;
-	var inputvari:PsychAlphabet;
+	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Duo','Hitbox','Keyboard'];
@@ -31,10 +31,11 @@ class MobileConfigSubState extends MusicBeatState
 	var bindbutton:FlxButton;
 	var config:Config;
 
-	override public function create():Void
+	public function new():Void
 	{
-		super.create();
-		
+		title = 'Mobile Config';
+		rpcTitle = 'Mobile Config Menu';
+
 		config = new Config();
 		curSelected = config.getcontrolmode();
 
@@ -44,12 +45,6 @@ class MobileConfigSubState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		var titleText:Alphabet = new Alphabet(75, 60, "Mobile Controls", true);
-		titleText.scaleX = 0.6;
-		titleText.scaleY = 0.6;
-		titleText.alpha = 0.4;
-		add(titleText);
-
 		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);
 		vpad.alpha = 0;
 		add(vpad);
@@ -58,7 +53,7 @@ class MobileConfigSubState extends MusicBeatState
 		hbox.visible = false;
 		add(hbox);
 
-		inputvari = new PsychAlphabet(0, 50, controlitems[curSelected], false, false, 0.05, 0.8);
+		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
 		inputvari.screenCenter(X);
 		add(inputvari);
 
@@ -105,6 +100,8 @@ class MobileConfigSubState extends MusicBeatState
 		add(tipText);
 
 		changeSelection();
+
+        super();
 	}
 
 	override function update(elapsed:Float)
