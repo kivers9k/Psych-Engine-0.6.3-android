@@ -64,7 +64,7 @@ class MusicBeatState extends FlxUIState
 
 	#if android
 	public function addMobileControls() {
-		mobileC = new mobileControls();
+		mobileC = new MobileControls();
 
 		switch (mobileC.mode)
 		{
