@@ -31,8 +31,8 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [
-	    #if android 'Mobile Config', #end
-	    #if android 'Mobile Setting', #end
+	    'Mobile Config',
+	    'Mobile Setting',
 	    'Note Colors',
 	    'Controls',
 	    'Adjust Delay and Combo',
@@ -46,18 +46,16 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-		    #if android
-    		    case 'Mobile Config':
-    				#if android
-    				removeVirtualPad();
-    				#end
-    				openSubState(new options.MobileConfigSubState());
-    		    case 'Mobile Setting':
-    				#if android
-    				removeVirtualPad();
-    				#end
-    				openSubState(new options.MobileSettingSubState());
-    		#end
+		    case 'Mobile Config':
+				#if android
+				removeVirtualPad();
+				#end
+				openSubState(new options.MobileConfigSubState());
+		    case 'Mobile Setting':
+				#if android
+				removeVirtualPad();
+				#end
+				openSubState(new options.MobileSettingSubState());
 			case 'Note Colors':
 				#if android
 				removeVirtualPad();
