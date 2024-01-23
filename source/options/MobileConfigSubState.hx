@@ -34,7 +34,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 	var bindbutton:FlxButton;
 	var config:Config;
 
-	public function new():Void
+	public function new()
 	{
 		title = 'Mobile Config';
 		rpcTitle = 'Mobile Config Menu';
@@ -56,7 +56,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		hbox.visible = false;
 		add(hbox);
 
-		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
+		inputvari = new Alphabet(0, 50, 'virtualpad', false);
 		inputvari.screenCenter(X);
 		add(inputvari);
 
