@@ -41,8 +41,11 @@ class MobileConfigSubState extends BaseOptionsMenu
 		title = 'Mobile Config';
 		rpcTitle = 'Mobile Config Menu';
 
-        super();
+		super();
+	}
 
+	override function create()
+	{
 		config = new Config();
 		curSelect = config.getcontrolmode();
 

@@ -37,9 +37,9 @@ class MobileSettingSubState extends BaseOptionsMenu
 		title = 'Mobile Settings';
 		rpcTitle = 'Mobile Settings Menu';
 
-		var option:Option = new Option('Mobile Controls Opacity',
-			'Changes opacity',
-			'mobileOpacity',
+		var option:Option = new Option('VirtualPad Opacity',
+			'Changes VirtualPad Opacity',
+			'VirtualPadOpacity',
 			'float',
 			0.2);
 		option.scrollSpeed = 1.6;
@@ -50,7 +50,7 @@ class MobileSettingSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Hide Hitbox Hint',
-			'Hide hint',
+			'if unchecked, the hitbox hint is not hide',
 			'hideHint',
 			'bool',
 			false);
