@@ -34,7 +34,7 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
-	public static var mobileOpacity:Float = 0.2;
+	public static var VirtualPadOpacity:Float = 0.2;
 	public static var hideHint:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -135,7 +135,7 @@ class ClientPrefs {
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
 		
-		FlxG.save.data.mobileOpacity = mobileOpacity;
+		FlxG.save.data.VirtualPadOpacity = VirtualPadOpacity;
 		FlxG.save.data.hideHint = hideHint;
 	
 	
@@ -250,8 +250,8 @@ class ClientPrefs {
 		if(FlxG.save.data.hitsoundVolume != null) {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;
 		}
-		if(FlxG.save.data.mobileOpacity != null) {
-			mobileOpacity = FlxG.save.data.mobileOpacity;
+		if(FlxG.save.data.VirtualPadOpacity != null) {
+			VirtualPadOpacity = FlxG.save.data.VirtualPadOpacity;
 		}
 		if(FlxG.save.data.hideHint != null) {
 			hideHint = FlxG.save.data.hideHint;
