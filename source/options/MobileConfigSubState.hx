@@ -38,12 +38,20 @@ class MobileConfigSubState extends BaseOptionsMenu
 	{
 		title = 'Mobile Config';
 		rpcTitle = 'Mobile Config Menu';
+	}
 
 		config = new Config();
 		curSelect= config.getcontrolmode();
 
-		inputvari = new Alphabet(0, 50, controlitems[curSelect], false);
-		inputvari.screenCenter(X);
+		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
+		vpad.alpha = 0;
+		add(vpad);
+
+		hbox = new FlxHitbox(ClientPrefs.globalAntialiasing);
+		hbox.visible = false;
+		add(hbox);
+
+		inputvari = new Alphabet(500, 50, controlitems[curSelect], false);
 		add(inputvari);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
