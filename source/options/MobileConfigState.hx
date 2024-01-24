@@ -98,17 +98,11 @@ class MobileConfigState extends MusicBeatState
 		rightPozition.borderSize = 2.4;
 		add(rightPozition);
 
-        saveAndLeave = new FlxButton(0,180,'Save and leave',function(){
-			FlxTransitionableState.skipNextTransIn = true;
-			FlxTransitionableState.skipNextTransOut = true;
-			MusicBeatState.switchState(new options.OptionsState());
-        });
+        saveAndLeave = new FlxButton(0,180,'Save and leave');
         saveAndLeave.x = (FlxG.width - saveAndLeave.width) / 2 - 50;
         add(saveAndLeave);
     
-        reset = new FlxButton(0,180,'Reset',function(){
-            curSelected = 0;
-        });
+        reset = new FlxButton(0,180,'Reset');
         reset.x = (FlxG.width - reset.width) / 2 + 50;
         add(reset);
 
@@ -134,6 +128,16 @@ class MobileConfigState extends MusicBeatState
 				changeSelection(1);
 			}
 			trackbutton(touch);
+		}
+
+		if (saveAndLeave.justPressed) {
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+			MusicBeatState.switchState(new options.OptionsState());
+		}
+
+		if (reset.justPressed) {
+			curSelected = 0;
 		}
 	}
 
