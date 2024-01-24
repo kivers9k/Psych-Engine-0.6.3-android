@@ -51,6 +51,8 @@ class OptionsState extends MusicBeatState
 		    #if android
     		    case 'Mobile Config':
     				removeVirtualPad();
+					FlxTransitionableState.skipNextTransIn = true;
+        			FlxTransitionableState.skipNextTransOut = true;
     				MusicBeatState.switchState(new options.MobileConfigState());
     		    case 'Mobile Setting':
     				removeVirtualPad();

@@ -56,11 +56,11 @@ class MobileConfigState extends MusicBeatState
 		titleText.alpha = 0.4;
 		add(titleText);
 
-		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
+		vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
 		vpad.alpha = 0;
 		add(vpad);
 
-		hbox = new FlxHitbox(ClientPrefs.globalAntialiasing);
+		hbox = new FlxHitbox();
 		hbox.visible = false;
 		add(hbox);
 
@@ -156,20 +156,20 @@ class MobileConfigState extends MusicBeatState
 		{
 				case 'Pad-Right':
 					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
 					add(vpad);
 				case 'Pad-Left':
 					remove(vpad);
-					vpad = new FlxVirtualPad(FULL, NONE, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(FULL, NONE);
 					add(vpad);
 				case 'Pad-Custom':
 					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
 					add(vpad);
 					loadcustom();
 				case 'Double':
 					remove(vpad);
-					vpad = new FlxVirtualPad(DUO, NONE, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(DUO, NONE);
 					add(vpad);
 				case 'Hitbox':
 					vpad.alpha = 0;
