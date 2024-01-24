@@ -24,6 +24,7 @@ class MobileConfigState extends MusicBeatState
 	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+	var saveAndLeave:FlxButton;
 	var controlitems:Array<String> = [
 	    'Pad-Right',
 	    'Pad-Left',
@@ -55,14 +56,6 @@ class MobileConfigState extends MusicBeatState
 		titleText.scaleY = 0.6;
 		titleText.alpha = 0.4;
 		add(titleText);
-
-		vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
-		vpad.alpha = 0;
-		add(vpad);
-
-		hbox = new FlxHitbox();
-		hbox.visible = false;
-		add(hbox);
 
 		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
 		inputvari.x = (FlxG.width - inputvari.width) / 2;
@@ -104,6 +97,20 @@ class MobileConfigState extends MusicBeatState
 		rightPozition.borderSize = 2.4;
 		add(rightPozition);
 
+        saveAndLeave = new FlxButton(0,180,'Save and leave',function(){
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+			MusicBeatState.switchState(new options.OptionsState());
+        });
+        saveAndLeave.x = (FlxG.width - saveAndLeave.width) / 2 - 50;
+        add(saveAndLeave);
+    
+        reset = new FlxButton(0,180,'Reset',function(){
+            curSelected = 0;
+        });
+        reset.x = (FlxG.width - reset.width) / 2 + 50;
+        add(reset);
+
 		changeSelection();
 	}
 
@@ -127,16 +134,6 @@ class MobileConfigState extends MusicBeatState
 			}
 			trackbutton(touch);
 		}
-		
-		#if android
-		if (FlxG.android.justReleased.BACK)
-		{
-			save();
-			FlxTransitionableState.skipNextTransIn = true;
-			FlxTransitionableState.skipNextTransOut = true;
-			MusicBeatState.switchState(new options.OptionsState());
-		}
-		#end
 	}
 
 	function changeSelection(change:Int = 0)
@@ -154,28 +151,30 @@ class MobileConfigState extends MusicBeatState
 
 		switch (daChoice)
 		{
-				case 'Pad-Right':
-					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
-					add(vpad);
-				case 'Pad-Left':
-					remove(vpad);
-					vpad = new FlxVirtualPad(FULL, NONE);
-					add(vpad);
-				case 'Pad-Custom':
-					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
-					add(vpad);
-					loadcustom();
-				case 'Double':
-					remove(vpad);
-					vpad = new FlxVirtualPad(DUO, NONE);
-					add(vpad);
-				case 'Hitbox':
-					vpad.alpha = 0;
-				case 'Keyboard':
-					remove(vpad);
-					vpad.alpha = 0;
+			case 'Pad-Right':
+				remove(vpad);
+				vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
+				add(vpad);
+			case 'Pad-Left':
+				remove(vpad);
+				vpad = new FlxVirtualPad(FULL, NONE);
+				add(vpad);
+			case 'Pad-Custom':
+				remove(vpad);
+				vpad = new FlxVirtualPad(RIGHT_FULL, NONE);
+				add(vpad);
+				loadcustom();
+			case 'Double':
+				remove(vpad);
+				vpad = new FlxVirtualPad(DUO, NONE);
+				add(vpad);
+			case 'Hitbox':
+				remove(vpad)
+				hbox = new FlxHitbox();
+				add(hbox)
+			case 'Keyboard':
+				remove(vpad);
+				remove(hbox)
 		}
 
 		if (daChoice != "Hitbox")
