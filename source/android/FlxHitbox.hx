@@ -3,18 +3,22 @@ package android;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.FlxGraphic;
 import flixel.group.FlxSpriteGroup;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
+	public var hitboxHint:FlxSpriteGroup;
 
 	public var buttonLeft:FlxButton;
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
+
+	public var leftHint:FlxSprite;
+	public var down.:FlxSprite;
+	public var upHint:FlxSprite;
+	public var rightHint:FlxSprite;
 
 	public function new() {
 		super();
@@ -56,6 +60,29 @@ class FlxHitbox extends FlxSpriteGroup {
 		buttonHint.color = colors;
 		buttonHint.alpha = 0;
 		return buttonHint;
+	}
+
+	override function update(elapsed:Float) {
+	    if (hitbox.buttonLeft.pressed) { //left
+	        hitbox.buttonLeft.alpha = 1;
+	    } else {
+	        hitbox.buttonLeft.alpha = 0
+	    }
+	    if (hitbox.buttonDown.pressed) { //down
+	        hitbox.buttonDown.alpha = 1;
+	    } else {
+	        hitbox.buttonDown.alpha = 0
+	    }
+	    if (hitbox.buttonUp.pressed) { //up
+	        hitbox.buttonUp.alpha = 1;
+	    } else {
+	        hitbox.buttonUp.alpha = 0
+	    }
+	    if (hitbox.buttonRight.pressed) { //right
+	        hitbox.buttonRight.alpha = 1;
+	    } else {
+	        hitbox.buttonRight.alpha = 0
+	    }
 	}
 
 	override public function destroy():Void {
