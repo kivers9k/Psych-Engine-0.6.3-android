@@ -14,6 +14,7 @@ import flixel.FlxSubState;
 import android.FlxHitbox;
 import android.MobileControls.Config;
 import android.FlxVirtualPad;
+import Alphabet;
 
 using StringTools;
 
@@ -50,7 +51,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		hbox.visible = false;
 		add(hbox);
 
-		inputvari = new Alphabet(500, 50, controlitems[curSelect], false);
+		inputvari = new Alphabet(0, 50, controlitems[curSelect], false);
 		add(inputvari);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
@@ -103,9 +104,9 @@ class MobileConfigSubState extends BaseOptionsMenu
 	{
 		super.update(elapsed);
 
+		inputvari.x = (FlxG.width - inputvari.width) / 2; // center haha
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
-		inputvari.screenCenter(X);
 		
 		for (touch in FlxG.touches.list){		
 			if(touch.overlaps(leftArrow) && touch.justPressed)
