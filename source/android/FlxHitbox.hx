@@ -66,22 +66,22 @@ class FlxHitbox extends FlxSpriteGroup {
 	    if (hitbox.buttonLeft.pressed) { //left
 	        hitbox.buttonLeft.alpha = 1;
 	    } else {
-	        hitbox.buttonLeft.alpha = 0
+	        hitbox.buttonLeft.alpha = 0;
 	    }
 	    if (hitbox.buttonDown.pressed) { //down
 	        hitbox.buttonDown.alpha = 1;
 	    } else {
-	        hitbox.buttonDown.alpha = 0
+	        hitbox.buttonDown.alpha = 0;
 	    }
 	    if (hitbox.buttonUp.pressed) { //up
 	        hitbox.buttonUp.alpha = 1;
 	    } else {
-	        hitbox.buttonUp.alpha = 0
+	        hitbox.buttonUp.alpha = 0;
 	    }
 	    if (hitbox.buttonRight.pressed) { //right
 	        hitbox.buttonRight.alpha = 1;
 	    } else {
-	        hitbox.buttonRight.alpha = 0
+	        hitbox.buttonRight.alpha = 0;
 	    }
 	}
 
