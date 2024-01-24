@@ -25,6 +25,7 @@ class MobileConfigState extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var saveAndLeave:FlxButton;
+	var reset:FlxButton;
 	var controlitems:Array<String> = [
 	    'Pad-Right',
 	    'Pad-Left',
