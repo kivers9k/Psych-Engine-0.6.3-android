@@ -52,6 +52,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		add(hbox);
 
 		inputvari = new Alphabet(0, 50, controlitems[curSelect], false);
+		inputvari.x = (FlxG.width - inputvari.width) / 2;
 		add(inputvari);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
@@ -104,7 +105,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 	{
 		super.update(elapsed);
 
-		inputvari.x = (FlxG.width - inputvari.width) / 2; // center haha
+		inputvari.x = (FlxG.width - inputvari.width) / 2; // update center
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
 		
