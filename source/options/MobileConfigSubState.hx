@@ -58,7 +58,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		inputvari.x = (FlxG.width - inputvari.width) / 2;
 		add(inputvari);
 
-		ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
+		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
 
 		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y + 50);
 		leftArrow.frames = ui_tex;
