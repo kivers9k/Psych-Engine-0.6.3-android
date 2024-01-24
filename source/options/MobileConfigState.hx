@@ -178,11 +178,6 @@ class MobileConfigState extends MusicBeatState
 				remove(hbox);
 		}
 
-		if (daChoice != "Hitbox")
-		{
-			hbox.visible = false;
-		}
-
 		if (daChoice != "Pad-Custom")
 		{
 			upPozition.visible = false;
