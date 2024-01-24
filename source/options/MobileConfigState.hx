@@ -169,12 +169,12 @@ class MobileConfigState extends MusicBeatState
 				vpad = new FlxVirtualPad(DUO, NONE);
 				add(vpad);
 			case 'Hitbox':
-				remove(vpad)
+				remove(vpad);
 				hbox = new FlxHitbox();
-				add(hbox)
+				add(hbox);
 			case 'Keyboard':
 				remove(vpad);
-				remove(hbox)
+				remove(hbox);
 		}
 
 		if (daChoice != "Hitbox")
