@@ -23,7 +23,6 @@ class ClientPrefs {
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-	public static var vibration:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var timeBarType:String = 'Time Left';
 	public static var scoreZoom:Bool = true;
@@ -33,7 +32,7 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
-	public static var monileControlOpacity:Float = 0.5;
+	public static var mobileControlOpacity:Float = 0.5;
 	public static var hideHint:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -112,7 +111,6 @@ class ClientPrefs {
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
 		FlxG.save.data.arrowHSV = arrowHSV;
-		FlxG.save.data.vibration = vibration;
 		FlxG.save.data.ghostTapping = ghostTapping;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.scoreZoom = scoreZoom;
@@ -133,7 +131,7 @@ class ClientPrefs {
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
 		
-		FlxG.save.data.VirtualPadOpacity = VirtualPadOpacity;
+		FlxG.save.data.mobileControlOpacity = mobileControlOpacity;
 		FlxG.save.data.hideHint = hideHint;
 	
 	
@@ -205,9 +203,6 @@ class ClientPrefs {
 		if(FlxG.save.data.arrowHSV != null) {
 			arrowHSV = FlxG.save.data.arrowHSV;
 		}
-		if(FlxG.save.data.vibration != null) {
-			vibration = FlxG.save.data.vibration;
-		}
 		if(FlxG.save.data.ghostTapping != null) {
 			ghostTapping = FlxG.save.data.ghostTapping;
 		}
@@ -245,8 +240,8 @@ class ClientPrefs {
 		if(FlxG.save.data.hitsoundVolume != null) {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;
 		}
-		if(FlxG.save.data.VirtualPadOpacity != null) {
-			VirtualPadOpacity = FlxG.save.data.VirtualPadOpacity;
+		if(FlxG.save.data.mobileControlOpacity != null) {
+			mobileControlOpacity = FlxG.save.data.mobileControlOpacity;
 		}
 		if(FlxG.save.data.hideHint != null) {
 			hideHint = FlxG.save.data.hideHint;
