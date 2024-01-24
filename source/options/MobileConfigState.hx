@@ -60,7 +60,7 @@ class MobileConfigState extends MusicBeatState
 		vpad.alpha = 0;
 		add(vpad);
 
-		hbox = new FlxHitbox(0.75, ClientPrefs.globalAntialiasing);
+		hbox = new FlxHitbox(ClientPrefs.globalAntialiasing);
 		hbox.visible = false;
 		add(hbox);
 
