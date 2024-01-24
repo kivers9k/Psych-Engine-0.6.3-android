@@ -38,7 +38,6 @@ class MobileConfigSubState extends BaseOptionsMenu
 	{
 		title = 'Mobile Config';
 		rpcTitle = 'Mobile Config Menu';
-	}
 
 		config = new Config();
 		curSelect= config.getcontrolmode();
