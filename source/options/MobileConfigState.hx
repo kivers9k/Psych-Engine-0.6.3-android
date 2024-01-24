@@ -78,6 +78,8 @@ class MobileConfigState extends MusicBeatState
 		rightArrow.animation.play('idle');
 		add(rightArrow);
 
+		changeSelection();
+
 		upPozition = new FlxText(10, FlxG.height - 104, 0,"Button Up X:" + vpad.buttonUp.x +" Y:" + vpad.buttonUp.y, 16);
 		upPozition.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		upPozition.borderSize = 2.4;
@@ -105,8 +107,6 @@ class MobileConfigState extends MusicBeatState
         reset = new FlxButton(0,180,'Reset');
         reset.x = (FlxG.width - reset.width) / 2 + 50;
         add(reset);
-
-		changeSelection();
 	}
 
 	override function update(elapsed:Float)
@@ -118,7 +118,7 @@ class MobileConfigState extends MusicBeatState
 		inputvari.x = (FlxG.width - inputvari.width) / 2;
 
 		
-		for (touch in FlxG.touches.list){		
+		for (touch in FlxG.touches.list){
 			if(touch.overlaps(leftArrow) && touch.justPressed)
 			{
 				changeSelection(-1);
@@ -135,7 +135,6 @@ class MobileConfigState extends MusicBeatState
 			FlxTransitionableState.skipNextTransOut = true;
 			MusicBeatState.switchState(new options.OptionsState());
 		}
-
 		if (reset.justPressed) {
 			curSelected = 0;
 		}

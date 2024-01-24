@@ -37,11 +37,11 @@ class MobileSettingSubState extends BaseOptionsMenu
 		title = 'Mobile Setting';
 		rpcTitle = 'Mobile Setting Menu';
 
-		var option:Option = new Option('VirtualPad Opacity',
-		'Changes VirtualPad Opacity',
-		'VirtualPadOpacity',
+		var option:Option = new Option('Mobile Controls Opacity',
+		'Changes Mobile Controls Opacity',
+		'mobileControlOpacity',
 		'float',
-		0.2);
+		0.5);
 		option.scrollSpeed = 1.6;
 		option.minValue = 0.0;
 		option.maxValue = 1;
