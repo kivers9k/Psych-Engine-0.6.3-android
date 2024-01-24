@@ -36,12 +36,8 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
 
-	public var orgAntialiasing:Bool = true;
-
-	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode, ?antialiasingAlt:Bool = true) {
+	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
 		super();
-
-		orgAntialiasing = antialiasingAlt;
 
 		dPad = new FlxSpriteGroup();
 		dPad.scrollFactor.set();
@@ -172,7 +168,6 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();
-		button.antialiasing = orgAntialiasing;
 		#if FLX_DEBUG
 		button.ignoreDrawDebug = true;
 		#end
