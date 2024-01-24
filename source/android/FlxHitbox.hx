@@ -8,17 +8,11 @@ import flixel.FlxSprite;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
-	public var hitboxHint:FlxSpriteGroup;
 
 	public var buttonLeft:FlxButton;
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
-
-	public var leftHint:FlxSprite;
-	public var downHint:FlxSprite;
-	public var upHint:FlxSprite;
-	public var rightHint:FlxSprite;
 
 	public function new() {
 		super();
@@ -28,62 +22,32 @@ class FlxHitbox extends FlxSpriteGroup {
 		buttonUp = new FlxButton(0, 0);
 		buttonRight = new FlxButton(0, 0);
 
-		leftHint = new FlxSprite(0, 0);
-		downHint = new FlxSprite(0, 0);
-		upHint = new FlxSprite(0, 0);
-		rightHint = new FlxSprite(0, 0);
-
 		hitbox = new FlxSpriteGroup();
 		hitbox.add(add(buttonLeft = createhitbox(0, 0, 0xC457D3)));
 		hitbox.add(add(buttonDown = createhitbox(320, 0, 0x00DAFF)));
 		hitbox.add(add(buttonUp = createhitbox(640, 0, 0x00FF00)));
 		hitbox.add(add(buttonRight = createhitbox(960, 0, 0xFF0000)));
-
-		hitboxHint = new FlxSpriteGroup();
-		hitboxHint.add(add(leftHint = createhitboxhint(0, 0, 0xC457D3)));
-		hitboxHint.add(add(downHint = createhitboxhint(320, 0, 0x00DAFF)));
-		hitboxHint.add(add(upHint = createhitboxhint(640, 0, 0x00FF00)));
-		hitboxHint.add(add(rightHint = createhitboxhint(960, 0, 0xFF0000)));
 	}
 
-	public function createhitbox(x:Float = 0, y:Float = 0, colorYeah:Int = 0xFFFFFF) {
-		var button = new FlxButton(x, y);
-		button.loadGraphic(Paths.image('androidcontrols/hitbox'));
-		button.color = colorYeah;
-		button.alpha = 0;
-		return button;
-	}
+    public function createhitbox(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
+        var button:FlxButton = new FlxButton(x,y);
+        button.loadGraphic(Paths.image('androidcontrols/hitbox'));
+        button.updateHitbox();
+        button.alpha = 0;
+        button.color = colors;
+        button.onOut.callback = function() {button.alpha = 0;}
+        button.onDown.callback = function() {button.alpha = 0.5;}
+        button.onUp.callback = function() {button.alpha = 0;}
+        add(button);
 
-	public function createhitboxhint(x:Float = 0,y:Float = 0, colors:Int = 0xFFFFFF) {
-		var buttonHint = new FlxSprite(x, y);
-		buttonHint.loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
-		buttonHint.color = colors;
-		buttonHint.alpha = 0;
-		return buttonHint;
-	}
+        var hint:FlxSprite = new FlxSprite(x,y);
+        hint.loadGraphic(Paths.image('androidcontrols/hint'));
+        hint.color = colors;
+        hint.alpha = 0.5;
+        add(hint);
 
-	override function update(elapsed:Float) {
-	    if (hitbox.buttonLeft.pressed) { //left
-	        hitbox.buttonLeft.alpha = 1;
-	    } else {
-	        hitbox.buttonLeft.alpha = 0;
-	    }
-	    if (hitbox.buttonDown.pressed) { //down
-	        hitbox.buttonDown.alpha = 1;
-	    } else {
-	        hitbox.buttonDown.alpha = 0;
-	    }
-	    if (hitbox.buttonUp.pressed) { //up
-	        hitbox.buttonUp.alpha = 1;
-	    } else {
-	        hitbox.buttonUp.alpha = 0;
-	    }
-	    if (hitbox.buttonRight.pressed) { //right
-	        hitbox.buttonRight.alpha = 1;
-	    } else {
-	        hitbox.buttonRight.alpha = 0;
-	    }
-	}
+        return button;
+    }
 
 	override public function destroy():Void {
 		super.destroy();
