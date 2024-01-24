@@ -51,7 +51,7 @@ class OptionsState extends MusicBeatState
 		    #if android
     		    case 'Mobile Config':
     				removeVirtualPad();
-    				openSubState(new options.MobileConfigSubState());
+    				MusicBeatState.switchState(new options.MobileConfigState());
     		    case 'Mobile Setting':
     				removeVirtualPad();
     				openSubState(new options.MobileSettingSubState());

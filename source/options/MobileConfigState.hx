@@ -8,7 +8,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
 import android.FlxHitbox;
-import android.AndroidControls.Config;
+import android.MobileControls.Config;
 import android.FlxVirtualPad;
 
 using StringTools;
