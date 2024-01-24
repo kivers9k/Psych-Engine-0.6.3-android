@@ -42,14 +42,6 @@ class MobileConfigSubState extends BaseOptionsMenu
 		config = new Config();
 		curSelect= config.getcontrolmode();
 
-		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
-		vpad.alpha = 0;
-		add(vpad);
-
-		hbox = new FlxHitbox(ClientPrefs.globalAntialiasing);
-		hbox.visible = false;
-		add(hbox);
-
 		inputvari = new Alphabet(0, 50, controlitems[curSelect], false);
 		inputvari.screenCenter(X);
 		add(inputvari);
@@ -140,7 +132,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		if (curSelect >= controlitems.length)
 			curSelect = 0;
 	
-		//inputvari.changeText(controlitems[curSelect]);
+		inputvari.text = controlitems[curSelect];
 
 		var daChoice:String = controlitems[Math.floor(curSelect)];
 

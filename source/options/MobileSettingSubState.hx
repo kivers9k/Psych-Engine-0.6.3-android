@@ -35,9 +35,9 @@ class MobileSettingSubState extends BaseOptionsMenu
 	public function new()
 	{
 		title = 'Mobile Controls Settings';
-		rpcTitle = 'Mobile Controls Settings Menu'; //hi, you can ask what is that, i will answer it's all what you needed lol.
+		rpcTitle = 'Mobile Controls Settings Menu';
 
-		var option:Option = new Option('Mobile Controls Opacity', //mariomaster was here again
+		var option:Option = new Option('Mobile Controls Opacity',
 			'Changes opacity',
 			'mobileOpacity',
 			'float',
@@ -49,11 +49,12 @@ class MobileSettingSubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 
-		var option:Option = new Option('Hide Hitbox Hint', //mariomaster was here again
+		var option:Option = new Option('Hide Hitbox Hint',
 			'Hide hint',
 			'hideHint',
 			'bool',
 			false);
+        addOption(option);
 
 		super();
 	}
