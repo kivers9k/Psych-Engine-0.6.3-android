@@ -168,7 +168,7 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();
-		button.alpha = ClientPrefs.mobileControlOpacity
+		button.alpha = ClientPrefs.mobileControlOpacity;
 		#if FLX_DEBUG
 		button.ignoreDrawDebug = true;
 		#end
