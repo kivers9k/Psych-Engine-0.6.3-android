@@ -16,7 +16,7 @@ class FlxHitbox extends FlxSpriteGroup {
 	public var buttonRight:FlxButton;
 
 	public var leftHint:FlxSprite;
-	public var down.:FlxSprite;
+	public var downHint:FlxSprite;
 	public var upHint:FlxSprite;
 	public var rightHint:FlxSprite;
 
