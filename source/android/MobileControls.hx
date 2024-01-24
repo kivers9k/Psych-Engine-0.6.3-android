@@ -92,23 +92,23 @@ class MobileControls extends FlxSpriteGroup {
 	function initControler(vpadMode:Int) {
 		switch (vpadMode){
 			case 0:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);	
+				vpad = new FlxVirtualPad(RIGHT_FULL, NONE);	
 				add(vpad);						
 			case 1:
-				vpad = new FlxVirtualPad(FULL, NONE, ClientPrefs.globalAntialiasing);
+				vpad = new FlxVirtualPad(FULL, NONE);
 				add(vpad);			
 			case 2:
-				vpad = new FlxVirtualPad(FULL, NONE, ClientPrefs.globalAntialiasing);
+				vpad = new FlxVirtualPad(FULL, NONE);
 				vpad = config.loadcustom(vpad);
 				add(vpad);	
 			case 3:
-				vpad = new FlxVirtualPad(DUO, NONE, ClientPrefs.globalAntialiasing);
+				vpad = new FlxVirtualPad(DUO, NONE);
 				add(vpad);		
 			case 4:
-				hbox = new FlxHitbox(ClientPrefs.globalAntialiasing);
+				hbox = new FlxHitbox();
 				add(hbox);
 			default:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);	
+				vpad = new FlxVirtualPad(RIGHT_FULL, NONE);	
 				add(vpad);					
 		}
 	}
