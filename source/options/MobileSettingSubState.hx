@@ -34,14 +34,14 @@ class MobileSettingSubState extends BaseOptionsMenu
 {
 	public function new()
 	{
-		title = 'Mobile Settings';
-		rpcTitle = 'Mobile Settings Menu';
+		title = 'Mobile Setting';
+		rpcTitle = 'Mobile Setting Menu';
 
 		var option:Option = new Option('VirtualPad Opacity',
-			'Changes VirtualPad Opacity',
-			'VirtualPadOpacity',
-			'float',
-			0.2);
+		'Changes VirtualPad Opacity',
+		'VirtualPadOpacity',
+		'float',
+		0.2);
 		option.scrollSpeed = 1.6;
 		option.minValue = 0.0;
 		option.maxValue = 1;
@@ -50,11 +50,11 @@ class MobileSettingSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Hide Hitbox Hint',
-			'if unchecked, the hitbox hint is not hide',
-			'hideHint',
-			'bool',
-			false);
-        addOption(option);
+		'if checked, hitbox hint will get hidden',
+		'hideHint',
+		'bool',
+		false);
+		addOption(option);
 
 		super();
 	}

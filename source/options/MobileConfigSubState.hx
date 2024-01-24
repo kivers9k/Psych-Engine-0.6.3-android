@@ -30,7 +30,14 @@ class MobileConfigSubState extends BaseOptionsMenu
 	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
-	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Double','Hitbox','Keyboard'];
+	var controlitems:Array<String> = [
+	    'Pad-Right',
+	    'Pad-Left',
+	    'Pad-Custom',
+	    'Double',
+	    'Hitbox',
+	    'Keyboard'
+	];
 	var curSelect:Int = 0;
 	var buttonistouched:Bool = false;
 	var bindbutton:FlxButton;
@@ -165,7 +172,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
 					add(vpad);
 					loadcustom();
-				case 'Duo':
+				case 'Double':
 					remove(vpad);
 					vpad = new FlxVirtualPad(DUO, NONE, ClientPrefs.globalAntialiasing);
 					add(vpad);
