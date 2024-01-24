@@ -26,6 +26,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 	var downPozition:FlxText;
 	var leftPozition:FlxText;
 	var rightPozition:FlxText;
+	var tipText:FlxText;
 	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
@@ -40,8 +41,10 @@ class MobileConfigSubState extends BaseOptionsMenu
 		title = 'Mobile Config';
 		rpcTitle = 'Mobile Config Menu';
 
+        super();
+
 		config = new Config();
-		curSelect= config.getcontrolmode();
+		curSelect = config.getcontrolmode();
 
 		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
 		vpad.alpha = 0;
@@ -55,7 +58,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		inputvari.x = (FlxG.width - inputvari.width) / 2;
 		add(inputvari);
 
-		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
+		ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
 
 		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y + 50);
 		leftArrow.frames = ui_tex;
@@ -91,14 +94,13 @@ class MobileConfigSubState extends BaseOptionsMenu
 		rightPozition.borderSize = 2.4;
 		add(rightPozition);
 
-		var tipText:FlxText = new FlxText(10, FlxG.height - 24, 0, 'Press BACK to Go Back to Options Menu', 16);
+		tipText:FlxText = new FlxText(10, FlxG.height - 24, 0, 'Press BACK to Go Back to Options Menu', 16);
 		tipText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		tipText.borderSize = 2;
 		tipText.scrollFactor.set();
 		add(tipText);
 
 		changeSelect();
-        super();
 	}
 
 	override function update(elapsed:Float)
@@ -109,7 +111,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
 		
-		for (touch in FlxG.touches.list){		
+		for (touch in FlxG.touches.list){
 			if(touch.overlaps(leftArrow) && touch.justPressed)
 			{
 				changeSelect(-1);

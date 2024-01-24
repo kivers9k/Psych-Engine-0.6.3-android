@@ -34,8 +34,8 @@ class MobileSettingSubState extends BaseOptionsMenu
 {
 	public function new()
 	{
-		title = 'Mobile Controls Settings';
-		rpcTitle = 'Mobile Controls Settings Menu';
+		title = 'Mobile Settings';
+		rpcTitle = 'Mobile Settings Menu';
 
 		var option:Option = new Option('Mobile Controls Opacity',
 			'Changes opacity',
