@@ -1,8 +1,5 @@
 package options;
 
-#if desktop
-import Discord.DiscordClient;
-#end
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
@@ -10,15 +7,13 @@ import flixel.text.FlxText;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.FlxSubState;
 import android.FlxHitbox;
-import android.MobileControls.Config;
+import android.AndroidControls.Config;
 import android.FlxVirtualPad;
-import Alphabet;
 
 using StringTools;
 
-class MobileConfigSubState extends BaseOptionsMenu
+class MobileConfigState extends MusicBeatState
 {
 	var vpad:FlxVirtualPad;
 	var hbox:FlxHitbox;
@@ -26,7 +21,6 @@ class MobileConfigSubState extends BaseOptionsMenu
 	var downPozition:FlxText;
 	var leftPozition:FlxText;
 	var rightPozition:FlxText;
-	var tipText:FlxText;
 	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
@@ -38,33 +32,39 @@ class MobileConfigSubState extends BaseOptionsMenu
 	    'Hitbox',
 	    'Keyboard'
 	];
-	var curSelect:Int = 0;
+	var curSelected:Int = 0;
 	var buttonistouched:Bool = false;
 	var bindbutton:FlxButton;
 	var config:Config;
 
-	public function new()
+	override public function create():Void
 	{
-		title = 'Mobile Config';
-		rpcTitle = 'Mobile Config Menu';
-
-		super();
-	}
-
-	override function create()
-	{
+		super.create();
+		
 		config = new Config();
-		curSelect = config.getcontrolmode();
+		curSelected = config.getcontrolmode();
+
+		var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
+		bg.color = 0xFFea71fd;
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bg);
+
+		var titleText:Alphabet = new Alphabet(75, 60, "Mobile Config", true);
+		titleText.scaleX = 0.6;
+		titleText.scaleY = 0.6;
+		titleText.alpha = 0.4;
+		add(titleText);
 
 		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, ClientPrefs.globalAntialiasing);
 		vpad.alpha = 0;
 		add(vpad);
 
-		hbox = new FlxHitbox(ClientPrefs.globalAntialiasing);
+		hbox = new FlxHitbox(0.75, ClientPrefs.globalAntialiasing);
 		hbox.visible = false;
 		add(hbox);
 
-		inputvari = new Alphabet(0, 50, controlitems[curSelect], false);
+		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
 		inputvari.x = (FlxG.width - inputvari.width) / 2;
 		add(inputvari);
 
@@ -104,31 +104,26 @@ class MobileConfigSubState extends BaseOptionsMenu
 		rightPozition.borderSize = 2.4;
 		add(rightPozition);
 
-		tipText = new FlxText(10, FlxG.height - 24, 0, 'Press BACK to Go Back to Options Menu', 16);
-		tipText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		tipText.borderSize = 2;
-		tipText.scrollFactor.set();
-		add(tipText);
-
-		changeSelect();
+		changeSelection();
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		inputvari.x = (FlxG.width - inputvari.width) / 2; // update center
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
+		inputvari.x = (FlxG.width - inputvari.width) / 2;
+
 		
-		for (touch in FlxG.touches.list){
+		for (touch in FlxG.touches.list){		
 			if(touch.overlaps(leftArrow) && touch.justPressed)
 			{
-				changeSelect(-1);
+				changeSelection(-1);
 			}
 			else if (touch.overlaps(rightArrow) && touch.justPressed)
 			{
-				changeSelect(1);
+				changeSelection(1);
 			}
 			trackbutton(touch);
 		}
@@ -144,18 +139,18 @@ class MobileConfigSubState extends BaseOptionsMenu
 		#end
 	}
 
-	function changeSelect(change:Int = 0)
+	function changeSelection(change:Int = 0)
 	{
-		curSelect += change;
+		curSelected += change;
 	
-		if (curSelect < 0)
-			curSelect = controlitems.length - 1;
-		if (curSelect >= controlitems.length)
-			curSelect = 0;
+		if (curSelected < 0)
+			curSelected = controlitems.length - 1;
+		if (curSelected >= controlitems.length)
+			curSelected = 0;
 	
-		inputvari.text = controlitems[curSelect];
+		inputvari.text = controlitems[curSelected];
 
-		var daChoice:String = controlitems[Math.floor(curSelect)];
+		var daChoice:String = controlitems[Math.floor(curSelected)];
 
 		switch (daChoice)
 		{
@@ -205,7 +200,7 @@ class MobileConfigSubState extends BaseOptionsMenu
 	}
 
 	function trackbutton(touch:flixel.input.touch.FlxTouch){
-		var daChoice:String = controlitems[Math.floor(curSelect)];
+		var daChoice:String = controlitems[Math.floor(curSelected)];
 
 		if (daChoice == 'Pad-Custom'){
 			if (buttonistouched){
@@ -255,8 +250,8 @@ class MobileConfigSubState extends BaseOptionsMenu
 	}
 
 	function save() {
-		config.setcontrolmode(curSelect);
-		var daChoice:String = controlitems[Math.floor(curSelect)];
+		config.setcontrolmode(curSelected);
+		var daChoice:String = controlitems[Math.floor(curSelected)];
 
 		if (daChoice == 'Pad-Custom'){
 			config.savecustom(vpad);
