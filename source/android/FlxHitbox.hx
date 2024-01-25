@@ -47,23 +47,12 @@ class FlxHitbox extends FlxSpriteGroup {
 		hint.add(add(buttonHintRight = createHitboxHint(960, 0, 0xFF0000)));
 	}
 
-    override function update(elapsed:Float) {
-        for (i in 0...3) {
-            hint.members[i].alpha = ClientPrefs.mobileControlOpacity;
-        }
-        if (ClientPrefs.hideHint == true) {
-            hint.visible = false;
-        } else {
-            hint.visible = true;
-        }
-    }
-
     public function createHitbox(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
         var button:FlxButton = new FlxButton(x,y);
         button.loadGraphic(Paths.image('androidcontrols/hitbox'));
         button.updateHitbox();
-        button.alpha = 0;
         button.color = colors;
+        button.alpha = 0;
         add(button);
 
         button.onOut.callback = function() {button.alpha = 0;}
@@ -76,8 +65,15 @@ class FlxHitbox extends FlxSpriteGroup {
     public function createHitboxHint(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
         var buttonHint:FlxSprite = new FlxSprite(x,y);
         buttonHint.loadGraphic(Paths.image('androidcontrols/hint'));
+        buttonHint.alpha = ClientPrefs.mobileControlOpacity;
         buttonHint.color = colors;
         add(buttonHint);
+
+        if (ClientPrefs.hideHint == true) {
+            buttonHint.visible = false;
+        } else {
+            buttonHint.visible = true;
+        }
 
         return buttonHint;
     }

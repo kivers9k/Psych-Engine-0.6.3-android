@@ -161,15 +161,6 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		}
 	}
 
-    override function update(elapsed:Float) {
-        for (i in 0...dPad.length) {
-            dPad.members[i].alpha = ClientPrefs.mobileControlOpacity;
-        }
-        for (e in 0...actions.length) {
-            actions.members[e].alpha = ClientPrefs.mobileControlOpacity;
-        }
-    }
-
 	public function createButton(x:Float, y:Float, width:Int, height:Int, frames:String):FlxButton {
 		var button = new FlxButton(x, y);
 		button.frames = FlxTileFrames.fromFrame(getFrames().getByName(frames), FlxPoint.get(width, height));
@@ -177,6 +168,7 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();
+		button.alpha = ClientPrefs.mobileControlOpacity;
 		#if FLX_DEBUG
 		button.ignoreDrawDebug = true;
 		#end
