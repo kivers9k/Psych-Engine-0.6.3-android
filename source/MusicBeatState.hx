@@ -48,8 +48,6 @@ class MusicBeatState extends FlxUIState
 	#if android
 	public function addVirtualPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(DPad, Action);
-		_virtualpad.alpha = ClientPrefs.mobileControlOpacity;
-		_virtualpad.antialiasing = ClientPrefs.globalAntialiasing;
 		add(_virtualpad);
 		controls.setVirtualPadUI(_virtualpad, DPad, Action);
 		trackedinputsUI = controls.trackedinputsUI;
@@ -67,15 +65,6 @@ class MusicBeatState extends FlxUIState
 	#if android
 	public function addMobileControls() {
 		mobileC = new MobileControls();
-
-		mobileC.alpha = ClientPrefs.mobileControlOpacity;
-		mobileC.antialiasing = ClientPrefs.globalAntialiasing;
-
-	    if (ClientPrefs.hideHint == true) {
-	        mobileC.hbox.hint.visible = false;
-	    } else {
-	        mobileC.hbox.hint.visible = true;
-	    }
 
 		switch (mobileC.mode)
 		{
