@@ -17,20 +17,13 @@ class MobileConfigState extends MusicBeatState
 {
 	var vpad:FlxVirtualPad;
 	var hbox:FlxHitbox;
-
 	var upPozition:FlxText;
 	var downPozition:FlxText;
 	var leftPozition:FlxText;
 	var rightPozition:FlxText;
-
 	var inputvari:Alphabet;
-
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
-
-    var saveAndLeave:FlxButton;
-    var reset:FlxButton;
-
 	var controlitems:Array<String> = [
 	    'Pad-Right',
 	    'Pad-Left',
@@ -65,6 +58,7 @@ class MobileConfigState extends MusicBeatState
 
 		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
 		inputvari.x = (FlxG.width - inputvari.width) / 2;
+		inputvari.alignment = CENTERED;
 		add(inputvari);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
@@ -103,14 +97,6 @@ class MobileConfigState extends MusicBeatState
 		rightPozition.borderSize = 2.4;
 		add(rightPozition);
 
-        saveAndLeave = new FlxButton(0,180,'Save and leave');
-        saveAndLeave.x = (FlxG.width - saveAndLeave.width) / 2 - 50;
-        add(saveAndLeave);
-    
-        reset = new FlxButton(0,180,'Reset');
-        reset.x = (FlxG.width - reset.width) / 2 + 50;
-        add(reset);
-
 		changeSelection();
 	}
 
@@ -134,14 +120,11 @@ class MobileConfigState extends MusicBeatState
 			trackbutton(touch);
 		}
 
-		if (saveAndLeave.justPressed) {
-		    save();
-			FlxTransitionableState.skipNextTransIn = true;
-			FlxTransitionableState.skipNextTransOut = true;
+		if (FlxG.android.justReleased.BACK) {
 			MusicBeatState.switchState(new options.OptionsState());
-		}
-		if (reset.justPressed) {
-		    curSelected = 0;
+			FlxTransitionableState.skipNextTransOut = true;
+			FlxTransitionableState.skipNextTransIn = true;
+			save();
 		}
 	}
 
