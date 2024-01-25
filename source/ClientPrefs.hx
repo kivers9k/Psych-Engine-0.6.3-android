@@ -32,7 +32,7 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
-	public static var mobileControlOpacity:Float = 0.5;
+	public static var mobileControlOpacity:Float = 0.7;
 	public static var hideHint:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
