@@ -122,6 +122,19 @@ class MusicBeatState extends FlxUIState
 
 	override function update(elapsed:Float)
 	{
+	    //mobile setting stuff
+	    _virtualpad.alpha = ClientPrefs.mobileControlOpacity;
+	    mobileC.alpha = ClientPrefs.mobileControlOpacity;
+
+		_virtualpad.antialiasing = ClientPrefs.globalAntialiasing;
+		mobileC.antialiasing = ClientPrefs.globalAntialiasing;
+
+	    if (ClientPrefs.hideHint == true) {
+	        mobileC.hbox.hint.visible = false;
+	    } else {
+	        mobileC.hbox.hint.visible = true;
+	    }
+
 		//everyStep();
 		var oldStep:Int = curStep;
 
