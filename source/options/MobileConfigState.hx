@@ -57,8 +57,7 @@ class MobileConfigState extends MusicBeatState
 		add(titleText);
 
 		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
-		inputvari.x = (FlxG.width) / 2;
-		inputvari.alignment = CENTERED;
+		inputvari.screenCenter(X);
 		add(inputvari);
 
 		vpad = new FlxVirtualPad(RIGHT_FULL,NONE);
@@ -103,6 +102,11 @@ class MobileConfigState extends MusicBeatState
 		rightPozition.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		rightPozition.borderSize = 2.4;
 		add(rightPozition);
+		
+		var tipTxt:FlxText = new FlxText(5,5,'Press Back To Leave');
+		tipTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tipTxt.borderSize = 2.4;
+		add(tipTxt);
 
 		changeSelection();
 	}
@@ -113,7 +117,7 @@ class MobileConfigState extends MusicBeatState
 
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
-		inputvari.x = (FlxG.width) / 2;
+		inputvari.screenCenter(X);
 
 		for (touch in FlxG.touches.list){
 			if(touch.overlaps(leftArrow) && touch.justPressed)
@@ -128,10 +132,10 @@ class MobileConfigState extends MusicBeatState
 		}
 
 		if (FlxG.android.justReleased.BACK) {
-			MusicBeatState.switchState(new options.OptionsState());
+			save();
 			FlxTransitionableState.skipNextTransOut = true;
 			FlxTransitionableState.skipNextTransIn = true;
-			save();
+			MusicBeatState.switchState(new options.OptionsState());
 		}
 	}
 
