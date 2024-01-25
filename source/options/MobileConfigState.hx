@@ -43,9 +43,6 @@ class MobileConfigState extends MusicBeatState
 		
 		config = new Config();
 		curSelected = config.getcontrolmode();
-		
-		vpad = new FlxVirtualPad(RIGHT_FULL,NONE);
-		add(vpad);
 
 		var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
@@ -60,9 +57,16 @@ class MobileConfigState extends MusicBeatState
 		add(titleText);
 
 		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
-		inputvari.x = (FlxG.width - inputvari.width) / 2;
+		inputvari.x = (FlxG.width) / 2;
 		inputvari.alignment = CENTERED;
 		add(inputvari);
+
+		vpad = new FlxVirtualPad(RIGHT_FULL,NONE);
+		add(vpad);
+
+		hbox = new FlxHitbox();
+		hbox.visible = false;
+		add(hbox);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
 
@@ -109,7 +113,7 @@ class MobileConfigState extends MusicBeatState
 
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
-		inputvari.x = (FlxG.width - inputvari.width) / 2;
+		inputvari.x = (FlxG.width) / 2;
 
 		for (touch in FlxG.touches.list){
 			if(touch.overlaps(leftArrow) && touch.justPressed)
@@ -165,22 +169,22 @@ class MobileConfigState extends MusicBeatState
 				add(vpad);
 			case 'Hitbox':
 				remove(vpad);
-				hbox = new FlxHitbox();
-				add(hbox);
 			case 'Keyboard':
 				remove(vpad);
-				remove(hbox);
 		}
 
-		if (daChoice != "Pad-Custom")
-		{
+		if (daChoice != "Hitbox") {
+		    hbox.visible = false;
+		} else {
+		    hbox.visible = true;
+		}
+
+		if (daChoice != "Pad-Custom") {
 			upPozition.visible = false;
 			downPozition.visible = false;
 			leftPozition.visible = false;
 			rightPozition.visible = false;
-		}
-		else
-		{
+		} else {
 			upPozition.visible = true;
 			downPozition.visible = true;
 			leftPozition.visible = true;
