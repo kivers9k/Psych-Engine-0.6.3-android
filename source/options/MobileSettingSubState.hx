@@ -56,16 +56,16 @@ class MobileSettingSubState extends BaseOptionsMenu
 		false);
 		addOption(option);
 
-        //set virtualPad opacity to 0
-        _virtualpad.alpha = 0;
-
 		super();
 	}
 
-    override function update(elapsed:Float) {
-        //reload virtualPad opacity
-        _virtualpad.alpha = ClientPrefs.mobileControlOpacity;
+    override function create() {
+        _virtualpad.alpha = 0;
+        super.create();
+    }
 
+    override function update(elapsed:Float) {
+        _virtualpad.alpha = ClientPrefs.mobileControlOpacity;
         super.update(elapsed);
     }
 }
