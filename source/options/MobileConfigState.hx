@@ -43,6 +43,9 @@ class MobileConfigState extends MusicBeatState
 		
 		config = new Config();
 		curSelected = config.getcontrolmode();
+		
+		vpad = new FlxVirtualPad(RIGHT_FULL,NONE);
+		add(vpad);
 
 		var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
