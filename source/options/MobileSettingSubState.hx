@@ -41,7 +41,7 @@ class MobileSettingSubState extends BaseOptionsMenu
 		'Changes Mobile Controls Opacity',
 		'mobileControlOpacity',
 		'float',
-		0.5);
+		0.7);
 		option.scrollSpeed = 1.6;
 		option.minValue = 0.0;
 		option.maxValue = 1;
@@ -55,6 +55,9 @@ class MobileSettingSubState extends BaseOptionsMenu
 		'bool',
 		false);
 		addOption(option);
+
+        //set virtualPad opacity to 0
+        _virtualpad.alpha = 0;
 
 		super();
 	}
