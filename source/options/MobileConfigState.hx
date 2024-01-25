@@ -24,6 +24,7 @@ class MobileConfigState extends MusicBeatState
 	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+	var leaveAndSave:FlxButton;
 	var controlitems:Array<String> = [
 	    'Pad-Right',
 	    'Pad-Left',
@@ -102,11 +103,10 @@ class MobileConfigState extends MusicBeatState
 		rightPozition.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		rightPozition.borderSize = 2.4;
 		add(rightPozition);
-		
-		var tipTxt:FlxText = new FlxText(5,5,'Press Back To Leave');
-		tipTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		tipTxt.borderSize = 2.4;
-		add(tipTxt);
+
+		leaveAndSave = new FlxButton(FlxG.width - 88,5,'Leave And Save');
+		leaveAndSave.scale.x = 1.1;
+		add(leaveAndSave);
 
 		changeSelection();
 	}
@@ -131,7 +131,7 @@ class MobileConfigState extends MusicBeatState
 			trackbutton(touch);
 		}
 
-		if (FlxG.android.justReleased.BACK) {
+		if (leaveAndSave.justPressed) {
 			save();
 			FlxTransitionableState.skipNextTransOut = true;
 			FlxTransitionableState.skipNextTransIn = true;
