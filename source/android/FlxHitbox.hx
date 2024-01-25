@@ -7,14 +7,12 @@ import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 
 class FlxHitbox extends FlxSpriteGroup {
-	public var hitbox:FlxSpriteGroup; // hitbox group
-	public var hint:FlxSpriteGroup; // hint group
-    //FlxButton
+	public var hitbox:FlxSpriteGroup;
+	public var hint:FlxSpriteGroup;
 	public var buttonLeft:FlxButton;
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
-    //FlxSprite
 	public var buttonHintLeft:FlxSprite;
 	public var buttonHintDown:FlxSprite;
 	public var buttonHintUp:FlxSprite;
@@ -22,36 +20,26 @@ class FlxHitbox extends FlxSpriteGroup {
 
 	public function new() {
 		super();
-        //hitbox
+		hitbox = new FlxSpriteGroup();
+		hint = new FlxSpriteGroup();
 		buttonLeft = new FlxButton(0, 0);
 		buttonDown = new FlxButton(0, 0);
 		buttonUp = new FlxButton(0, 0);
 		buttonRight = new FlxButton(0, 0);
-        //hitbox hint
         buttonHintLeft = new FlxSprite(0, 0);
         buttonHintDown = new FlxSprite(0, 0);
         buttonHintUp = new FlxSprite(0, 0);
         buttonHintRight = new FlxSprite(0, 0);
 
-		hitbox = new FlxSpriteGroup();
 		hitbox.add(add(buttonLeft = createHitbox(0, 0, 0xC457D3)));
 		hitbox.add(add(buttonDown = createHitbox(320, 0, 0x00DAFF)));
 		hitbox.add(add(buttonUp = createHitbox(640, 0, 0x00FF00)));
 		hitbox.add(add(buttonRight = createHitbox(960, 0, 0xFF0000)));
 
-		hint = new FlxSpriteGroup();
 		hint.add(add(buttonHintLeft = createHitboxHint(0, 0, 0xC457D3)));
 		hint.add(add(buttonHintDown = createHitboxHint(320, 0, 0x00DAFF)));
 		hint.add(add(buttonHintUp = createHitboxHint(640, 0, 0x00FF00)));
 		hint.add(add(buttonHintRight = createHitboxHint(960, 0, 0xFF0000)));
-
-        for (i in 0...4) {
-            if (ClientPrefs.hideHint == true) {
-                hint.members[i].visible = false;
-            } else {
-                hint.members[i].visible = true;
-            }
-        }
 	}
 
     public function createHitbox(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
@@ -74,6 +62,13 @@ class FlxHitbox extends FlxSpriteGroup {
         buttonHint.loadGraphic(Paths.image('androidcontrols/hint'));
         buttonHint.alpha = ClientPrefs.mobileControlOpacity;
         buttonHint.color = colors;
+
+        if (ClientPrefs.hideHint == true) {
+            buttonHint.visible = false;
+        } else {
+            buttonHint.visible = true;
+        }
+
         add(buttonHint);
 
         return buttonHint;
