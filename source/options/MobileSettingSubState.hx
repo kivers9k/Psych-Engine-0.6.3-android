@@ -58,4 +58,13 @@ class MobileSettingSubState extends BaseOptionsMenu
 
 		super();
 	}
+
+    override function update(elapsed:Float) {
+        // reload virtualpad alpha
+        if (controls.UI_LEFT || controls.UI_RIGHT) {
+            removeVirtualPad();
+            addVirtualPad(FULL, A_B_C);
+        }
+        super.update(elapsed);
+    }
 }
