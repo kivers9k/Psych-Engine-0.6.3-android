@@ -22,7 +22,6 @@ class FlxHitbox extends FlxSpriteGroup {
 
 	public function new() {
 		super();
-
         //hitbox
 		buttonLeft = new FlxButton(0, 0);
 		buttonDown = new FlxButton(0, 0);
@@ -45,12 +44,14 @@ class FlxHitbox extends FlxSpriteGroup {
 		hint.add(add(buttonHintDown = createHitboxHint(320, 0, 0x00DAFF)));
 		hint.add(add(buttonHintUp = createHitboxHint(640, 0, 0x00FF00)));
 		hint.add(add(buttonHintRight = createHitboxHint(960, 0, 0xFF0000)));
-		
-		if (ClientPrefs.hideHint == true) {
-		    hint.visible = false;
-		} else {
-		    hint.visible = true;
-		}
+
+        for (i in 0...4) {
+            if (ClientPrefs.hideHint == true) {
+                hint.members[i].visible = false;
+            } else {
+                hint.members[i].visible = true;
+            }
+        }
 	}
 
     public function createHitbox(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
