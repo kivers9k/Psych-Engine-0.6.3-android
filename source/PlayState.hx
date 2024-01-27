@@ -4493,7 +4493,7 @@ class PlayState extends MusicBeatState
 			for (i in 0...parsedArray.length)
 			{
 				if(parsedArray[i])
-					onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
+				onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
 			}
 		}
 	}
