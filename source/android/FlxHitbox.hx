@@ -63,11 +63,10 @@ class FlxHitbox extends FlxSpriteGroup {
         buttonHint.alpha = ClientPrefs.mobileControlOpacity;
         buttonHint.color = colors;
 
-        if (ClientPrefs.hideHint == true) {
-            buttonHint.visible = false;
-        } else {
-            buttonHint.visible = true;
-        }
+
+
+
+
 
         add(buttonHint);
 
