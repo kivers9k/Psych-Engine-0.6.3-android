@@ -4351,8 +4351,7 @@ class PlayState extends MusicBeatState
 				if (sortedNotesList.length > 0) {
 					for (epicNote in sortedNotesList)
 					{
-						for (doubleNote in pressNotes) {
-							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 1) {
+						for (doubleNote in pressNotes) {							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 1) {
 								doubleNote.kill();
 								notes.remove(doubleNote, true);
 								doubleNote.destroy();
@@ -4495,7 +4494,7 @@ class PlayState extends MusicBeatState
 			{
 				for (i in 0...parsedArray.length)
 				{
-					if(parsedArray[i] || strumsBlocked[i] == true)
+					if(parsedArray[i])
 						onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
 				}
 			}
