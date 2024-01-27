@@ -72,6 +72,8 @@ class FlxHitbox extends FlxSpriteGroup {
 		if (ClientPrefs.hideHint) {
 			hint.visible = false;
 		}
+
+		super.create();
 	}
 
 	override public function destroy():Void {
