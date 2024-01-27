@@ -4486,17 +4486,14 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		//TO DO: Find a better way to handle controller inputs, this should work for now
-		if(strumsBlocked.contains(true))
+        //TO DO: find a way the fix this dumbass shit
+		var parsedArray:Array<Bool> = parseKeys('_R');
+		if(parsedArray.contains(true))
 		{
-			var parsedArray:Array<Bool> = parseKeys('_R');
-			if(parsedArray.contains(true))
+			for (i in 0...parsedArray.length)
 			{
-				for (i in 0...parsedArray.length)
-				{
-					if(parsedArray[i])
-						onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
-				}
+				if(parsedArray[i])
+					onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
 			}
 		}
 	}
