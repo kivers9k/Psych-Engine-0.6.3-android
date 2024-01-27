@@ -4486,7 +4486,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		// TO DO: Find a better way to handle controller inputs, this should work for now
+		//TO DO: Find a better way to handle controller inputs, this should work for now
 		if(strumsBlocked.contains(true))
 		{
 			var parsedArray:Array<Bool> = parseKeys('_R');
