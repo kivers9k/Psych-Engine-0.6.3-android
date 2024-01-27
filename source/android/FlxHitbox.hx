@@ -68,12 +68,12 @@ class FlxHitbox extends FlxSpriteGroup {
         return buttonHint;
     }
 
-	override function create() {
+	override function create():Void {
+		super.create();
+
 		if (ClientPrefs.hideHint) {
 			hint.visible = false;
 		}
-
-		super.create();
 	}
 
 	override public function destroy():Void {
