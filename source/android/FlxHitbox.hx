@@ -42,12 +42,6 @@ class FlxHitbox extends FlxSpriteGroup {
 		hint.add(add(buttonHintRight = createHitboxHint(960, 0, 0xFF0000)));
 	}
 
-    overide function create() {
-		if (ClientPrefs.hideHint) {
-			hint.visible = false;
-		}
-	}
-
     public function createHitbox(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
         var button:FlxButton = new FlxButton(x,y);
         button.loadGraphic(Paths.image('androidcontrols/hitbox'));
@@ -72,6 +66,15 @@ class FlxHitbox extends FlxSpriteGroup {
 
         return buttonHint;
     }
+
+    override function create() {
+	    if (ClientPrefs.hideHint) {
+			hint.visible = false;
+		}
+
+		super.create();
+	}
+
 	override public function destroy():Void {
 		super.destroy();
 
