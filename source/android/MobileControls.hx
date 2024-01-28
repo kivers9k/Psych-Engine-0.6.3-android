@@ -106,9 +106,6 @@ class MobileControls extends FlxSpriteGroup {
 				add(vpad);		
 			case 4:
 				hbox = new FlxHitbox();
-				if (ClientPrefs.hideHint) {
-					hbox.hint.visible = false;
-				}
 				add(hbox);
 			default:
 				vpad = new FlxVirtualPad(RIGHT_FULL, NONE);	
