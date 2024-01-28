@@ -64,7 +64,7 @@ class FlxHitbox extends FlxSpriteGroup {
         var buttonHint:FlxSprite = new FlxSprite(x,y);
         buttonHint.loadGraphic(Paths.image('androidcontrols/hint'));
 		if (ClientPrefs.hideHint) {
-            buttonHint.visible = false;
+            buttonHint.alpha = 0;
 		} else {
             buttonHint.alpha = ClientPrefs.mobileControlOpacity;
 		}
