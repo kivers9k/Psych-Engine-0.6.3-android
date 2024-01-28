@@ -34,13 +34,6 @@ class FlxHitbox extends FlxSpriteGroup {
         buttonHintUp = new FlxSprite(0, 0);
         buttonHintRight = new FlxSprite(0, 0);
 
-		if (ClientPrefs.hideHint) {
-			buttonHintLeft.visible = false;
-			buttonHintDown.visible = false;
-			buttonHintUp.visible = false;
-			buttonHintRight.visible = false;
-		}
-
 		hitbox.add(add(buttonLeft = createHitbox(0, 0, 0xC457D3)));
 		hitbox.add(add(buttonDown = createHitbox(320, 0, 0x00DAFF)));
 		hitbox.add(add(buttonUp = createHitbox(640, 0, 0x00FF00)));

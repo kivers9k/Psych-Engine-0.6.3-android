@@ -66,6 +66,9 @@ class MobileConfigState extends MusicBeatState
 
 		hbox = new FlxHitbox();
 		hbox.visible = false;
+		if (ClientPrefs.hideHint) {
+			hbox.hint.visible = false;
+		}
 		add(hbox);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
