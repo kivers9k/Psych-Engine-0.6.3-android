@@ -176,7 +176,7 @@ class MainMenuState extends MusicBeatState
         #if mobile
             if (menuJSON.disable_editor == true)
             {
-                addVirtualPad(UP_DOWN,A_B_C);
+                addVirtualPad(UP_DOWN,A_B_E);
             
             }
             else
@@ -322,7 +322,7 @@ class MainMenuState extends MusicBeatState
 		}
 	if (menuJSON.disable_editor == true)
 	{
-		if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonC.justPressed #end)
+		if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
 		{
 			selectedSomethin = true;
 			MusicBeatState.switchState(new MasterEditorMenu());
