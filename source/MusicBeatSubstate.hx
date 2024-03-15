@@ -18,6 +18,8 @@ class MusicBeatSubstate extends FlxSubState
 	{
 		super();
 	}
+    private var curSection:Int = 0;
+	private var stepsToDo:Int = 0;
 
 	private var lastBeat:Float = 0;
 	private var lastStep:Float = 0;
