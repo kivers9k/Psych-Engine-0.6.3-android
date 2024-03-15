@@ -61,7 +61,7 @@ class EditorPlaySubState extends MusicBeatSubstate
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
 
-	public static var instance:EditorPlayState;
+	public static var instance:EditorPlaySubState;
 
 	override function create()
 	{
