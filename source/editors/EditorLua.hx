@@ -148,7 +148,7 @@ class EditorLua {
 					sex.destroy();
 				return;
 			}
-			Reflect.getProperty(EditorPlaySubState.instance, obj).remove(Reflect.getProperty(EditorPlayState.instance, obj)[index]);
+			Reflect.getProperty(EditorPlaySubState.instance, obj).remove(Reflect.getProperty(EditorPlaySubState.instance, obj)[index]);
 		});
 
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {
