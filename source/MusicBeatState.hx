@@ -43,9 +43,7 @@ class MusicBeatState extends FlxUIState
 	var mobileC:MobileControls;
 	var trackedinputsUI:Array<FlxActionInput> = [];
 	var trackedinputsNOTES:Array<FlxActionInput> = [];
-	#end
-	
-	#if android
+
 	public function addVirtualPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(DPad, Action);
 		add(_virtualpad);
@@ -53,16 +51,12 @@ class MusicBeatState extends FlxUIState
 		trackedinputsUI = controls.trackedinputsUI;
 		controls.trackedinputsUI = [];
 	}
-	#end
 
-	#if android
 	public function removeVirtualPad() {
 		controls.removeFlxInput(trackedinputsUI);
 		remove(_virtualpad);
 	}
-	#end
 
-	#if android
 	public function addMobileControls() {
 		mobileC = new MobileControls();
 
@@ -89,9 +83,7 @@ class MusicBeatState extends FlxUIState
 
 		add(mobileC);
 	}
-	#end
 
-	#if android
         public function addPadCamera() {
 		var camcontrol = new flixel.FlxCamera();
 		camcontrol.bgColor.alpha = 0;

@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 
 #if android
 import flixel.input.actions.FlxActionInput;
+import android.MobileControls.MobileControls;
 import android.FlxVirtualPad;
 #end
 
@@ -33,11 +34,10 @@ class MusicBeatSubstate extends FlxSubState
 
 	#if android
 	var _virtualpad:FlxVirtualPad;
+	var mobileC:MobileControls;
 	var trackedinputsUI:Array<FlxActionInput> = [];
 	var trackedinputsNOTES:Array<FlxActionInput> = [];
-	#end
-	
-	#if android
+
 	public function addVirtualPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(DPad, Action);
 		add(_virtualpad);
@@ -45,17 +45,40 @@ class MusicBeatSubstate extends FlxSubState
 		trackedinputsUI = controls.trackedinputsUI;
 		controls.trackedinputsUI = [];
 	}
-	#end
 
-	#if android
 	public function removeVirtualPad() {
 		controls.removeFlxInput(trackedinputsUI);
 		remove(_virtualpad);
 	}
-	#end
 
-	#if android
-		public function addPadCamera() {
+	public function addMobileControls() {
+		mobileC = new MobileControls();
+
+		switch (mobileC.mode)
+		{
+			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
+				controls.setVirtualPadNOTES(mobileC.vpad, FULL, NONE);
+			case DUO:
+				controls.setVirtualPadNOTES(mobileC.vpad, DUO, NONE);
+			case HITBOX:
+				controls.setHitBox(mobileC.hbox);
+			default:
+		}
+
+		trackedinputsNOTES = controls.trackedinputsNOTES;
+		controls.trackedinputsNOTES = [];
+
+		var camcontrol = new flixel.FlxCamera();
+		FlxG.cameras.add(camcontrol, false);
+		camcontrol.bgColor.alpha = 0;
+		mobileC.cameras = [camcontrol];
+
+		mobileC.visible = false;
+
+		add(mobileC);
+	}
+
+        public function addPadCamera() {
 		var camcontrol = new flixel.FlxCamera();
 		camcontrol.bgColor.alpha = 0;
 		FlxG.cameras.add(camcontrol, false);
