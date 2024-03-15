@@ -22,7 +22,7 @@ import FunkinLua;
 
 using StringTools;
 
-class EditorPlayState extends MusicBeatState
+class EditorPlaySubState extends MusicBeatSubState
 {
 	// Yes, this is mostly a copy of PlayState, it's kinda dumb to make a direct copy of it but... ehhh
 	private var strumLine:FlxSprite;
