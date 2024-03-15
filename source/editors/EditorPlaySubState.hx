@@ -320,7 +320,7 @@ class EditorPlayState extends MusicBeatState
 	}
 
 	private function endSong() {
-		LoadingState.loadAndSwitchState(new editors.ChartingState());
+		close();
 	}
 
 	public var noteKillOffset:Float = 350;
@@ -333,7 +333,7 @@ class EditorPlayState extends MusicBeatState
 			#if android
 			mobileC.visible = false;
 			#end
-			LoadingState.loadAndSwitchState(new editors.ChartingState());
+			close();
 		}
 
 		if (startingSong) {
