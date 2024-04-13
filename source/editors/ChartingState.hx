@@ -424,7 +424,7 @@ class ChartingState extends MusicBeatState
 
 		bf = new Character(400,0,_song.player1,true);
 		bf.alpha = 0.6;
-		bf(dad);
+		bf(bf);
 
 		super.create();
 	}
