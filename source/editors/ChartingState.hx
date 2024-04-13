@@ -12,6 +12,7 @@ import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.FlxCamera;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
@@ -95,7 +96,8 @@ class ChartingState extends MusicBeatState
 	];
 
     var dad:Character = null;
-    var bf:Character = null;
+    var bf:Boyfriend = null;
+    var charCam:FlxCamera;
     var singAnimation:Array<String> = [
         'singLEFT',
         'singDOWN',
@@ -414,16 +416,21 @@ class ChartingState extends MusicBeatState
 
 		updateGrid();
 
+		charCam = new FlxCamera();
+		charCam.bgColor.alpha = 0;
+		FlxG.cameras.add(charCam, false);
+
 		#if android
 		    addVirtualPad(CHART_EDITOR, CHART_EDITOR);
+		    addPadCamera();
 		#end
-		
-		dad = new Character(0,0,_song.player2,false);
-		dad.alpha = 0.6;
+
+		dad = new Character(0,0,_song.player2);
+		dad.cameras = [charCam];
 		add(dad);
 
-		bf = new Character(400,0,_song.player1,true);
-		bf.alpha = 0.6;
+		bf = new Character(400,0,_song.player1);
+		bf.cameras = [charCam];
 		add(bf);
 
 		super.create();
@@ -2126,10 +2133,11 @@ class ChartingState extends MusicBeatState
 							data += 4;
 						}
 					}
-					if (noteDataToCheck > -1 && !note.mustPress) {
+					if (noteDataToCheck > -1 && note.mustPress != _song.notes[curSec].mustHitSection) {
 						dad.playAnim(singAnimation[noteDataToCheck],true);
 						dad.holdTimer = 0;
-					} else if (noteDataToCheck > -1 && note.mustPress) {
+					}
+					if (noteDataToCheck > -1 && note.mustPress = _song.notes[curSec].mustHitSection) {
 						bf.playAnim(singAnimation[noteDataToCheck],true);
 						bf.holdTimer = 0;
 					}
@@ -2155,21 +2163,7 @@ class ChartingState extends MusicBeatState
 
 		super.update(elapsed);
 	}
-
-	override function beatHit()
-	{
-		super.beatHit();
-
-		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
-		{
-			dad.dance();
-		}
-		if (curBeat % bf.danceEveryNumBeats == 0 && bf.animation.curAnim != null && !bf.animation.curAnim.name.startsWith('sing') && !bf.stunned)
-		{
-			bf.dance();
-		}
-	}
-
+    // add idle beat hit later
 	function updateZoom() {
 		var daZoom:Float = zoomList[curZoom];
 		var zoomThing:String = '1 / ' + daZoom;
