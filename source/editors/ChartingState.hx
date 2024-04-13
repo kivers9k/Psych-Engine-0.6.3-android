@@ -2148,7 +2148,7 @@ class ChartingState extends MusicBeatState
 		}
 		lastConductorPos = Conductor.songPosition;
 
-		} else if(bf.animation.curAnim != null && bf.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * bf.singDuration && bf.animation.curAnim.name.startsWith('sing') && !bf.animation.curAnim.name.endsWith('miss')) {
+		if (bf.animation.curAnim != null && bf.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * bf.singDuration && bf.animation.curAnim.name.startsWith('sing') && !bf.animation.curAnim.name.endsWith('miss')) {
 			bf.dance();
 			bf.holdTimer = 0;
 		}
