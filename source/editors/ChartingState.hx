@@ -424,7 +424,7 @@ class ChartingState extends MusicBeatState
 
 		bf = new Character(400,0,_song.player1,true);
 		bf.alpha = 0.6;
-		bf(bf);
+		add(bf);
 
 		super.create();
 	}
@@ -2126,10 +2126,10 @@ class ChartingState extends MusicBeatState
 							data += 4;
 						}
 					}
-					if (noteDataToCheck && !note.mustPress) {
+					if (noteDataToCheck > -1 && !note.mustPress) {
 						dad.playAnim(singAnimation[noteDataToCheck],true);
 						dad.holdTimer = 0;
-					} else if (noteDataToCheck && note.mustPress) {
+					} else if (noteDataToCheck > -1 && note.mustPress) {
 						bf.playAnim(singAnimation[noteDataToCheck],true);
 						bf.holdTimer = 0;
 					}
