@@ -429,7 +429,7 @@ class ChartingState extends MusicBeatState
 		dad.cameras = [charCam];
 		add(dad);
 
-		bf = new Character(400,0,_song.player1);
+		bf = new Boyfriend(400,0,_song.player1);
 		bf.cameras = [charCam];
 		add(bf);
 
@@ -2133,8 +2133,8 @@ class ChartingState extends MusicBeatState
 							data += 4;
 						}
 					}
-					if (noteDataToCheck > -1 && note.mustPress != _song.notes[curSec].mustHitSection) {
-						dad.playAnim(singAnimation[noteDataToCheck],true);
+					if (noteDataToCheck > 4 && note.mustPress != _song.notes[curSec].mustHitSection) {
+						dad.playAnim(singAnimation[noteDataToCheck -4],true);
 						dad.holdTimer = 0;
 					}
 					if (noteDataToCheck > -1 && note.mustPress = _song.notes[curSec].mustHitSection) {
@@ -2156,7 +2156,7 @@ class ChartingState extends MusicBeatState
 		}
 		lastConductorPos = Conductor.songPosition;
 
-		if (bf.animation.curAnim != null && bf.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * bf.singDuration && bf.animation.curAnim.name.startsWith('sing') && !bf.animation.curAnim.name.endsWith('miss')) {
+		if (bf.animation.curAnim != null && bf.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * bf.singDuration && bf.animation.curAnim.name.startsWith('sing')) {
 			bf.dance();
 			bf.holdTimer = 0;
 		}
