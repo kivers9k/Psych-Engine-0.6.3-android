@@ -2133,11 +2133,14 @@ class ChartingState extends MusicBeatState
 							data += 4;
 						}
 					}
-					if (data > -1 && note.mustPress) {
+					if (note.mustPress) {
 						bf.playAnim(singAnimation[data],true);
 						bf.holdTimer = 0;
-					}
-					if (data > -1 && !note.mustPress) {
+						dad.playAnim(singAnimation[data -4],true);
+						dad.holdTimer = 0;
+					} else {
+						bf.playAnim(singAnimation[data -4],true);
+						bf.holdTimer = 0;
 						dad.playAnim(singAnimation[data],true);
 						dad.holdTimer = 0;
 					}
@@ -2162,20 +2165,6 @@ class ChartingState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-	}
-
-	override function beatHit()
-	{
-		super.beatHit();
-
-		if (curBeat % bf.danceEveryNumBeats == 0 && bf.animation.curAnim != null && !bf.animation.curAnim.name.startsWith('sing') && !bf.stunned)
-		{
-			bf.dance();
-		}
-		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
-		{
-			dad.dance();
-		}
 	}
 
 	function updateZoom() {
