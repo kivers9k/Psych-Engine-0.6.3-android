@@ -416,7 +416,9 @@ class ChartingState extends MusicBeatState
 
 		updateGrid();
 
-		charCam = new FlxCamera();
+		charCam = new FlxCamera(-505,-100);
+		charCam.flashSprite.scaleX = 0.21;
+		charCam.flashSprite.scaleY = 0.21;
 		charCam.bgColor.alpha = 0;
 		FlxG.cameras.add(charCam, false);
 
@@ -426,10 +428,14 @@ class ChartingState extends MusicBeatState
 		#end
 
 		dad = new Character(0,0,_song.player2);
+        dad.x += dad.positionArray[0];
+        dad.y += dad.positionArray[1];
 		dad.cameras = [charCam];
 		add(dad);
 
 		bf = new Boyfriend(400,0,_song.player1);
+        bf.x += bf.positionArray[0];
+        bf.y += bf.positionArray[1];
 		bf.cameras = [charCam];
 		add(bf);
 
@@ -2136,12 +2142,12 @@ class ChartingState extends MusicBeatState
 					if (note.mustPress) {
 						bf.playAnim(singAnimation[data],true);
 						bf.holdTimer = 0;
-						dad.playAnim(singAnimation[data -4],true);
+						dad.playAnim(singAnimation[data],true);
 						dad.holdTimer = 0;
 					} else {
 						bf.playAnim(singAnimation[data -4],true);
 						bf.holdTimer = 0;
-						dad.playAnim(singAnimation[data],true);
+						dad.playAnim(singAnimation[data -4],true);
 						dad.holdTimer = 0;
 					}
 				}
