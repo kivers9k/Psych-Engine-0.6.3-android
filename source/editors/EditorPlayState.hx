@@ -22,7 +22,7 @@ import FunkinLua;
 
 using StringTools;
 
-class EditorPlaySubState extends MusicBeatSubstate
+class EditorPlayState extends MusicBeatState
 {
 	// Yes, this is mostly a copy of PlayState, it's kinda dumb to make a direct copy of it but... ehhh
 	private var strumLine:FlxSprite;
@@ -61,7 +61,7 @@ class EditorPlaySubState extends MusicBeatSubstate
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
 
-	public static var instance:EditorPlaySubState;
+	public static var instance:EditorPlayState;
 
 	override function create()
 	{
