@@ -2133,13 +2133,13 @@ class ChartingState extends MusicBeatState
 							data += 4;
 						}
 					}
-					if (noteDataToCheck > 4 && !note.mustPress) {
-						dad.playAnim(singAnimation[noteDataToCheck -4],true);
-						dad.holdTimer = 0;
-					}
-					if (noteDataToCheck > -1 && note.mustPress) {
-						bf.playAnim(singAnimation[noteDataToCheck],true);
+					if (data > -1 && note.mustPress) {
+						bf.playAnim(singAnimation[data],true);
 						bf.holdTimer = 0;
+					}
+					if (data > -1 && !note.mustPress) {
+						dad.playAnim(singAnimation[data],true);
+						dad.holdTimer = 0;
 					}
 				}
 			}
