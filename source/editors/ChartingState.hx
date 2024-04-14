@@ -2133,11 +2133,11 @@ class ChartingState extends MusicBeatState
 							data += 4;
 						}
 					}
-					if (noteDataToCheck > 4 && note.mustPress != _song.notes[curSec].mustHitSection) {
+					if (noteDataToCheck > 4 && !note.mustPress) {
 						dad.playAnim(singAnimation[noteDataToCheck -4],true);
 						dad.holdTimer = 0;
 					}
-					if (noteDataToCheck > -1 && note.mustPress = _song.notes[curSec].mustHitSection) {
+					if (noteDataToCheck > -1 && note.mustPress) {
 						bf.playAnim(singAnimation[noteDataToCheck],true);
 						bf.holdTimer = 0;
 					}
@@ -2163,7 +2163,54 @@ class ChartingState extends MusicBeatState
 
 		super.update(elapsed);
 	}
-    // add idle beat hit later
+
+	override function beatHit()
+	{
+		super.beatHit();
+
+		if (curBeat % bf.danceEveryNumBeats == 0 && bf.animation.curAnim != null && !bf.animation.curAnim.name.startsWith('sing') && !bf.stunned)
+		{
+			bf.dance();
+		}
+		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
+		{
+			dad.dance();
+		}
+	}
+
+	override function sectionHit()
+	{
+		super.sectionHit();
+
+		if (SONG.notes[curSection] != null)
+		{
+			if (generatedMusic && !endingSong && !isCameraOnForcedPos)
+			{
+				moveCameraSection();
+			}
+
+			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms)
+			{
+				FlxG.camera.zoom += 0.015 * camZoomingMult;
+				camHUD.zoom += 0.03 * camZoomingMult;
+			}
+
+			if (SONG.notes[curSection].changeBPM)
+			{
+				Conductor.changeBPM(SONG.notes[curSection].bpm);
+				setOnLuas('curBpm', Conductor.bpm);
+				setOnLuas('crochet', Conductor.crochet);
+				setOnLuas('stepCrochet', Conductor.stepCrochet);
+			}
+			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
+			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
+			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
+		}
+		
+		setOnLuas('curSection', curSection);
+		callOnLuas('onSectionHit', []);
+	}
+
 	function updateZoom() {
 		var daZoom:Float = zoomList[curZoom];
 		var zoomThing:String = '1 / ' + daZoom;
