@@ -1095,6 +1095,7 @@ class CharacterEditorState extends MusicBeatState
 		#end
 	}
 
+	var mousePos:Array<Float> = [0,0];
 	override function update(elapsed:Float)
 	{
 		MusicBeatState.camBeat = FlxG.camera;
@@ -1148,14 +1149,13 @@ class CharacterEditorState extends MusicBeatState
 				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 			}
             #if android
-                var pos:Array<Float> = [0,0];
                 var getMouse = FlxG.mouse.getScreenPosition(camEditor);
                 if (FlxG.mouse.justPressed) {
-                    pos[0] = camFollow.x + getMouse.x;
-                    pos[1] = camFollow.y + getMouse.y;
+                    mousePos[0] = camFollow.x + getMouse.x;
+                    mousePos[1] = camFollow.y + getMouse.y;
                 } else if (FlxG.mouse.pressed) {
-                    camFollow.x = pos[0] - getMouse.x;
-                    camFollow.y = pos[1] - getMouse.y;
+                    camFollow.x = mousePos[0] - getMouse.x;
+                    camFollow.y = mousePos[1] - getMouse.y;
                 }
             #else
     			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
