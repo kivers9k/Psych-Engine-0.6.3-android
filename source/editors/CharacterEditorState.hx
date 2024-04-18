@@ -1148,7 +1148,7 @@ class CharacterEditorState extends MusicBeatState
 				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 			}
             #if android
-                var pos = [0,0];
+                var pos:Array<Float> = [0,0];
                 var getMouse = FlxG.mouse.getScreenPosition(camEditor);
                 if (FlxG.mouse.justPressed) {
                     pos[0] = camFollow.x + getMouse.x;
