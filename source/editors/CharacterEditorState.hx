@@ -1149,13 +1149,17 @@ class CharacterEditorState extends MusicBeatState
 				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 			}
             #if android
-                var getMouse = FlxG.mouse.getScreenPosition(camEditor);
-                if (FlxG.mouse.justPressed) {
-                    mousePos[0] = camFollow.x + getMouse.x;
-                    mousePos[1] = camFollow.y + getMouse.y;
-                } else if (FlxG.mouse.pressed) {
-                    camFollow.x = mousePos[0] - getMouse.x;
-                    camFollow.y = mousePos[1] - getMouse.y;
+                if (!_virtualpad.buttonLeft.pressed || !_virtualpad.buttonRight.pressed || !_virtualpad.buttonUp.pressed || !_virtualpad.buttonDown.pressed ||
+                    !_virtualpad.buttonA.pressed || !_virtualpad.buttonB.pressed || !_virtualpad.buttonC.pressed || !_virtualpad.buttonD ||
+                    !_virtualpad.buttonZ.pressed || !_virtualpad.buttonY.pressed || !_virtualpad.buttonX.pressed || !_virtualpad.buttonV) {
+                    var getMouse = FlxG.mouse.getScreenPosition(camEditor);
+                    if (FlxG.mouse.justPressed) {
+                        mousePos[0] = camFollow.x + getMouse.x;
+                        mousePos[1] = camFollow.y + getMouse.y;
+                    } else if (FlxG.mouse.pressed) {
+                        camFollow.x = mousePos[0] - getMouse.x;
+                        camFollow.y = mousePos[1] - getMouse.y;
+                    }
                 }
             #else
     			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
@@ -1175,7 +1179,6 @@ class CharacterEditorState extends MusicBeatState
     					camFollow.x += addToCam;
     			}
     		#end
-
 			if(char.animationsArray.length > 0) {
 				if (FlxG.keys.justPressed.W #if android || _virtualpad.buttonV.justPressed #end)
 				{
@@ -1193,7 +1196,7 @@ class CharacterEditorState extends MusicBeatState
 				if (curAnim >= char.animationsArray.length)
 					curAnim = 0;
 
-				if (FlxG.keys.justPressed.S #if android || _virtualpad.buttonD.justPressed #end || FlxG.keys.justPressed.W #if android || _virtualpad.buttonV.justPressed #end || FlxG.keys.justPressed.SPACE)
+				if (FlxG.keys.justPressed.S #if android || _virtualpad.buttonD.justPressed #end || FlxG.keys.justPressed.W #if android || _virtualpad.buttonV.justPressed #end || FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonC.justPressed #end)
 				{
 					char.playAnim(char.animationsArray[curAnim].anim, true);
 					genBoyOffsets();
