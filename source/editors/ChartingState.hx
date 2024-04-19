@@ -12,7 +12,6 @@ import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxG;
 import flixel.FlxObject;
-import flixel.FlxCamera;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
@@ -94,16 +93,6 @@ class ChartingState extends MusicBeatState
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"]
 	];
-
-    var dad:Character = null;
-    var bf:Boyfriend = null;
-    var charCam:FlxCamera;
-    var singAnimation:Array<String> = [
-        'singLEFT',
-        'singDOWN',
-        'singUP',
-        'singRIGHT'
-    ];
 
 	var _file:FileReference;
     var postfix:String = '';
@@ -416,29 +405,9 @@ class ChartingState extends MusicBeatState
 
 		updateGrid();
 
-		charCam = new FlxCamera(-505,-100);
-		charCam.flashSprite.scaleX = 0.21;
-		charCam.flashSprite.scaleY = 0.21;
-		charCam.bgColor.alpha = 0;
-		FlxG.cameras.add(charCam, false);
-
 		#if android
 		    addVirtualPad(CHART_EDITOR, CHART_EDITOR);
-		    addPadCamera();
 		#end
-
-		dad = new Character(0,0,_song.player2);
-        dad.x += dad.positionArray[0];
-        dad.y += dad.positionArray[1];
-		dad.cameras = [charCam];
-		add(dad);
-
-		bf = new Boyfriend(400,0,_song.player1);
-        bf.x += bf.positionArray[0];
-        bf.y += bf.positionArray[1];
-		bf.cameras = [charCam];
-		add(bf);
-
 		super.create();
 	}
 
@@ -1577,6 +1546,7 @@ class ChartingState extends MusicBeatState
 
 	var lastConductorPos:Float;
 	var colorSine:Float = 0;
+	var mousePos:Array<Float> = [0,0];
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
@@ -1766,7 +1736,7 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 			{
 				autosaveSong();
-				LoadingState.loadAndSwitchState(new editors.EditorPlayState(sectionStartTime()));
+				openSubState(new editors.EditorPlaySubState(sectionStartTime()));
 			}
 			if (FlxG.keys.justPressed.ENTER #if android || _virtualpad.buttonA.justPressed #end)
 			{
@@ -2139,17 +2109,6 @@ class ChartingState extends MusicBeatState
 							data += 4;
 						}
 					}
-					if (note.mustPress) {
-						bf.playAnim(singAnimation[data],true);
-						bf.holdTimer = 0;
-						dad.playAnim(singAnimation[data],true);
-						dad.holdTimer = 0;
-					} else {
-						bf.playAnim(singAnimation[data -4],true);
-						bf.holdTimer = 0;
-						dad.playAnim(singAnimation[data -4],true);
-						dad.holdTimer = 0;
-					}
 				}
 			}
 		});
@@ -2164,11 +2123,6 @@ class ChartingState extends MusicBeatState
 			}
 		}
 		lastConductorPos = Conductor.songPosition;
-
-		if (bf.animation.curAnim != null && bf.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * bf.singDuration && bf.animation.curAnim.name.startsWith('sing')) {
-			bf.dance();
-			bf.holdTimer = 0;
-		}
 
 		super.update(elapsed);
 	}
