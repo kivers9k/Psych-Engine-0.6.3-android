@@ -1546,7 +1546,6 @@ class ChartingState extends MusicBeatState
 
 	var lastConductorPos:Float;
 	var colorSine:Float = 0;
-	var mousePos:Array<Float> = [0,0];
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
@@ -1736,7 +1735,7 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 			{
 				autosaveSong();
-				openSubState(new editors.EditorPlaySubState(sectionStartTime()));
+				LoadingState.loadAndSwitchState(new editors.EditorPlayState(sectionStartTime()));
 			}
 			if (FlxG.keys.justPressed.ENTER #if android || _virtualpad.buttonA.justPressed #end)
 			{
