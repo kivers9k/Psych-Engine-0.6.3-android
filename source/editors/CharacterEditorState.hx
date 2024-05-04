@@ -1149,17 +1149,13 @@ class CharacterEditorState extends MusicBeatState
 				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 			}
             #if android
-                if (!_virtualpad.buttonLeft.pressed || !_virtualpad.buttonRight.pressed || !_virtualpad.buttonUp.pressed || !_virtualpad.buttonDown.pressed ||
-                    !_virtualpad.buttonA.pressed || !_virtualpad.buttonB.pressed || !_virtualpad.buttonC.pressed || !_virtualpad.buttonD ||
-                    !_virtualpad.buttonZ.pressed || !_virtualpad.buttonY.pressed || !_virtualpad.buttonX.pressed || !_virtualpad.buttonV) {
-                    var getMouse = FlxG.mouse.getScreenPosition(camEditor);
-                    if (FlxG.mouse.justPressed) {
-                        mousePos[0] = camFollow.x + getMouse.x;
-                        mousePos[1] = camFollow.y + getMouse.y;
-                    } else if (FlxG.mouse.pressed) {
-                        camFollow.x = mousePos[0] - getMouse.x;
-                        camFollow.y = mousePos[1] - getMouse.y;
-                    }
+                var getMouse = FlxG.mouse.getScreenPosition(camEditor);
+                if (FlxG.mouse.justPressed) {
+                    mousePos[0] = camFollow.x + getMouse.x;
+                    mousePos[1] = camFollow.y + getMouse.y;
+                } else if (FlxG.mouse.pressed) {
+                    camFollow.x = mousePos[0] - getMouse.x;
+                    camFollow.y = mousePos[1] - getMouse.y;
                 }
             #else
     			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
