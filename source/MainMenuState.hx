@@ -139,7 +139,7 @@ class MainMenuState extends MusicBeatState
 		{
     		menuItems.forEach(function(spr:FlxSprite)
     		{
-    		spr.screenCenter(X);
+    		    spr.screenCenter(X);
     		});
 		}
 
@@ -174,7 +174,7 @@ class MainMenuState extends MusicBeatState
 		#end
 
         #if mobile
-            if (menuJSON.disable_editor == true)
+            if (!menuJSON.disable_editor)
             {
                 addVirtualPad(UP_DOWN,A_B_E);
             
@@ -320,7 +320,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-	if (menuJSON.disable_editor == true)
+	if (!menuJSON.disable_editor)
 	{
 		if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
 		{
