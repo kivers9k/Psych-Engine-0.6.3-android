@@ -82,6 +82,11 @@
             "dir":null,
             "ref":"main",
             "url":"https://github.com/MaysLastPlay77/extension-androidtools"
+        },
+        {
+            "name":"SScript",
+            "type":"haxelib",
+            "version":null
         }
     ]
 }
