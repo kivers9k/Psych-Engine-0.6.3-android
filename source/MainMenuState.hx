@@ -59,8 +59,12 @@ class MainMenuState extends MusicBeatState
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
 
+    public static var instance:MainMenuState;
 	override function create()
 	{
+		instance = this;
+	    PlayState.instance.callOnLuas('onCreate', ['mainMenu']);
+
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -329,6 +333,8 @@ class MainMenuState extends MusicBeatState
 		}
 	}
 		super.update(elapsed);
+
+		PlayState.instance.callOnLuas('onUpdate', [elapsed, 'mainMenu']);
 	}
 
 	function changeItem(huh:Int = 0)
