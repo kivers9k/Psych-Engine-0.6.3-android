@@ -63,7 +63,6 @@ class MainMenuState extends MusicBeatState
 	override function create()
 	{
 		instance = this;
-	    PlayState.instance.callOnLuas('onCreate', ['mainMenu']);
 
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
@@ -324,17 +323,15 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-	if (!menuJSON.disable_editor)
-	{
-		if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
-		{
-			selectedSomethin = true;
-			MusicBeatState.switchState(new MasterEditorMenu());
-		}
-	}
-		super.update(elapsed);
-
-		PlayState.instance.callOnLuas('onUpdate', [elapsed, 'mainMenu']);
+	    if (!menuJSON.disable_editor)
+	    {
+		    if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
+		    {
+			    selectedSomethin = true;
+			    MusicBeatState.switchState(new MasterEditorMenu());
+		    }
+	    }
+		super.update(elapsed); 
 	}
 
 	function changeItem(huh:Int = 0)
