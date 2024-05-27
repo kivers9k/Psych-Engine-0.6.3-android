@@ -58,12 +58,8 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-
-    public static var instance:MainMenuState;
 	override function create()
 	{
-		instance = this;
-
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
