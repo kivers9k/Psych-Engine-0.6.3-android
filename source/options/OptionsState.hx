@@ -46,6 +46,12 @@ class OptionsState extends MusicBeatState
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
+	var isPlayState:Bool = true;
+	public function new(isPlayState:Bool = true) {
+		super();
+		this.isPlayState = isPlayState;
+	}
+
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 		    #if android
@@ -148,8 +154,12 @@ class OptionsState extends MusicBeatState
 		}
 
 		if (controls.BACK) {
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			if (isPlayState) {
+                MusicBeatState.switchState(new PlayState());
+			} else {
+			    FlxG.sound.play(Paths.sound('cancelMenu'));
+			    MusicBeatState.switchState(new MainMenuState());
+		    }
 		}
 
 		if (controls.ACCEPT) {

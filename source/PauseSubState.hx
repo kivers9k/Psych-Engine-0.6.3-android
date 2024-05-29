@@ -24,6 +24,7 @@ class PauseSubState extends MusicBeatSubstate
 		'Resume',
 		'Restart Song',
 		'Change Difficulty',
+		'Option',
         'Chart Editor',
 		'Character Editor',
 		'Exit to menu'
@@ -270,6 +271,8 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
+				case 'Option':
+				    LoadingState.loadAndSwitchState(new options.OptionsState());
                 case 'Chart Editor':
 		            MusicBeatState.switchState(new editors.ChartingState());
 		            PlayState.chartingMode = true;
