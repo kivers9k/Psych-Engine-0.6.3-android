@@ -82,11 +82,6 @@
             "dir":null,
             "ref":"main",
             "url":"https://github.com/MaysLastPlay77/extension-androidtools"
-        },
-        {
-            "name": "discord-rpc",
-            "type": "haxelib",
-            "version": "1.0.0"
         }
     ]
 }
