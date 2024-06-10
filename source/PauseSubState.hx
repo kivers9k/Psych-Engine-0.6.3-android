@@ -24,7 +24,7 @@ class PauseSubState extends MusicBeatSubstate
 		'Resume',
 		'Restart Song',
 		'Change Difficulty',
-		'Option',
+		'Options',
         'Chart Editor',
 		'Character Editor',
 		'Exit to menu'
@@ -271,8 +271,9 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
-				case 'Option':
+				case 'Options':
 				    LoadingState.loadAndSwitchState(new options.OptionsState());
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
                 case 'Chart Editor':
 		            MusicBeatState.switchState(new editors.ChartingState());
 		            PlayState.chartingMode = true;
