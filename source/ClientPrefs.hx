@@ -32,8 +32,11 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
+	//mobile setting stuff
 	public static var mobileControlOpacity:Float = 0.7;
 	public static var hideHint:Bool = false;
+    public static var orientation:String = 'landscape';
+
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -133,6 +136,7 @@ class ClientPrefs {
 		
 		FlxG.save.data.mobileControlOpacity = mobileControlOpacity;
 		FlxG.save.data.hideHint = hideHint;
+		FlxG.save.data.orientation = orientation;
 	
 	
 		FlxG.save.flush();

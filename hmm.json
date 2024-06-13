@@ -82,6 +82,13 @@
             "dir":null,
             "ref":"main",
             "url":"https://github.com/MaysLastPlay77/extension-androidtools"
+        },
+        {
+            "name":"extension-orientation",
+            "type":"git",
+            "dir":null,
+            "ref":"master",
+            "url":"https://github.com/HaxeExtension/extension-orientation.git"
         }
     ]
 }
