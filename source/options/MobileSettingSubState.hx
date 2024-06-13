@@ -79,9 +79,9 @@ class MobileSettingSubState extends BaseOptionsMenu
 
         if (ClientPrefs.orientation == 'portrait') {
 		    EsOrientation.setScreenOrientation(EsOrientation.ORIENTATION_PORTRAIT);
-		else if (ClientPrefs.orientation == 'landscape') {
+		} else if (ClientPrefs.orientation == 'landscape') {
 		    EsOrientation.setScreenOrientation(EsOrientation.ORIENTATION_LANDSCAPE);
-		else if (ClientPrefs.orientation == 'unspecified') {
+		} else if (ClientPrefs.orientation == 'unspecified') {
 		    EsOrientation.setScreenOrientation(EsOrientation.ORIENTATION_UNSPECIFIED);
 		}
 
