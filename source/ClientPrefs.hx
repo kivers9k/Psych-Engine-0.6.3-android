@@ -35,7 +35,6 @@ class ClientPrefs {
 	//mobile setting stuff
 	public static var mobileControlOpacity:Float = 0.7;
 	public static var hideHint:Bool = false;
-    public static var orientation:String = 'landscape';
 
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -136,8 +135,6 @@ class ClientPrefs {
 		
 		FlxG.save.data.mobileControlOpacity = mobileControlOpacity;
 		FlxG.save.data.hideHint = hideHint;
-		FlxG.save.data.orientation = orientation;
-	
 	
 		FlxG.save.flush();
 

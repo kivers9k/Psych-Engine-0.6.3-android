@@ -27,7 +27,6 @@ import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
 import openfl.Lib;
-import extension.eightsines.EsOrientation;
 
 using StringTools;
 
@@ -50,15 +49,6 @@ class MobileSettingSubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 
-		
-		var option:Option = new Option('Change Screen Orientation',
-        "what should be",
-		'orientation',
-		'string',
-		'landscape',
-        ['unspecified','portrait','landscape']);
-		addOption(option);
-
 		var option:Option = new Option('Hide Hitbox Hint',
 		'if checked, hitbox hint will get hidden',
 		'hideHint',
@@ -76,15 +66,7 @@ class MobileSettingSubState extends BaseOptionsMenu
 
     override function update(elapsed:Float) {
         _virtualpad.alpha = ClientPrefs.mobileControlOpacity;
-
-        if (ClientPrefs.orientation == 'portrait') {
-		    EsOrientation.setScreenOrientation(EsOrientation.ORIENTATION_PORTRAIT);
-		} else if (ClientPrefs.orientation == 'landscape') {
-		    EsOrientation.setScreenOrientation(EsOrientation.ORIENTATION_LANDSCAPE);
-		} else if (ClientPrefs.orientation == 'unspecified') {
-		    EsOrientation.setScreenOrientation(EsOrientation.ORIENTATION_UNSPECIFIED);
-		}
-
+        
         super.update(elapsed);
     }
 }

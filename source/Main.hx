@@ -12,9 +12,9 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 
-#if desktop
+//#if desktop
 import Discord.DiscordClient;
-#end
+//#end
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -110,14 +110,14 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 
-		#if desktop
+		//#if desktop
 		if (!DiscordClient.isInitialized) {
 			DiscordClient.initialize();
 			Application.current.window.onClose.add(function() {
 				DiscordClient.shutdown();
 			});
 		}
-		#end
+		//#end
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!

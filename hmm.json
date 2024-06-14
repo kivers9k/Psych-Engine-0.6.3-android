@@ -84,11 +84,11 @@
             "url":"https://github.com/MaysLastPlay77/extension-androidtools"
         },
         {
-            "name":"extension-orientation",
+            "name":"discord_rpc",
             "type":"git",
             "dir":null,
             "ref":"master",
-            "url":"https://github.com/HaxeExtension/extension-orientation.git"
+            "url":"https://github.com/Aidan63/linc_discord-rpc.git"
         }
     ]
 }
