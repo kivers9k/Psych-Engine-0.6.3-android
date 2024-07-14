@@ -10,8 +10,8 @@ import flixel.FlxG;
 class SpriteVideo extends FlxSprite
 {
     public var bitmap:VideoHandler;
-    public var rate(get, set):Float = 1;
-    public var volume(get, set):Float = 1;
+    public var rate:Float = 1;
+    public var volume:Float = 1;
 
     public function new(x:Float, y:Float, video:String, ?muteSound:Bool = true)
     {
@@ -34,14 +34,14 @@ class SpriteVideo extends FlxSprite
         var vidBitmap = bitmap.bitmapData;
         loadGraphic(vidBitmap);
 
-        bitmap.set_volume(volume);
-        bitmap.set_rate(rate);
+        bitmap.volume = volume;
+        bitmap.rate = rate;
     }
 
     override function destroy():Void
     {
         super.destroy();
-        bitmap.set_volume(0);
+        bitmap.volume = 0;
         bitmap = null;
     }
 
