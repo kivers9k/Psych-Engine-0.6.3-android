@@ -1,22 +1,21 @@
 package android;
 
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.graphics.FlxGraphic;
+import flixel.util.FlxGradient;
 import flixel.group.FlxSpriteGroup;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
+import flixel.FlxG;
 
 class FlxHitbox extends FlxSpriteGroup {
+	//group stuff
 	public var hitbox:FlxSpriteGroup;
 	public var hint:FlxSpriteGroup;
+
+    //button stuff
 	public var buttonLeft:FlxButton;
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
-	public var buttonHintLeft:FlxSprite;
-	public var buttonHintDown:FlxSprite;
-	public var buttonHintUp:FlxSprite;
-	public var buttonHintRight:FlxSprite;
 
 	public function new() {
 		super();
@@ -29,35 +28,33 @@ class FlxHitbox extends FlxSpriteGroup {
 		buttonUp = new FlxButton(0, 0);
 		buttonRight = new FlxButton(0, 0);
 
-        buttonHintLeft = new FlxSprite(0, 0);
-        buttonHintDown = new FlxSprite(0, 0);
-        buttonHintUp = new FlxSprite(0, 0);
-        buttonHintRight = new FlxSprite(0, 0);
+        var hitboxWidth:Int = Math.floor(FlxG.width / 4);
 
-		hitbox.add(add(buttonLeft = createHitbox(0, 0, 0xC457D3)));
-		hitbox.add(add(buttonDown = createHitbox(320, 0, 0x00DAFF)));
-		hitbox.add(add(buttonUp = createHitbox(640, 0, 0x00FF00)));
-		hitbox.add(add(buttonRight = createHitbox(960, 0, 0xFF0000)));
+		hitbox.add(add(buttonLeft = createhitbox(0, 0, hitboxWidth, FlxG.height, 0xC457D3)));
+		hitbox.add(add(buttonDown = createhitbox(hitboxWidth, 0, hitboxWidth, FlxG.height, 0x00DAFF)));
+		hitbox.add(add(buttonUp = createhitbox(hitboxWidth*2, 0, hitboxWidth, FlxG.height, 0x00FF00)));
+		hitbox.add(add(buttonRight = createhitbox(hitbox*3, 0, hitboxWidth, FlxG.height, 0xFF0000)));
 
-		hint.add(add(buttonHintLeft = createHitboxHint(0, 0, 0xC457D3)));
-		hint.add(add(buttonHintDown = createHitboxHint(320, 0, 0x00DAFF)));
-		hint.add(add(buttonHintUp = createHitboxHint(640, 0, 0x00FF00)));
-		hint.add(add(buttonHintRight = createHitboxHint(960, 0, 0xFF0000)));
+		hint.add(add(createHitboxHint(0, 0, 0xC457D3)));
+		hint.add(add(createHitboxHint(320, 0, 0x00DAFF)));
+		hint.add(add(createHitboxHint(640, 0, 0x00FF00)));
+		hint.add(add(createHitboxHint(960, 0, 0xFF0000)));
 	}
 
-    public function createHitbox(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
-        var button:FlxButton = new FlxButton(x,y);
-        button.loadGraphic(Paths.image('androidcontrols/hitbox'));
-        button.updateHitbox();
-        button.color = colors;
-        button.alpha = 0;
+	public function createhitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:Int) {
+		var hitboxSpr:FlxSprite = FlxGradient.createGradientFlxSprite(width, height, [0x0, color]);
 
-        button.onOut.callback = function() {button.alpha = 0;}
-        button.onDown.callback = function() {button.alpha = ClientPrefs.mobileControlOpacity;}
-        button.onUp.callback = function() {button.alpha = 0;}
+		var button:FlxButton = new FlxButton(x, y);
+		button.loadGraphic(hitboxSpr.pixels);
+		button.updateHitbox();
+		button.alpha = 0;
 
-        return button;
-    }
+		button.onOut.callback = function() button.alpha = 0;
+		button.onUp.callback = function() button.alpha = 0;
+		button.onDown.callback = function() button.alpha = 0.5;
+		
+		return button;
+	}
 
     public function createHitboxHint(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
         var buttonHint:FlxSprite = new FlxSprite(x,y);
