@@ -51,7 +51,7 @@ class FlxHitbox extends FlxSpriteGroup {
 
 		button.onOut.callback = function() button.alpha = 0;
 		button.onUp.callback = function() button.alpha = 0;
-		button.onDown.callback = function() button.alpha = 0.5;
+		button.onDown.callback = function() button.alpha = ClientPrefs.mobileControlOpacity;
 		
 		return button;
 	}
