@@ -2,6 +2,7 @@ package;
 
 #if VIDEOS_ALLOWED
 import VideoHandler;
+import openfl.events.Event;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -23,24 +24,24 @@ class SpriteVideo extends FlxSprite
         bitmap.visible = false;
         if (muteSound) volume = 0;
 
-        FlxG.stage.removeEventListener('enterFrame', bitmap.update);
+        FlxG.stage.removeEventListener(Event.ENTER_FRAME, bitmap.update);
     }
 
     override function update(elapsed:Float)
     {
         super.update(elapsed);
     
-        var vidBitmap:FlxGraphic = FlxG.bitmap.add(bitmap.bitmapData, false, '');
+        var vidBitmap = bitmap.bitmapData;
         loadGraphic(vidBitmap);
 
-        bitmap.volume = volume;
-        bitmap.rate = rate;
+        bitmap.set_volume(volume);
+        bitmap.set_rate(rate);
     }
 
     override function destroy():Void
     {
         super.destroy();
-        bitmap.volume = 0;
+        bitmap.set_volume(0);
         bitmap = null;
     }
 
