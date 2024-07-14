@@ -53,11 +53,7 @@ class FlxHitbox extends FlxSpriteGroup {
     public function createHitboxHint(x:Float = 0, y:Float = 0, colors:Int = 0xFFFFFF) {
         var buttonHint:FlxSprite = new FlxSprite(x,y);
         buttonHint.loadGraphic(Paths.image('androidcontrols/hint'));
-		if (ClientPrefs.hideHint) {
-            buttonHint.alpha = 0;
-		} else {
-            buttonHint.alpha = ClientPrefs.mobileControlOpacity;
-		}
+        buttonHint.alpha = (ClientPrefs.hideHint ? 0 : ClientPrefs.mobileControlOpacity);
 		buttonHint.color = colors;
 
         return buttonHint;
