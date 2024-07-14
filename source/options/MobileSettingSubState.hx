@@ -65,7 +65,7 @@ class MobileSettingSubState extends BaseOptionsMenu
     }
 
     override function update(elapsed:Float) {
-        _virtualpad.alpha = ClientPrefs.mobileControlOpacity;
+        _virtualpad.alpha = ClientPrefs.mobileOpacity;
         
         super.update(elapsed);
     }
