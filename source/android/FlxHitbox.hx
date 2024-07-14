@@ -19,14 +19,13 @@ class FlxHitbox extends FlxSpriteGroup {
 
 	public function new() {
 		super();
-
 		hitbox = new FlxSpriteGroup();
 		hint = new FlxSpriteGroup();
 
         var hitboxWidth:Int = Math.floor(FlxG.width / 4);
 
-		hitbox.add(add(buttonLeft = createhitbox(0, 0, hitboxWidth, FlxG.height, 0xC457D3)));
-		hitbox.add(add(buttonDown = createhitbox(hitboxWidth, 0, hitboxWidth, FlxG.height, 0x00DAFF)));
+		hitbox.add(add(buttonLeft = createhitbox(hitboxWidth*0, 0, hitboxWidth, FlxG.height, 0xC457D3)));
+		hitbox.add(add(buttonDown = createhitbox(hitboxWidth*1, 0, hitboxWidth, FlxG.height, 0x00DAFF)));
 		hitbox.add(add(buttonUp = createhitbox(hitboxWidth*2, 0, hitboxWidth, FlxG.height, 0x00FF00)));
 		hitbox.add(add(buttonRight = createhitbox(hitboxWidth*3, 0, hitboxWidth, FlxG.height, 0xFF0000)));
 
