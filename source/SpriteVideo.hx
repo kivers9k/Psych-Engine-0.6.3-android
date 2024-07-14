@@ -28,7 +28,7 @@ class SpriteVideo extends FlxSprite {
         if (pause) {
             bitmap.pause();
         } else {
-            bitmap.resume()
+            bitmap.resume();
         }
     }
 }
