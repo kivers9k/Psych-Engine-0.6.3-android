@@ -243,8 +243,8 @@ class ClientPrefs {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;
 		}
 
-		if(FlxG.save.data.mobileControlOpacity != null) {
-			mobileControlOpacity = FlxG.save.data.mobileControlOpacity;
+		if(FlxG.save.data.mobileOpacity != null) {
+			mobileOpacity = FlxG.save.data.mobileOpacity;
 		}
 		if(FlxG.save.data.hideHint != null) {
 			hideHint = FlxG.save.data.hideHint;
