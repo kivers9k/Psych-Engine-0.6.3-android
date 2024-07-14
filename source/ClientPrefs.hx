@@ -134,7 +134,7 @@ class ClientPrefs {
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
 		
-		FlxG.save.data.mobileControlOpacity = mobileControlOpacity;
+		FlxG.save.data.mobileOpacity = mobileOpacity;
 		FlxG.save.data.hideHint = hideHint;
 	
 		FlxG.save.flush();
@@ -242,12 +242,14 @@ class ClientPrefs {
 		if(FlxG.save.data.hitsoundVolume != null) {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;
 		}
+
 		if(FlxG.save.data.mobileControlOpacity != null) {
 			mobileControlOpacity = FlxG.save.data.mobileControlOpacity;
 		}
 		if(FlxG.save.data.hideHint != null) {
 			hideHint = FlxG.save.data.hideHint;
 		}
+
 		if(FlxG.save.data.pauseMusic != null) {
 			pauseMusic = FlxG.save.data.pauseMusic;
 		}
