@@ -1,30 +1,28 @@
 package;
 
-import VideoHandler as MP4Handler;
-import flixel.FlxG;
+import VideoHandler;
 import flixel.FlxSprite;
 
 class SpriteVideo extends FlxSprite
 {
-    public var bitmap:MP4Handler;
-    public function new(X:Float, Y:Float, video:String)
-    {
-        super(X, Y);        
-        setPosition(X, Y);
-        
-        bitmap = new MP4Handler();
-        bitmap.playVideo(Paths.video(video));
-        bitmap.visible = false;
-        bitmap.volume = 0;
+    public var bitmap:VideoHandler;
+    public var playbackRate:Float = 1;
 
-        FlxG.stage.removeEventListener('enterFrame', bitmap.update);
+    public function new(x:Float, y:Float, video:String, ?muteSound:Bool = true)
+    {
+        super(x, y);
+        
+        bitmap = new VideoHandler();
+        bitmap.playVideo(Paths.video(video), false, muteSound);
+        bitmap.visible = false;
     }
 
     override function update(elapsed:Float)
     {
         super.update(elapsed);
+    
         loadGraphic(bitmap.bitmapData);
-        bitmap.set_rate(PlayState.instance.playbackRate);
+        bitmap.set_rate(playbackRate);
     }
 
     override function destroy():Void
