@@ -1,17 +1,18 @@
 package;
 
-import VideoHandler;
+import VideoHandler as MP4Handler;
 import flixel.FlxG;
 import flixel.FlxSprite;
 
-class SpriteVideo extends FlxSprite {
-    public var playbackRate:Float = 1;
-    public var pause:Bool = false;
-    public var bitmap:VideoHandler;
-    public function new(x:Float, y:Float, video:String) {
-        super(x ,y);
-
-        bitmap = new VideoHandler();
+class SpriteVideo extends FlxSprite
+{
+    public var bitmap:MP4Handler;
+    public function new(X:Float, Y:Float, video:String)
+    {
+        super(X, Y);        
+        setPosition(X, Y);
+        
+        bitmap = new MP4Handler();
         bitmap.playVideo(Paths.video(video));
         bitmap.visible = false;
         bitmap.volume = 0;
@@ -19,16 +20,16 @@ class SpriteVideo extends FlxSprite {
         FlxG.stage.removeEventListener('enterFrame', bitmap.update);
     }
 
-    override function update(elapsed:Float) {
+    override function update(elapsed:Float)
+    {
         super.update(elapsed);
-
         loadGraphic(bitmap.bitmapData);
+        bitmap.set_rate(PlayState.instance.playbackRate);
+    }
 
-        bitmap.set_rate(playbackRate);
-        if (pause) {
-            bitmap.pause();
-        } else {
-            bitmap.resume();
-        }
+    override function destroy():Void
+    {
+        super.destroy();
+        bitmap = null;
     }
 }
