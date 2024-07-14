@@ -8,11 +8,11 @@ import flixel.FlxG;
 
 class SpriteVideo extends FlxSprite
 {
-    public var bitmap:VideoHandler;
-    public var rate:Int = 1;
-    public var volume:Float = 1;
+    private var bitmap:VideoHandler;
+    public var rate:Float = 1;
+    public var muteVolume:Bool = true;
 
-    public function new(x:Float, y:Float, video:String, ?muteSound:Bool = true)
+    public function new(x:Float, y:Float, video:String)
     {
         super(x, y);
         
@@ -20,29 +20,17 @@ class SpriteVideo extends FlxSprite
 
         bitmap = new VideoHandler();
         bitmap.playVideo(videoPath);
-        bitmap.visible = false;
-        if (muteSound)
-            volume = 0;
-
-        FlxG.stage.removeEventListener('enterFrame', bitmap.update);
+        bitmap.alpha = 0;
     }
 
     override function update(elapsed:Float)
     {
         super.update(elapsed);
+        bitmap.volume = (muteVolume ? 0 : 1);
+        bitmap.rate = rate;
     
         var vidBitmap = bitmap.bitmapData;
         loadGraphic(vidBitmap);
-
-        bitmap.volume = volume;
-        bitmap.rate = rate;
-    }
-
-    override function destroy():Void
-    {
-        super.destroy();
-        bitmap.volume = 0;
-        bitmap = null;
     }
 
     public function stop() {
@@ -55,6 +43,12 @@ class SpriteVideo extends FlxSprite
 
     public function resume() {
         bitmap.resume();
+    }
+
+    override function destroy():Void
+    {
+        super.destroy();
+        bitmap = null;
     }
 }
 #end
