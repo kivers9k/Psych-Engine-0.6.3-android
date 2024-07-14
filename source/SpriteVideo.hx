@@ -4,18 +4,20 @@ package;
 import VideoHandler;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxSprite;
+import flixel.FlxG;
 
 class SpriteVideo extends FlxSprite
 {
     public var bitmap:VideoHandler;
-    public var playbackRate:Float = 1;
 
     public function new(x:Float, y:Float, video:String, ?muteSound:Bool = true)
     {
         super(x, y);
         
+        var videoPath:String = Paths.video(video);
+
         bitmap = new VideoHandler();
-        bitmap.playVideo(Paths.video(video), false, muteSound);
+        bitmap.playVideo(videoPath, false, muteSound);
         bitmap.visible = false;
     }
 
@@ -23,10 +25,8 @@ class SpriteVideo extends FlxSprite
     {
         super.update(elapsed);
     
-        var vidBitmap:Graphic = FlxG.bitmap.add(bitmap.bitmapData, false, '');
+        var vidBitmap:FlxGraphic = FlxG.bitmap.add(bitmap.bitmapData, false, '');
         loadGraphic(vidBitmap);
-        
-        bitmap.set_rate(playbackRate);
     }
 
     override function destroy():Void
