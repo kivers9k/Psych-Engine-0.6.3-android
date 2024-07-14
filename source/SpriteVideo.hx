@@ -1,6 +1,8 @@
 package;
 
+#if VIDEOS_ALLOWED
 import VideoHandler;
+import flixel.graphics.FlxGraphic;
 import flixel.FlxSprite;
 
 class SpriteVideo extends FlxSprite
@@ -21,7 +23,9 @@ class SpriteVideo extends FlxSprite
     {
         super.update(elapsed);
     
-        loadGraphic(bitmap.bitmapData);
+        var vidBitmap:Graphic = FlxG.bitmap.add(bitmap.bitmapData, false, '');
+        loadGraphic(vidBitmap);
+        
         bitmap.set_rate(playbackRate);
     }
 
@@ -31,3 +35,4 @@ class SpriteVideo extends FlxSprite
         bitmap = null;
     }
 }
+#end
