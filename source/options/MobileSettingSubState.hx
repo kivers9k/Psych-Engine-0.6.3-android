@@ -37,9 +37,9 @@ class MobileSettingSubState extends BaseOptionsMenu
 		title = 'Mobile Setting';
 		rpcTitle = 'Mobile Setting Menu';
 
-		var option:Option = new Option('Mobile Controls Opacity',
-		'Changes Mobile Controls Opacity',
-		'mobileControlOpacity',
+		var option:Option = new Option('Mobile Opacity',
+		'how much opacity should mobile controls be',
+		'mobileOpacity',
 		'float',
 		0.7);
 		option.scrollSpeed = 1.6;

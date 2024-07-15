@@ -1,5 +1,6 @@
 package android;
 
+import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxGradient;
 import flixel.group.FlxSpriteGroup;
 import flixel.ui.FlxButton;
@@ -61,6 +62,12 @@ class FlxHitbox extends FlxSpriteGroup {
 
 	override public function destroy():Void {
 		super.destroy();
+
+		hitbox = FlxDestroyUtil.destroy(hitbox);
+		hint = FlxDestroyUtil.destroy(hint);
+
+        hitbox = null;
+		hint = null;
 
 		buttonLeft = null;
 		buttonDown = null;
