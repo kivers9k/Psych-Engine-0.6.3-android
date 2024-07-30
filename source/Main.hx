@@ -55,7 +55,7 @@ class Main extends Sprite
 	{
 		super();
 
-    SUtil.gameCrashCheck();
+        SUtil.gameCrashCheck();
 		if (stage != null)
 		{
 			init();
@@ -123,7 +123,7 @@ class Main extends Sprite
 
 		if (ClientPrefs.mobileOrientation == 'unspecified') {
 			Hardware.setScreenOrientation(0);
-		} else if (ClientPrefs.mobileOrientation == 'protrait') {
+		} else if (ClientPrefs.mobileOrientation == 'portrait') {
 			Hardware.setScreenOrientation(1);
 		} else if (ClientPrefs.mobileOrientation == 'landscape') {
 			Hardware.setScreenOrientation(2);

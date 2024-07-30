@@ -56,12 +56,12 @@ class MobileSettingSubState extends BaseOptionsMenu
 		false);
 		addOption(option);
 
-		var option:Option = new Option('orientation',
-		'i forgor',
+		var option:Option = new Option('Orientation',
+		'you might need to restart the game',
 		'mobileOrientation',
 		'string',
 		'landscape',
-		['unspecified', 'portrait', 'lenandscape']);
+		['unspecified', 'portrait', 'landscape']);
 		addOption(option);
 
 		super();
