@@ -36,6 +36,7 @@ class ClientPrefs {
 	//mobile setting stuff
 	public static var mobileOpacity:Float = 0.7;
 	public static var hideHint:Bool = false;
+	public static var mobileOrientation:String = 'landscape';
 
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -136,6 +137,7 @@ class ClientPrefs {
 		
 		FlxG.save.data.mobileOpacity = mobileOpacity;
 		FlxG.save.data.hideHint = hideHint;
+		FlxG.save.data.mobileOrientation = mobileOrientation;
 	
 		FlxG.save.flush();
 
@@ -242,13 +244,11 @@ class ClientPrefs {
 		if(FlxG.save.data.hitsoundVolume != null) {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;
 		}
-
-		if(FlxG.save.data.mobileOpacity != null) {
-			mobileOpacity = FlxG.save.data.mobileOpacity;
-		}
-		if(FlxG.save.data.hideHint != null) {
-			hideHint = FlxG.save.data.hideHint;
-		}
+        
+		//mobile stuff
+		if(FlxG.save.data.mobileOpacity != null) mobileOpacity = FlxG.save.data.mobileOpacity;
+		if(FlxG.save.data.hideHint != null) hideHint = FlxG.save.data.hideHint;
+		if(FlxG.save.data.mobileOrientation != null) mobileOrientation = FlxG.save.data.mobileOrientation;
 
 		if(FlxG.save.data.pauseMusic != null) {
 			pauseMusic = FlxG.save.data.pauseMusic;

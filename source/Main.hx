@@ -26,6 +26,8 @@ import sys.io.File;
 import sys.io.Process;
 #end
 
+import android.Hardware;
+
 using StringTools;
 
 class Main extends Sprite
@@ -118,6 +120,14 @@ class Main extends Sprite
 			});
 		}
 		#end
+
+		if (ClientPrefs.mobileOrientation == 'unspecified) {
+			Hardware.setScreenOrientation(0);
+		} else if (ClientPrefs.mobileOrientation == 'protrait') {
+			Hardware.setScreenOrientation(1);
+		} else if (ClinetPrefs.mobileOpacity == 'landscape'); {
+			Hardware.setScreenOrientation(2);
+		}
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
