@@ -32,8 +32,8 @@ class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [
 	    #if android
-    	    'Mobile Config',
-    	    'Mobile Setting',
+        'Mobile Config',
+        'Mobile Setting',
 	    #end
 	    'Note Colors',
 	    'Controls',
@@ -47,47 +47,24 @@ class OptionsState extends MusicBeatState
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
-	var isPlayState:Bool;
-	public function new(?playState:Bool = true) {
-		super();
-		isPlayState = playState;
-	}
-
 	function openSelectedSubstate(label:String) {
+		removeVirtualPad();
 		switch(label) {
 		    #if android
-    		    case 'Mobile Config':
-					FlxTransitionableState.skipNextTransIn = true;
-        			FlxTransitionableState.skipNextTransOut = true;
-    				MusicBeatState.switchState(new options.MobileConfigState());
-    		    case 'Mobile Setting':
-    				removeVirtualPad();
-    				openSubState(new options.MobileSettingSubState());
+    		case 'Mobile Config':
+			    LoadingState.loadAndSwitchState(new options.MobileConfigState());
+    		case 'Mobile Setting':
+			    openSubState(new options.MobileSettingSubState());
     		#end
 			case 'Note Colors':
-				#if android
-				removeVirtualPad();
-				#end
 				openSubState(new options.NotesSubState());
 			case 'Controls':
-				#if android
-				removeVirtualPad();
-				#end
 				openSubState(new options.ControlsSubState());
 			case 'Graphics':
-				#if android
-				removeVirtualPad();
-				#end
 				openSubState(new options.GraphicsSettingsSubState());
 			case 'Visuals and UI':
-				#if android
-				removeVirtualPad();
-				#end
 				openSubState(new options.VisualsUISubState());
 			case 'Gameplay':
-				#if android
-				removeVirtualPad();
-				#end
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
@@ -156,11 +133,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if (isPlayState) {
-                MusicBeatState.switchState(new PlayState());
-			} else {
-			    MusicBeatState.switchState(new MainMenuState());
-		    }
+			MusicBeatState.switchState(new MainMenuState());
 		}
 
 		if (controls.ACCEPT) {

@@ -24,7 +24,6 @@ class PauseSubState extends MusicBeatSubstate
 		'Resume',
 		'Restart Song',
 		'Change Difficulty',
-		'Options',
         'Chart Editor',
 		'Character Editor',
 		'Exit to menu'
@@ -143,13 +142,10 @@ class PauseSubState extends MusicBeatSubstate
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
 		#if android
-		if (PlayState.chartingMode)
-		{
-		        addVirtualPad(FULL, A);
-		}
-		else
-		{
-		        addVirtualPad(UP_DOWN, A);
+		if (PlayState.chartingMode) {
+		    addVirtualPad(FULL, A);
+		} else {
+		    addVirtualPad(UP_DOWN, A);
 		}
 		addPadCamera();
 		#end
@@ -271,9 +267,6 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
-				case 'Options':
-				    LoadingState.loadAndSwitchState(new options.OptionsState());
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
                 case 'Chart Editor':
 		            MusicBeatState.switchState(new editors.ChartingState());
 		            PlayState.chartingMode = true;
