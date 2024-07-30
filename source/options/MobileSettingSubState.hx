@@ -27,6 +27,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
 import openfl.Lib;
+import android.HardWare;
 
 using StringTools;
 
@@ -75,13 +76,10 @@ class MobileSettingSubState extends BaseOptionsMenu
     override function update(elapsed:Float) {
         _virtualpad.alpha = ClientPrefs.mobileOpacity;
         
-		//yes
-		if (ClientPrefs.mobileOrientation == 'unspecified') {
-			Hardware.setScreenOrientation(0);
-		} else if (ClientPrefs.mobileOrientation == 'portrait') {
-			Hardware.setScreenOrientation(1);
-		} else if (ClientPrefs.mobileOrientation == 'landscape') {
-			Hardware.setScreenOrientation(2);
+		switch (ClientPrefs.mobileOrientation) {
+		    case 'unspecified': Hardware.setScreenOrientation(0);
+		    case 'portrait': Hardware.setScreenOrientation(1);
+		    case 'landscape': Hardware.setScreenOrientation(2);
 		}
 
         super.update(elapsed);

@@ -121,12 +121,10 @@ class Main extends Sprite
 		}
 		#end
 
-		if (ClientPrefs.mobileOrientation == 'unspecified') {
-			Hardware.setScreenOrientation(0);
-		} else if (ClientPrefs.mobileOrientation == 'portrait') {
-			Hardware.setScreenOrientation(1);
-		} else if (ClientPrefs.mobileOrientation == 'landscape') {
-			Hardware.setScreenOrientation(2);
+		switch (ClientPrefs.mobileOrientation) {
+		    case 'unspecified': Hardware.setScreenOrientation(0);
+		    case 'portrait': Hardware.setScreenOrientation(1);
+		    case 'landscape': Hardware.setScreenOrientation(2);
 		}
 	}
 
