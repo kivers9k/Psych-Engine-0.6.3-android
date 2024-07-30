@@ -125,7 +125,7 @@ class Main extends Sprite
 			Hardware.setScreenOrientation(0);
 		} else if (ClientPrefs.mobileOrientation == 'protrait') {
 			Hardware.setScreenOrientation(1);
-		} else if (ClientPrefs.mobileOpacity == 'landscape') {
+		} else if (ClientPrefs.mobileOrientation == 'landscape') {
 			Hardware.setScreenOrientation(2);
 		}
 	}
