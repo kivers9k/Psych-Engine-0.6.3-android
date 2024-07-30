@@ -121,7 +121,7 @@ class Main extends Sprite
 		}
 		#end
 
-		if (ClientPrefs.mobileOrientation == 'unspecified) {
+		if (ClientPrefs.mobileOrientation == 'unspecified') {
 			Hardware.setScreenOrientation(0);
 		} else if (ClientPrefs.mobileOrientation == 'protrait') {
 			Hardware.setScreenOrientation(1);

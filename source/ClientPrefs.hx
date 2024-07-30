@@ -246,10 +246,16 @@ class ClientPrefs {
 		}
         
 		//mobile stuff
-		if(FlxG.save.data.mobileOpacity != null) mobileOpacity = FlxG.save.data.mobileOpacity;
-		if(FlxG.save.data.hideHint != null) hideHint = FlxG.save.data.hideHint;
-		if(FlxG.save.data.mobileOrientation != null) mobileOrientation = FlxG.save.data.mobileOrientation;
-
+		if(FlxG.save.data.mobileOpacity != null) {
+		    mobileOpacity = FlxG.save.data.mobileOpacity;
+		}
+		if(FlxG.save.data.hideHint != null) {
+		    hideHint = FlxG.save.data.hideHint;
+		}
+		if(FlxG.save.data.mobileOrientation != null) {
+		    mobileOrientation = FlxG.save.data.mobileOrientation;
+		}
+		
 		if(FlxG.save.data.pauseMusic != null) {
 			pauseMusic = FlxG.save.data.pauseMusic;
 		}
