@@ -41,7 +41,8 @@ class OptionsState extends MusicBeatState
 	    'Graphics',
 	    'Visuals and UI',
 	    'Gameplay'
-	   ];
+	];
+	
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;

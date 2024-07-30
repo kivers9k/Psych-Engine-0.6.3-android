@@ -75,6 +75,15 @@ class MobileSettingSubState extends BaseOptionsMenu
     override function update(elapsed:Float) {
         _virtualpad.alpha = ClientPrefs.mobileOpacity;
         
+		//yes
+		if (ClientPrefs.mobileOrientation == 'unspecified') {
+			Hardware.setScreenOrientation(0);
+		} else if (ClientPrefs.mobileOrientation == 'portrait') {
+			Hardware.setScreenOrientation(1);
+		} else if (ClientPrefs.mobileOrientation == 'landscape') {
+			Hardware.setScreenOrientation(2);
+		}
+
         super.update(elapsed);
     }
 }
