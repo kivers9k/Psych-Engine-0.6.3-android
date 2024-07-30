@@ -58,8 +58,8 @@ class MobileSettingSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('orientation',
 		'i forgor',
-		'mobileOrientation'
-		'string'
+		'mobileOrientation',
+		'string',
 		'landscape',
 		['unspecified', 'portrait', lenandscape']);
 		addOption(option);
