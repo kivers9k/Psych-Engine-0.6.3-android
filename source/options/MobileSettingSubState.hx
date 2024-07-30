@@ -61,7 +61,7 @@ class MobileSettingSubState extends BaseOptionsMenu
 		'mobileOrientation',
 		'string',
 		'landscape',
-		['unspecified', 'portrait', lenandscape']);
+		['unspecified', 'portrait', 'lenandscape']);
 		addOption(option);
 
 		super();
