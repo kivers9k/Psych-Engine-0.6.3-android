@@ -897,7 +897,7 @@ class PlayState extends MusicBeatState
 						luaArray.push(new FunkinLua(folder + file));
 						filesPushed.push(file);
 					}
-					if (file.endsWidth('.hx')) {
+					if (file.endsWith('.hx')) {
 						hxArray.push(new FunkinHx('scripts/' + file));
 					}
 				}
