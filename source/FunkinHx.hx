@@ -1,11 +1,10 @@
 package;
 
+import flixel.util.FlxColor;
+
 import hscript.Parser;
 import hscript.Interp;
 import hscript.Expr;
-
-import flixel.util.FlxColor;
-import Reflect;
 
 using StringTools;
 
