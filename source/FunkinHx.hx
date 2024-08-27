@@ -1,8 +1,6 @@
 package;
 
 import flixel.util.FlxColor;
-import flixel.FlxSprite;
-import flixel.FlxG;
 
 import hscript.Parser;
 import hscript.Interp;
@@ -70,13 +68,6 @@ class FunkinHx {
 			}
 			return result;
 		});
-		interp.variables.set('addVar', function(name:String) {
-			if (PlayState.instance.variables.exists(name)) {
-				PlayState.instance.variables.add(name);
-				return true;
-			}
-			return false;
-		});
 		interp.variables.set('removeVar', function(name:String) {
 			if (PlayState.instance.variables.exists(name)) {
 				PlayState.instance.variables.remove(name);
@@ -89,9 +80,9 @@ class FunkinHx {
 		interp.variables.set('Std', Std);
 	}
 
-	public function call(name:String, arg:Array<Dynamic>):Dynamic {
+	public function call(name:String, args:Array<Dynamic>):Dynamic {
 		if (interp.variables.exists(name)) {
-			return Reflect.callMethod(null, interp.variables.get(name), arg);
+			return Reflect.callMethod(null, interp.variables.get(name), args);
 		}
 		return false;
 	}

@@ -5204,7 +5204,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
-		callOnHx(event, arg); // :troll:
+		callOnHx(event, args); // :troll:
 		return returnVal;
 	}
 	
@@ -5217,10 +5217,10 @@ class PlayState extends MusicBeatState
 		setOnHx(variable, arg); // :troll:
 	}
 
-	public function callOnHx(event:String, arg:Array<Dynamic>):Dynamic {
+	public function callOnHx(event:String, args:Array<Dynamic>):Dynamic {
 		var result:Dynamic = null;
 		for (hscript in hxArray) {
-			result = hscript.call(event, arg);
+			result = hscript.call(event, args);
 		}
 		return result;
 	}
