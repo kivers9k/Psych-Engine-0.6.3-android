@@ -80,7 +80,7 @@ class FunkinHx {
 		interp.variables.set('Std', Std);
 	}
 
-	public function call(name:String, arg:Dynamic) {
+	public function call(name:String, arg:Array<Dynamic>) {
 		var getFunc:Dynamic = interp.variables.get(name);
 		if (getFunc != null)
 			return Reflect.callMethod(null, getFunc, arg);
