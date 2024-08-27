@@ -309,6 +309,9 @@ class PlayState extends MusicBeatState
 	public var luaArray:Array<FunkinLua> = [];
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public var introSoundsSuffix:String = '';
+	
+	// Hx shit
+	public var hxArray:Array<FunkinHx> = [];
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -894,6 +897,9 @@ class PlayState extends MusicBeatState
 						luaArray.push(new FunkinLua(folder + file));
 						filesPushed.push(file);
 					}
+					if (file.endsWidth('.hx')) {
+						hxArray.push(new FunkinHx('scripts/' + file));
+					}
 				}
 			}
 		}
@@ -1259,6 +1265,9 @@ class PlayState extends MusicBeatState
 					{
 						luaArray.push(new FunkinLua(folder + file));
 						filesPushed.push(file);
+					}
+					if (file.endsWith('.hx')) {
+						hxArray.push(new FunkinHx('scripts/' + file));
 					}
 				}
 			}
@@ -5195,17 +5204,33 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
+		callOnHx(event, arg); // :troll:
 		return returnVal;
 	}
-
+	
 	public function setOnLuas(variable:String, arg:Dynamic) {
 		#if LUA_ALLOWED
 		for (i in 0...luaArray.length) {
 			luaArray[i].set(variable, arg);
 		}
 		#end
+		setOnHx(variable, arg); // :troll:
 	}
 
+	public function callOnHx(event:String, arg:Array<Dynamic>):Dynamic {
+		var result:Dynamic = null;
+		for (hscript in hxArray) {
+			result = hscript.call(event, arg);
+		}
+		return result;
+	}
+
+	public function setOnHx(variable:String, arg:Dynamic) {
+		for (hscript in hxArray) {
+			hscript.variables.set(variable, arg);
+		}
+	}
+	
 	function StrumPlayAnim(isDad:Bool, id:Int, time:Float) {
 		var spr:StrumNote = null;
 		if(isDad) {

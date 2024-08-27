@@ -1,6 +1,8 @@
 package;
 
 import flixel.util.FlxColor;
+import flixel.FlxSprite;
+import flixel.FlxG;
 
 import hscript.Parser;
 import hscript.Interp;
@@ -10,14 +12,15 @@ using StringTools;
 
 class FunkinHx {
 	public static var parser:Parser = new Parser();
-	public var interp:Interp;
+	public var interp:Interp = new Interp();
+	public var variables(get, never):Map<String, Dynamic>;
 
 	public function new(hscript:String) {
-		interp = new Interp();
-
+		preset();
+		
 		var file:String = Paths.getTextFromFile(hscript);
 		var lines:String = '';
-	
+		
 		for (splitStr in file.split('\n')) {
 			if (!splitStr.startsWith('import')) {
 				lines += splitStr + '\n';
@@ -36,7 +39,6 @@ class FunkinHx {
 				}
 			}
 		}
-		preset();
 		
 		try {
 			execute(lines);
@@ -68,6 +70,13 @@ class FunkinHx {
 			}
 			return result;
 		});
+		interp.variables.set('addVar', function(name:String) {
+			if (PlayState.instance.variables.exists(name)) {
+				PlayState.instance.variables.add(name);
+				return true;
+			}
+			return false;
+		});
 		interp.variables.set('removeVar', function(name:String) {
 			if (PlayState.instance.variables.exists(name)) {
 				PlayState.instance.variables.remove(name);
@@ -80,9 +89,9 @@ class FunkinHx {
 		interp.variables.set('Std', Std);
 	}
 
-	public function call(name:String, args:Array<Dynamic>):Dynamic {
+	public function call(name:String, arg:Array<Dynamic>):Dynamic {
 		if (interp.variables.exists(name)) {
-		    return Reflect.callMethod(null, interp.variables.get(name), args);
+			return Reflect.callMethod(null, interp.variables.get(name), arg);
 		}
 		return false;
 	}
@@ -92,5 +101,9 @@ class FunkinHx {
 		FunkinHx.parser.line = 1;
 		FunkinHx.parser.allowTypes = true;
 		return interp.execute(FunkinHx.parser.parseString(codeToRun));
+	}
+	
+	public function get_variables():Dynamic {
+		return interp.variables;
 	}
 }
