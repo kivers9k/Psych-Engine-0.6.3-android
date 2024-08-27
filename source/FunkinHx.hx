@@ -1,10 +1,8 @@
 package;
 
-#if hscript
 import hscript.Parser;
 import hscript.Interp;
 import hscript.Expr;
-#end
 
 import flixel.util.FlxColor;
 import Reflect;
@@ -20,7 +18,7 @@ class FunkinHx {
 		var lines:String = '';
 	
 		for (splitStr in file.split('\n')) {
-			if (!splitStr.startsWith('import ')) {
+			if (!splitStr.startsWith('import')) {
 				lines += splitStr + '\n';
 			} else {
 				var lib:String = splitStr.split(' ')[1].replace(';', '');
@@ -64,13 +62,13 @@ class FunkinHx {
 		});
 		interp.variables.set('getVar', function(name:String) {
 			var result:Dynamic = null;
-			if (PlayState.instance.variables.exist(name)) {
+			if (PlayState.instance.variables.exists(name)) {
 				result = PlayState.instance.variables.get(name);
 			}
 			return result;
 		});
 		interp.variables.set('removeVar', function(name:String) {
-			if (PlayState.instance.variables.exist(name))
+			if (PlayState.instance.variables.exists(name))
 				PlayState.instance.variables.remove(name);
 				return true;
 			}
