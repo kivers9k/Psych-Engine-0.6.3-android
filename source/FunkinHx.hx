@@ -76,7 +76,6 @@ class FunkinHx {
 			return false;
 		});
 		interp.variables.set('Math', Math);
-		interp.variables.set('Map', Map);
 		interp.variables.set('Type', Type);
 		interp.variables.set('Std', Std);
 	}
