@@ -68,7 +68,7 @@ class FunkinHx {
 			return result;
 		});
 		interp.variables.set('removeVar', function(name:String) {
-			if (PlayState.instance.variables.exists(name))
+			if (PlayState.instance.variables.exists(name)) {
 				PlayState.instance.variables.remove(name);
 				return true;
 			}
