@@ -4981,11 +4981,12 @@ class PlayState extends MusicBeatState
 			lua.stop();
 		}
 		luaArray = [];
+		hxArray = null;
 
 		#if hscript
 		if(FunkinLua.hscript != null) FunkinLua.hscript = null;
 		#end
-
+	
 		FlxAnimationController.globalSpeed = 1;
 		FlxG.sound.music.pitch = 1;
 
