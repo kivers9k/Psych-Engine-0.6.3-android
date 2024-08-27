@@ -13,14 +13,15 @@ using StringTools;
 class FunkinHx {
 	public static var parser:Parser = new Parser();
 	public var interp:Interp;
-	
 	public var variables(get, never):Map<String, Dynamic>;
+	
 	public function get_variables()
 	{
 		return interp.variables;
 	}
 
 	public function new(hscript:String) {
+		var interp:Interp = new Interp();
 		preset();
 		
 		var file:String = Paths.getTextFromFile(hscript);
@@ -63,9 +64,9 @@ class FunkinHx {
 		variables.set('Type', Type);
 		variables.set('Std', Std);
 		
-		variables.set('add', game.add);
-		variables.set('remove', game.remove);
-		variables.set('insert', game.insert);
+		variables.set('add', PlayState.instance.add);
+		variables.set('remove', PlayState.instance.remove);
+		variables.set('insert', PlayState.instance.insert);
 	}
 
 	public function call(func:String, arg:Dynamic) {
@@ -74,8 +75,7 @@ class FunkinHx {
 			return Reflect.callMethod(null, getFunc, arg);
 	}
 
-	public function execute(codeToRun:String):Dynamic
-	{
+	public function execute(codeToRun:String):Dynamic {
 		@:privateAccess
 		HScript.parser.line = 1;
 		HScript.parser.allowTypes = true;
