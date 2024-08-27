@@ -11,9 +11,11 @@ using StringTools;
 
 class FunkinHx {
 	public static var parser:Parser = new Parser();
-	public var interp:Interp = new Interp();
+	public var interp:Interp;
 
 	public function new(hscript:String) {
+		interp = new Interp();
+
 		var file:String = Paths.getTextFromFile(hscript);
 		var lines:String = '';
 	
@@ -81,7 +83,7 @@ class FunkinHx {
 	}
 
 	public function call(name:String, args:Array<Dynamic>):Dynamic {
-		if (interp.variables.get(name) != null)
+		if (interp.variables.exists(name))
 		    return Reflect.callMethod(null, interp.variables.get(name), args);
 	}
 
