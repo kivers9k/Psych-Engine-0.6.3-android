@@ -81,9 +81,8 @@ class FunkinHx {
 	}
 
 	public function call(name:String, args:Array<Dynamic>):Dynamic {
-		var getFunc:Dynamic = interp.variables.get(name);
-		if (getFunc != null)
-			return Reflect.callMethod(null, getFunc, args);
+		if (interp.variables.exists(name))
+		    return Reflect.callMethod(null, interp.variables.get(name), args);
 	}
 
 	public function execute(codeToRun:String):Dynamic {
