@@ -3,8 +3,8 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
-import flixel.tween.FlxTween;
-import flixel.tween.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxTimer;
 
 import FunkinLua.CustomSubstate;
