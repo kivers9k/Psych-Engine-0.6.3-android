@@ -2106,7 +2106,7 @@ class PlayState extends MusicBeatState
 	{
 		if(startedCountdown) {
 			callOnLuas('onStartCountdown', []);
-			callOnHx(('onStartCountdown', []));
+			callOnHx('onStartCountdown', []);
 			return;
 		}
 
