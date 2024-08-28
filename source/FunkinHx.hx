@@ -1,5 +1,14 @@
 package;
 
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.FlxCamera;
+import flixel.tween.FlxTween;
+import flixel.tween.FlxEase;
+import flixel.util.FlxTimer;
+
+import FunkinLua.CustomSubstate;
+
 import flixel.util.FlxColor;
 import sys.io.File;
 
