@@ -128,7 +128,9 @@ class FunkinHx {
 	}
 
 	public function execute(codeToRun:String):Dynamic {
-		var expr:Expr = parser.parseString(codeToRun);
-		return interp.execute(expr);
+		@:privateAccess
+		FunkinHx.parser.line = 1;
+		FunkinHx.parser.allowTypes = true;
+		return interp.execute(FunkinHx.parser.parseString(codeToRun));
 	}
 }
