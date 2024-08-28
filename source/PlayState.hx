@@ -1370,7 +1370,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		callOnLuas('onCreatePost', []);
-		callOnHx('onCreatePost', [])
+		callOnHx('onCreatePost', []);
 
 		super.create();
 
