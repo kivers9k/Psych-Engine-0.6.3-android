@@ -892,9 +892,13 @@ class PlayState extends MusicBeatState
 			{
 				for (file in FileSystem.readDirectory(folder))
 				{
-					if((file.endsWith('.lua') || file.endsWith('.hx')) && !filesPushed.contains(file))
+					if(file.endsWith('.lua') && !filesPushed.contains(file))
 					{
 						luaArray.push(new FunkinLua(folder + file));
+						filesPushed.push(file);
+					}
+					if(file.endsWith('.hx') && !filesPushed.contains(file))
+					{
 						hxArray.push(new FunkinHx(folder + file));
 						filesPushed.push(file);
 					}
@@ -1259,9 +1263,13 @@ class PlayState extends MusicBeatState
 			{
 				for (file in FileSystem.readDirectory(folder))
 				{
-					if((file.endsWith('.lua') || file.endsWith('.hx')) && !filesPushed.contains(file))
+					if(file.endsWith('.lua') && !filesPushed.contains(file))
 					{
 						luaArray.push(new FunkinLua(folder + file));
+						filesPushed.push(file);
+					}
+					if(file.endsWith('.hx') && !filesPushed.contains(file))
+					{
 						hxArray.push(new FunkinHx(folder + file));
 						filesPushed.push(file);
 					}
