@@ -1,5 +1,6 @@
 package;
 
+import SUtil;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
@@ -81,6 +82,7 @@ class FunkinHx {
 		interp.variables.set('FlxTimer', FlxTimer);
 
 		interp.variables.set('Paths', Paths);
+		interp.variables.set('SUtil', SUtil);
 		interp.variables.set('Character', Character);
 		interp.variables.set('Alphabet', Alphabet);
 		interp.variables.set('ClientPrefs', ClientPrefs);
